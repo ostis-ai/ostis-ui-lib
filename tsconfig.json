@@ -1,0 +1,29 @@
+{
+  "include": ["./src"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "importHelpers": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./build",
+    "target": "es6",
+    "strict": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@model/*": ["model/*"],
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@api/*": ["api/*"],
+      "@utils/*": ["utils/*"],
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"]
+    },
+    "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }]
+  }
+}

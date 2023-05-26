@@ -1,0 +1,95 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["simple-import-sort"],
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:sonarjs/recommended",
+    "prettier/@typescript-eslint",
+    "prettier"
+  ],
+  "rules": {
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-this-alias": [
+      "error",
+      {
+        "allowDestructuring": true,
+        "allowedNames": ["self"]
+      }
+    ],
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "consistent-this": [2, "self"],
+    "react/prop-types": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "sonarjs/prefer-immediate-return": "error",
+    "sonarjs/no-collapsible-if": "warn",
+    "sonarjs/no-redundant-boolean": "error",
+    "sonarjs/no-redundant-jump": "error",
+    "sonarjs/prefer-single-boolean-return": "error",
+    "sonarjs/no-duplicate-string": "off",
+    "sonarjs/cognitive-complexity": "off",
+    "sonarjs/no-identical-functions": "off",
+    "object-shorthand": "error", //check path, 2 item of list, rule from site
+    "no-else-return": "error", //check path, 2 item of list, rule from site
+    "no-duplicate-imports": "error", //check path, 2 item of list, rule from site
+    "eqeqeq": "error",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          // common types
+          ["^@/types"],
+          // Packages. `react` related packages come first.
+          ["^react", "^@?\\w"],
+          // Internal packages.
+          // api
+          ["^@?\\/api"],
+          // api
+          ["^@?\\/utils"],
+          // misc
+          ["^@?\\/[^(ui|api|utils)]"],
+          // UI
+          ["^@?\\/ui\\/[^ce]", "^@?\\/ui\\/e", "^@?\\/ui\\/c"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ]
+  }
+}
