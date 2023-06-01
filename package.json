@@ -1,0 +1,92 @@
+{
+  "name": "ostis-ui-lib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./build/ostis-ui-lib.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "analyze": "webpack --analyze  --color",
+    "lint": "eslint src/**/*.{js,ts,tsx} --quiet",
+    "lint:fix": "eslint src/**/*.{js,ts,tsx} --fix",
+    "start": "webpack serve --node-env development",
+    "build": "webpack && ttsc ./src/model/declarations.d.ts ./src/index.tsx",
+    "types": "ttsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ostis-ai/ostis-ui-lib.git"
+  },
+  "author": "Mikhail Sadovsky <mishachess@mail.ru>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "build"
+  ],
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16",
+    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.2",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
+    "@svgr/webpack": "^6.2.1",
+    "@types/react-dom": "^18.2.4",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.44.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-react-transform": "^3.0.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^6.7.3",
+    "dotenv-webpack": "^7.1.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-sonarjs": "^0.13.0",
+    "eslint-webpack-plugin": "^3.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.6.0",
+    "postcss": "^8.4.17",
+    "postcss-loader": "^7.0.1",
+    "prettier": "^2.7.1",
+    "react-refresh": "^0.11.0",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "style-loader": "^2.0.0",
+    "ttypescript": "^1.5.15",
+    "typescript": "^4.6.2",
+    "typescript-transform-paths": "^3.4.6",
+    "webpack": "^5.36.2",
+    "webpack-bundle-analyzer": "^4.3.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-merge": "^5.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@floating-ui/react": "^0.24.1"
+  }
+}
