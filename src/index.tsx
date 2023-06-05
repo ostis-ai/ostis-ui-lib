@@ -4,3 +4,4 @@ export * from '@components/Toast';
 export * from '@components/Toasts';
 export * from '@components/Spinner';
 export * from '@components/PositionInPortal';
+export * from '@components/Textarea';

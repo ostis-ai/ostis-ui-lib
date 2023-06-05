@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { observeRect } from '@utils/observeRect';
+import { observeRect } from '@utils';
 
 import { Portal } from './styled';
 
