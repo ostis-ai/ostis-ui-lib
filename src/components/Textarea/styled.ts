@@ -39,10 +39,11 @@ export const StyledTextarea = styled.textarea<{
   ${({ disabled }) =>
     disabled &&
     css`
-      border-color: #f14747;
+      background-color: #fafafa;
+      border-color: #eeeeee;
 
       &:hover {
-        border-color: #d81616;
+        border-color: #eeeeee;
       }
     `}
 
@@ -52,7 +53,7 @@ export const StyledTextarea = styled.textarea<{
       border-color: #f14747;
 
       &:hover {
-        border-color: #d81616;
+        border-color: #f14747;
       }
     `}
 
