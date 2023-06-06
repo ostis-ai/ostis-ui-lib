@@ -1,5 +1,5 @@
 import { forwardRef, TextareaHTMLAttributes, useEffect, useRef, useState } from 'react';
-import { refSetter } from '@utils';
+import { refSetter } from '@utils/refSetter';
 
 import { StyledTextarea } from './styled';
 

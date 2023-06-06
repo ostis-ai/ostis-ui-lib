@@ -20,7 +20,7 @@
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
       "@api/*": ["api/*"],
-      "@utils": ["utils/index"],
+      "@utils/*": ["utils/*"],
       "@components/*": ["components/*"],
       "@assets/*": ["assets/*"]
     },
