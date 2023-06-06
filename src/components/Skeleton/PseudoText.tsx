@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { getRandomInt, refSetter } from '@utils';
+import { getRandomInt } from '@utils/getRandomInt';
+import { refSetter } from '@utils/refSetter';
 
 import { StyledSkeleton, Wrapper } from './styled';
 import { ILoaderInfo, IPseudoText } from './types';

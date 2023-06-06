@@ -20,8 +20,8 @@ export const StorybookInit = () => {
         <SwitchScgScnStory />
         <TooltipStory />
         <SpinnerStory />
-        <TextareaStory />
         <SkeletonStory />
+        <TextareaStory />
       </Storybook>
     </>
   );
