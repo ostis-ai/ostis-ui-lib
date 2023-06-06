@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { observeRect } from '@utils/observeRect';
 
 import { Portal } from './styled';
+
 interface IProps {
   targetRef: React.RefObject<HTMLElement>;
   relativeRef?: React.RefObject<HTMLElement>;

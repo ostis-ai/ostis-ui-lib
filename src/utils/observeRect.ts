@@ -1,5 +1,11 @@
 // https://github.com/reach/observe-rect
 
+export type RectProps = {
+  rect: DOMRect | undefined;
+  hasRectChanged: boolean;
+  callbacks: ((rect: DOMRect | undefined) => void)[];
+};
+
 const props: (keyof DOMRect)[] = ['bottom', 'height', 'left', 'right', 'top', 'width'];
 
 const rectChanged = (a: DOMRect = {} as DOMRect, b: DOMRect = {} as DOMRect) =>
@@ -55,10 +61,4 @@ export const observeRect = (node: Element, cb: (rect: DOMRect | undefined) => vo
       }
     },
   };
-};
-
-export type RectProps = {
-  rect: DOMRect | undefined;
-  hasRectChanged: boolean;
-  callbacks: ((rect: DOMRect | undefined) => void)[];
 };
