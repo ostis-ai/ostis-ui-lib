@@ -53,4 +53,4 @@ jobs:
         run: npm install
 
       - name: Prod build
-        run: npm build
+        run: npm run build
