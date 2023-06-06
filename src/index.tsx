@@ -15,3 +15,4 @@ export * from '@components/Language';
 export * from '@components/Dropdown';
 export * from '@components/DropdownOption';
 export * from '@components/Popup';
+export * from '@components/ButtonWithIcon';
