@@ -6,7 +6,7 @@ import { useClickOutside } from '@hooks/useClickOutside';
 
 import { Dropdown } from './Dropdown';
 
-const IndexStoryitem = () => {
+const IndexStoryItem = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isDropDownOpen, , onClose, toggleDropDown] = useBooleanState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ const IndexStoryitem = () => {
 export const DropdownStory = () => {
   return (
     <StoryItem path="Dropdown">
-      <IndexStoryitem />
+      <IndexStoryItem />
     </StoryItem>
   );
 };
