@@ -1,3 +1,4 @@
+import { ChipStory } from '@components/Chip/ChipStory';
 import { SkeletonStory } from '@components/Skeleton/story/SkeletonStory';
 import { SpinnerStory } from '@components/Spinner/SpinnerStory';
 import { Storybook } from '@components/Storybook';
@@ -20,6 +21,7 @@ export const StorybookInit = () => {
         <SwitchScgScnStory />
         <TooltipStory />
         <SpinnerStory />
+        <ChipStory />
         <SkeletonStory />
         <TextareaStory />
       </Storybook>
