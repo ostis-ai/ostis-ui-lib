@@ -5,6 +5,3 @@ export * from '@components/Toasts';
 export * from '@components/Spinner';
 export * from '@components/PositionInPortal';
 export * from '@components/Chip';
-export * from '@components/Textarea';
-export * from '@components/Skeleton';
-export * from '@components/InfiniteScroll';

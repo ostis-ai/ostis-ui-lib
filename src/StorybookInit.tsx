@@ -1,9 +1,7 @@
 import { ChipStory } from '@components/Chip/ChipStory';
-import { SkeletonStory } from '@components/Skeleton/story/SkeletonStory';
 import { SpinnerStory } from '@components/Spinner/SpinnerStory';
 import { Storybook } from '@components/Storybook';
 import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
-import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
 import { createGlobalStyle } from 'styled-components';
 
@@ -22,8 +20,6 @@ export const StorybookInit = () => {
         <TooltipStory />
         <SpinnerStory />
         <ChipStory />
-        <SkeletonStory />
-        <TextareaStory />
       </Storybook>
     </>
   );
