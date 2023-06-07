@@ -1,5 +1,7 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
-import { refSetter, useClickOutside, useInterval } from 'ostis-ui-kit';
+import { useClickOutside } from '@hooks/useClickOutside';
+import { useInterval } from '@hooks/useInterval';
+import { refSetter } from '@utils/refSetter';
 
 import { Container, FakeTarget, StyledPositionInPortal } from './styled';
 

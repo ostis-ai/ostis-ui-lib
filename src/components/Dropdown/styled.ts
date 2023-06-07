@@ -1,10 +1,10 @@
+import { PropsWithChildren } from 'react';
+import { PositionInPortal } from '@components/PositionInPortal';
 import styled, { css } from 'styled-components';
-
-import { PositionInPortal } from '../PositionInPortal';
 
 import { TDisplay } from './types';
 
-export const StyledPositionInPortal = styled(PositionInPortal)<TDisplay>`
+export const StyledPositionInPortal = styled(PositionInPortal)<PropsWithChildren<TDisplay>>`
   display: flex;
   flex-wrap: nowrap;
   z-index: 3;
