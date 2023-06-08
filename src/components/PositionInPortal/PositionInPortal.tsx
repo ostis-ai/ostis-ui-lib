@@ -4,7 +4,7 @@ import { observeRect } from '@utils/observeRect';
 
 import { Portal } from './styled';
 
-interface IProps {
+export interface IPositionInPortalProps {
   targetRef: React.RefObject<HTMLElement>;
   relativeRef?: React.RefObject<HTMLElement>;
   container?: React.RefObject<HTMLDivElement>;
@@ -12,7 +12,7 @@ interface IProps {
   className?: string;
 }
 
-export const PositionInPortal: FC<IProps> = ({
+export const PositionInPortal: FC<IPositionInPortalProps> = ({
   targetRef,
   relativeRef,
   container,
