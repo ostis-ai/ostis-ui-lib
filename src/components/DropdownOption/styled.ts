@@ -11,7 +11,10 @@ export const Option = styled.div`
   color: #454545;
 
   word-break: break-word;
+
   padding: 8px 16px;
+
   background-color: transparent;
+  
   cursor: pointer;
 `;

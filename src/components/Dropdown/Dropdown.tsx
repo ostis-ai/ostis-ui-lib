@@ -16,10 +16,12 @@ const defaultRect = {
   left: 0,
 };
 
+type AlignItem = 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+
 export interface DropdownProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onKeyDown'> {
   targetRef: React.RefObject<HTMLElement>;
   relativeRef?: React.RefObject<HTMLElement>;
-  alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
+  alignSelf?: AlignItem;
   container?: React.RefObject<HTMLDivElement>;
   onClickOutside?: (e: Event) => void;
 }
@@ -46,7 +48,7 @@ export const Dropdown = forwardRef<HTMLDivElement, React.PropsWithChildren<Dropd
       if (mayPlaceBottom) setDisplay('bottom');
       else if (mayPlaceTop) setDisplay('top');
       else setDisplay('center');
-      // TODO: Добавить проверку, если элемент слишком большой и не помещается ни сверху ни снизу
+      // TODO: Add a check if the element is too big and doesn't fit on top or bottom
 
       const conteinerWidth = containerRect.right - containerRect.left;
 

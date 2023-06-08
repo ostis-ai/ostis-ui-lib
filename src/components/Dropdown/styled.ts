@@ -7,7 +7,9 @@ import { TDisplay } from './types';
 export const StyledPositionInPortal = styled(PositionInPortal)<PropsWithChildren<TDisplay>>`
   display: flex;
   flex-wrap: nowrap;
+
   z-index: 3;
+
   flex-direction: ${({ display }) =>
     () => {
       switch (display) {
@@ -23,18 +25,26 @@ export const StyledPositionInPortal = styled(PositionInPortal)<PropsWithChildren
 
 export const FakeTarget = styled.div`
   pointer-events: none;
+
   height: 100%;
+
   flex: 0 0 auto;
 `;
 
 export const Container = styled.div<TDisplay>`
   pointer-events: initial;
   margin: 2px 0;
+
   background-color: #fff;
+
   border-radius: 10px;
+
   flex: 0 0 auto;
+
   max-width: calc(100vw - 32px);
+
   opacity: 0;
+
   transition-delay: 200ms;
   transition-property: opacity;
 
@@ -59,12 +69,15 @@ export const Container = styled.div<TDisplay>`
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
+
     background-color: #c0c0c0;
+
     margin: 8px;
   }
 
   &::-webkit-scrollbar-track {
     border-radius: 10px;
+
     background-color: transparent;
   }
 `;
