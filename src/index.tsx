@@ -10,3 +10,4 @@ export * from '@components/Skeleton';
 export * from '@components/InfiniteScroll';
 export * from '@components/Dropdown';
 export * from '@components/DropdownOption';
+export * from '@components/Popup';
