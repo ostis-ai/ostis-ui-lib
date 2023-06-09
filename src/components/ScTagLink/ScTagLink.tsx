@@ -3,7 +3,7 @@ import { useCommandContext } from '@components/CommandProvider';
 
 import { StyledScTag, TAppearance } from './styled';
 
-interface IProps {
+export interface IScTagLinkProps {
   className?: string;
   addr?: number;
   systemId?: string;
@@ -24,7 +24,7 @@ export const ScTagLink = ({
   appearance = 'blue',
   showMenu,
   onClick: onClickFromProps,
-}: PropsWithChildren<IProps>) => {
+}: PropsWithChildren<IScTagLinkProps>) => {
   const { onExecuteCommand } = useCommandContext();
 
   const onClick = async (e: any) => {
@@ -35,13 +35,13 @@ export const ScTagLink = ({
 
   return (
     <StyledScTag
-      className={className}
-      as={as}
-      addr={addr}
-      systemId={systemId}
-      showMenu={showMenu}
-      onClick={onClick}
-      appearance={appearance}
+      // className={className}
+      // as={as}
+      // addr={addr}
+      // systemId={systemId}
+      // showMenu={showMenu}
+      // onClick={onClick}
+      // appearance={appearance}
     >
       {children}
     </StyledScTag>

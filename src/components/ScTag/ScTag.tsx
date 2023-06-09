@@ -2,7 +2,7 @@ import { ComponentType, MouseEvent, ReactNode, useRef } from 'react';
 import { ContextMenu } from '@components/ContextMenu';
 import { useBooleanState } from '@hooks/useBooleanState';
 
-type TagProps<Tag extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[Tag] & {
+export type TagProps<Tag extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[Tag] & {
   as?: Tag;
   children?: ReactNode;
   addr?: number;
@@ -10,7 +10,7 @@ type TagProps<Tag extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[T
   showMenu?: boolean;
 };
 
-type CompProps<P extends Record<string, any>, Comp extends ComponentType<P>> = P & {
+export type CompProps<P extends Record<string, any>, Comp extends ComponentType<P>> = P & {
   as?: Comp;
   addr: number;
 };
