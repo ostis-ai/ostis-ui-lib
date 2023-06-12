@@ -1,5 +1,6 @@
-import { ScTag } from '@components/ScTag';
 import styled, { css } from 'styled-components';
+
+import { ScTag } from '../ScTag';
 
 export type TAppearance = 'blue' | 'transparent';
 

@@ -25,6 +25,7 @@ export const StyledDropdownOption = styled(DropdownOption)<{ isLoad?: boolean }>
     css`
       display: flex;
       align-items: center;
+      
       gap: 8px;
     `}
 `;

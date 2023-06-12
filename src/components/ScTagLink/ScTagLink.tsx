@@ -9,7 +9,7 @@ export interface IScTagLinkProps {
   systemId?: string;
   appearance?: TAppearance;
   command?: number | string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: any;
   showMenu?: boolean;
   onClick?: () => void;
 }
@@ -35,13 +35,13 @@ export const ScTagLink = ({
 
   return (
     <StyledScTag
-      // className={className}
-      // as={as}
-      // addr={addr}
-      // systemId={systemId}
-      // showMenu={showMenu}
-      // onClick={onClick}
-      // appearance={appearance}
+      className={className}
+      as={as}
+      addr={addr}
+      systemId={systemId}
+      showMenu={showMenu}
+      onClick={onClick}
+      appearance={appearance}
     >
       {children}
     </StyledScTag>

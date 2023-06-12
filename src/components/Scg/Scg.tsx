@@ -6,7 +6,6 @@ import { useBooleanState } from '@hooks/useBooleanState';
 import { langToKeynode } from '@utils/langToKeynode';
 import { snakeToCamelCase } from '@utils/snakeToCamelCase';
 
-import { confirmClearScenePopupContent, confirmDeletePopupContent } from './constants';
 import { Frame, StyledSpinner, Wrap } from './styled';
 import { EWindowEvents, ITarget, IWindowEventData } from './types';
 
