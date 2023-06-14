@@ -19,7 +19,7 @@ export const ScnEdge = ({ node: { addr, type, sourceNode, targetNode } }: IProps
       &#40;
       <EdgeInner>
         <ScnLink addr={sourceNode.addr} loaderWidth={getRandomInt(40, 80)} />
-        <StyledScTagLink addr={addr} as="span">
+        <StyledScTagLink addr={addr} forwardedAs="span">
           {arcMap[type].right}
         </StyledScTagLink>
         <ScnLink addr={targetNode.addr} loaderWidth={getRandomInt(40, 80)} />

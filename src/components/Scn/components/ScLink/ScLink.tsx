@@ -92,7 +92,7 @@ const ScLinkContent = ({ addr, contentType }: IProps) => {
   }
 
   return (
-    <StyledScTag as="span" addr={addr}>
+    <StyledScTag forwardedAs="span" addr={addr}>
       {content && contentType === 'format_png' && <img src={`data:image/png;base64,${content}`} />}
       {contentType !== 'format_png' && <>{content}</>}
       {!content && <span ref={targetRef} />}
