@@ -1,4 +1,4 @@
-import { ComponentType, MouseEvent, ReactNode, useRef } from 'react';
+import { MouseEvent, ReactNode, useRef } from 'react';
 import { ContextMenu } from '@components/ContextMenu';
 import { useBooleanState } from '@hooks/useBooleanState';
 
