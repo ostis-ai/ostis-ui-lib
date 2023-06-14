@@ -58,13 +58,13 @@ const Divider = styled.span`
   border-left: 1px solid #c0c0c0;
 `;
 
-interface IProps {
+export interface ISwitchScgScnProps {
   className?: string;
   tab: TScLanguageTab;
   onTabClick: (tab: TScLanguageTab) => void;
 }
 
-export const SwitchScgScn = ({ tab, className, onTabClick }: IProps) => {
+export const SwitchScgScn = ({ tab, className, onTabClick }: ISwitchScgScnProps) => {
   const onClick = (newTab: TScLanguageTab) => () => {
     onTabClick(newTab);
   };

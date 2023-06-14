@@ -19,7 +19,7 @@ const readonlyStyle = `
   </style>
 `;
 
-interface IProps {
+export interface IScgProps {
   question?: number;
   className?: string;
   show?: boolean;
@@ -31,7 +31,7 @@ interface IProps {
   onFullfilledFragment?: () => void;
 }
 
-export const Scg: FC<IProps> = ({
+export const Scg: FC<IScgProps> = ({
   question,
   readonly,
   className,
