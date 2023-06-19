@@ -1,32 +1,16 @@
-import { ComponentType, MouseEvent, ReactNode, useRef } from 'react';
+import { MouseEvent, ReactNode, useRef } from 'react';
 import { ContextMenu } from '@components/ContextMenu';
 import { useBooleanState } from '@hooks/useBooleanState';
 
-type TagProps<Tag extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[Tag] & {
-  as?: Tag;
+export interface IScTagProps {
   children?: ReactNode;
   addr?: number;
   systemId?: string;
   showMenu?: boolean;
-};
+  [x: string]: any;
+}
 
-type CompProps<P extends Record<string, any>, Comp extends ComponentType<P>> = P & {
-  as?: Comp;
-  addr: number;
-};
-
-export const ScTag = <
-  P extends Record<string, any>,
-  Comp extends ComponentType<P>,
-  Tag extends keyof JSX.IntrinsicElements = 'div',
->({
-  addr,
-  systemId,
-  as = 'div' as any,
-  children,
-  showMenu = true,
-  ...restProps
-}: TagProps<Tag> | CompProps<P, Comp>) => {
+export const ScTag = ({ addr, systemId, as = 'div', children, showMenu = true, ...restProps }: IScTagProps) => {
   const [isOpened, openDropdown, closeDropdown] = useBooleanState(false);
 
   const ref = useRef<HTMLElement>(null);
