@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode, useRef } from 'react';
 import { ContextMenu } from '@components/ContextMenu';
 import { useBooleanState } from '@hooks/useBooleanState';
 
-export interface IScgTagProps {
+export interface IScTagProps {
   children?: ReactNode;
   addr?: number;
   systemId?: string;
@@ -10,7 +10,7 @@ export interface IScgTagProps {
   [x: string]: any;
 }
 
-export const ScTag = ({ addr, systemId, as = 'div', children, showMenu = true, ...restProps }: IScgTagProps) => {
+export const ScTag = ({ addr, systemId, as = 'div', children, showMenu = true, ...restProps }: IScTagProps) => {
   const [isOpened, openDropdown, closeDropdown] = useBooleanState(false);
 
   const ref = useRef<HTMLElement>(null);
