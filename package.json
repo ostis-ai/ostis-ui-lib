@@ -27,8 +27,8 @@
   "peerDependencies": {
     "react": ">=16",
     "react-dom": ">=16",
-    "ts-sc-client": ">=0.3.0",
-    "styled-components": "^5.1.0 || ^6.0.0-rc.1"
+    "styled-components": "^5.1.0 || ^6.0.0-rc.1",
+    "ts-sc-client": ">=0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -88,6 +88,7 @@
     ]
   },
   "dependencies": {
-    "@floating-ui/react": "^0.24.1"
+    "@floating-ui/react": "^0.24.1",
+    "axios": "^1.4.0"
   }
 }
