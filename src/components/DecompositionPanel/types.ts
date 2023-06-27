@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+// import { AxiosResponse } from 'axios';
 
 export interface IUserData {
   login: string;
@@ -34,7 +34,7 @@ export interface IDecompositionItem {
 export type TAddDecompositionItemCallBack = (
   parentID: string,
   data: IDecompositionItem,
-) => Promise<AxiosResponse<Record<string, any>, any> | null>;
+) => Promise<IUserData | null>;
 
 export type TGetDecompositionCallback = () => Promise<Decomposition | null>;
 
@@ -43,7 +43,7 @@ export type TEditDecompositionItemCallback = (id: number, value: string) => Prom
 export type TDeleteDecompositionItemCallback = (
   parentID: string,
   id: string,
-) => Promise<AxiosResponse<any, any> | null>;
+) => Promise<IUserData | null>;
 
 export interface IDecompositionContext {
   isMenuListLoading: boolean;

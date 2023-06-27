@@ -77,7 +77,7 @@ export const DecompositionProvider: FC<IProps> = ({
           if (!prevState || !res) return null;
           return updateElem(prevState, elemID, (elem) => ({
             ...elem,
-            id: Number(res.data.sc_addr),
+            id: Number(res.sc_addr),
             expanded: false,
             isLoading: false,
           }));
@@ -130,7 +130,7 @@ export const DecompositionProvider: FC<IProps> = ({
 
       if (!deleteRes) return;
 
-      const deletedID = deleteRes.data.sc_addr;
+      const deletedID = deleteRes.sc_addr;
       if (!deletedID) return;
 
       const newMenuList = updateElem(menuList, parent.id, (elem) => ({
