@@ -18,5 +18,8 @@ export * from '@components/Popup';
 export * from '@components/ButtonWithIcon';
 export * from '@components/ContextMenu';
 export * from '@components/Scg';
+export * from '@components/Scn';
 export * from '@components/ScTag';
 export * from '@components/ScTagLink';
+export * from '@components/DecompositionPanel';
+export * from '@components/Expandable';
