@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslate } from '@components/Language/useTranslate';
 
-import { StyledIconButtonOld, Wrap } from './styled';
+import { StyledButtonWithIcon, Wrap } from './styled';
 
 interface IProps {
   onAddClick: () => void;
@@ -15,15 +15,17 @@ export const Options: FC<IProps> = ({ onAddClick, onEditClick, onDeleteClick, is
 
   return (
     <Wrap>
-      <StyledIconButtonOld onClick={onEditClick}>
+      <StyledButtonWithIcon onClick={onEditClick}>
         {translate({ ru: 'Переименовать', en: 'Rename' })}
-      </StyledIconButtonOld>
+      </StyledButtonWithIcon>
       {isAdmin && (
-        <StyledIconButtonOld onClick={onDeleteClick}>{translate({ ru: 'Удалить', en: 'Delete' })}</StyledIconButtonOld>
+        <StyledButtonWithIcon onClick={onDeleteClick}>
+          {translate({ ru: 'Удалить', en: 'Delete' })}
+        </StyledButtonWithIcon>
       )}
-      <StyledIconButtonOld onClick={onAddClick}>
+      <StyledButtonWithIcon onClick={onAddClick}>
         {translate({ ru: 'Новый подраздел', en: 'New subsection' })}
-      </StyledIconButtonOld>
+      </StyledButtonWithIcon>
     </Wrap>
   );
 };

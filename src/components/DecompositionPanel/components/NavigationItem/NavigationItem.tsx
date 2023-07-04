@@ -1,17 +1,24 @@
 import { ChangeEvent, FC, KeyboardEvent, memo, useEffect, useRef, useState } from 'react';
-import { ScLangText} from '@components/Language';
-import {useClickOutside} from '@hooks/useClickOutside';
+import { ScLangText } from '@components/Language';
+import { useClickOutside } from '@hooks/useClickOutside';
 
 import { ITransformedDecomposition, IUserData } from '../../types';
 import { EditTextarea } from '../EditTextarea';
 import { NavigationList } from '../NavigationList';
 import { Options } from '../Options';
-import { TextAreaItem } from '../TextAreaItem'
+import { TextAreaItem } from '../TextAreaItem';
 
 import Option from './../../icons/options.svg';
 import Point from './../../icons/point.svg';
 import { useDecompositionContext } from './../../useDecompositionContext';
-import { ChildrenWrapper, ItemContentWrapper, OptionsBtnWrapper, StyledArrowIcon, StyledIconButtonOld, StyledScTagLink } from './styled';
+import {
+  ChildrenWrapper,
+  ItemContentWrapper,
+  OptionsBtnWrapper,
+  StyledArrowIcon,
+  StyledButtonWithIcon,
+  StyledScTagLink,
+} from './styled';
 
 interface IProps {
   menuItem: ITransformedDecomposition;
@@ -106,20 +113,20 @@ export const NavigationItemIner: FC<IProps> = ({ menuItem, user }) => {
       {menuItem.title && (
         <li>
           <ItemContentWrapper isOptionsOpen={isOptionsOpen} isLoading={menuItem.isLoading}>
-            <StyledIconButtonOld
+            <StyledButtonWithIcon
               marker={true}
               onClick={() => onToggle(menuItem.id)}
               disabled={!menuItem.children.length}
             >
               {menuItem.children.length ? <StyledArrowIcon expanded={menuItem.expanded} /> : <Point />}
-            </StyledIconButtonOld>
+            </StyledButtonWithIcon>
             <ScLangText addrOrSystemId={menuItem.id} renderText={renderItemText} />
 
             {!!user.can_edit && !isEditInputShow && (
               <OptionsBtnWrapper ref={optionsWrapperRef}>
-                <StyledIconButtonOld options className="optionsBtn" onClick={onOptionsOpen}>
+                <StyledButtonWithIcon options className="optionsBtn" onClick={onOptionsOpen}>
                   <Option />
-                </StyledIconButtonOld>
+                </StyledButtonWithIcon>
                 {isOptionsOpen && (
                   <Options
                     onAddClick={onAddClick}

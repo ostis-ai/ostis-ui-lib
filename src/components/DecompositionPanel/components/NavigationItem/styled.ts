@@ -49,7 +49,7 @@ export const ItemContentWrapper = styled.div<{ isOptionsOpen: boolean; isLoading
   }
 `;
 
-export const StyledIconButtonOld = styled(ButtonWithIcon)<{ options?: boolean; marker?: boolean }>`
+export const StyledButtonWithIcon = styled(ButtonWithIcon)<{ options?: boolean; marker?: boolean }>`
   width: 24px;
   height: 24px;
 
