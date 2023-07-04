@@ -17,7 +17,7 @@ export const Wrap = styled.div`
   z-index: 2;
 `;
 
-export const StyledIconButtonOld = styled(ButtonWithIcon)`
+export const StyledButtonWithIcon = styled(ButtonWithIcon)`
   width: 100%;
 
   padding: 8px 16px;

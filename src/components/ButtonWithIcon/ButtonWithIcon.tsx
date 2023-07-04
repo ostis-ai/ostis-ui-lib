@@ -6,7 +6,7 @@ import { Button } from './styled';
 
 type TButtonType = 'button' | 'submit' | 'reset';
 
-interface IButtonWithIcon {
+export interface IButtonWithIcon {
   className?: string;
   disabled?: boolean;
   type?: TButtonType;
