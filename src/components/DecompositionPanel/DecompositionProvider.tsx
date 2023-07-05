@@ -69,15 +69,15 @@ export const DecompositionProvider: FC<IProps> = ({
           }));
         });
 
-        const res = await addDecompositionItemCallBack(String(id), { sectionName: value });
+        const scAddr = await addDecompositionItemCallBack(String(id), { sectionName: value });
 
-        if (!res) return;
+        if (!scAddr) return;
 
         return setMenuList((prevState) => {
-          if (!prevState || !res) return null;
+          if (!prevState || !scAddr) return null;
           return updateElem(prevState, elemID, (elem) => ({
             ...elem,
-            id: Number(res.sc_addr),
+            id: scAddr,
             expanded: false,
             isLoading: false,
           }));
@@ -126,16 +126,13 @@ export const DecompositionProvider: FC<IProps> = ({
 
       if (!parent) return;
 
-      const deleteRes = await deleteDecompositionItemCallback(String(parent.id), String(id));
+      const scAddr = await deleteDecompositionItemCallback(String(parent.id), String(id));
 
-      if (!deleteRes) return;
-
-      const deletedID = deleteRes.sc_addr;
-      if (!deletedID) return;
+      if (!scAddr) return;
 
       const newMenuList = updateElem(menuList, parent.id, (elem) => ({
         ...elem,
-        children: elem.children.filter((item) => item.id !== Number(deletedID)),
+        children: elem.children.filter((item) => item.id !== scAddr),
       }));
 
       setMenuList(newMenuList);
