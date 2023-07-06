@@ -42,3 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add component: Toast
 - Add component: Toasts
 - Add component: Tooltip
+
+## [v0.0.1-beta.2] - 06.07.2023
+### Changed
+- Typing for addDecompositionItemCallBack, deleteDecompositionItemCallback functions
