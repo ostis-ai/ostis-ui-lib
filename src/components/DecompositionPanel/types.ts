@@ -34,7 +34,7 @@ export interface IDecompositionItem {
 export type TAddDecompositionItemCallBack = (
   parentID: string,
   data: IDecompositionItem,
-) => Promise<IUserData | null>;
+) => Promise<number | null>;
 
 export type TGetDecompositionCallback = () => Promise<Decomposition | null>;
 
@@ -43,7 +43,7 @@ export type TEditDecompositionItemCallback = (id: number, value: string) => Prom
 export type TDeleteDecompositionItemCallback = (
   parentID: string,
   id: string,
-) => Promise<IUserData | null>;
+) => Promise<number | null>;
 
 export interface IDecompositionContext {
   isMenuListLoading: boolean;
