@@ -42,3 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add component: Toast
 - Add component: Toasts
 - Add component: Tooltip
+
+## [v0.0.1-beta.2] - 06.07.2023
+### Changed
+- Modified promise typing for the TAddDecompositionItemCallBack function:
+    - Before: export type TAddDecompositionItemCallBack = (parentID: string, data: IDecompositionItem) => Promise<IUserData | null>;
+    - After: export type TAddDecompositionItemCallBack = (parentID: string, data: IDecompositionItem) => Promise<number | null>;
+- Modified promise typing for the TDeleteDecompositionItemCallback function:
+    - Before: export type TDeleteDecompositionItemCallback = (parentID: string, id: string) => Promise<IUserData | null>;
+    - After: export type TDeleteDecompositionItemCallback = (parentID: string, id: string) => Promise<number | null>;
+    
