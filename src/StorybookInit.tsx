@@ -1,5 +1,6 @@
 import { ChipStory } from '@components/Chip/ChipStory';
 import { DropdownStory } from '@components/Dropdown/DropdownStory';
+import { NotificationStory } from '@components/Notification/NotificationStory';
 import { PopupStory } from '@components/Popup/PopupStory';
 import { SkeletonStory } from '@components/Skeleton/story/SkeletonStory';
 import { SpinnerStory } from '@components/Spinner/SpinnerStory';
@@ -28,6 +29,7 @@ export const StorybookInit = () => {
         <TextareaStory />
         <DropdownStory />
         <PopupStory />
+        <NotificationStory />
       </Storybook>
     </>
   );
