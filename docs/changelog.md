@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v0.0.1-beta.1] - 04.07.2023
+
 ### Added
+
 - Add utility module: findKeynodes
 - Add utility module: langToKeynode
 - Add utility module: observeRect
@@ -44,5 +46,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add component: Tooltip
 
 ## [v0.0.1-beta.2] - 06.07.2023
+
 ### Changed
+
 - Typing for addDecompositionItemCallBack, deleteDecompositionItemCallback functions
+
+## [v0.0.1-beta.3] - 03.08.2023
+
+### Fixed
+
+- Moved ts-sc-client to externals
