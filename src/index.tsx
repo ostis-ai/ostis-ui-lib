@@ -35,3 +35,5 @@ export * from '@utils/langToKeynode';
 export * from '@utils/observeRect';
 export * from '@utils/refSetter';
 export * from '@utils/snakeToCamelCase';
+
+export * from '@model/utils';

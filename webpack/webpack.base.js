@@ -25,10 +25,5 @@ module.exports = (env) => ({
   module: {
     rules,
   },
-  externals: IS_DEV
-    ? undefined
-    : {
-        react: 'react',
-        reactDom: 'react-dom',
-      },
+  externals: IS_DEV ? undefined : ['react', 'react-dom', 'ts-sc-client'],
 });
