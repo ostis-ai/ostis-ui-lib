@@ -14,7 +14,7 @@ interface IProps {
   scgUrl: string;
   isLoading?: boolean;
   question: number;
-  renderRequestPanel: (addr: number) => ReactNode;
+  renderRequestPanel?: (addr: number) => ReactNode;
   onAskQuestion: TOnAskQuestion;
 }
 
@@ -36,7 +36,7 @@ export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskQuestion
         <Inner>
           {isLoading && <ScnSkeleton />}
           {partialTree && !isLoading && <ScnElement tree={partialTree} isRoot />}
-          {partialTree && renderRequestPanel(partialTree.addr)}
+          {partialTree && renderRequestPanel && renderRequestPanel(partialTree.addr)}
 
           <Target ref={targetRef} />
         </Inner>
