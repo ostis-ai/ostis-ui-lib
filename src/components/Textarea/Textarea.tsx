@@ -19,20 +19,20 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextareaProps>(
     const [textAreaHeight, setTextAreaHeight] = useState(`${minHeight}px`);
     const [isScrollable, setIsScrollable] = useState(false);
 
-    const onResize = () => {
-      setTextAreaHeight(`${minHeight}px`);
-      if (!ref.current) return;
-      setTextAreaHeight(`${ref.current.scrollHeight}px`);
-    };
-
     useEffect(() => {
+      const onResize = () => {
+        setTextAreaHeight(`${minHeight}px`);
+        if (!ref.current) return;
+        setTextAreaHeight(`${ref.current.scrollHeight}px`);
+      };
+
       if (!ref.current) return;
       setTextAreaHeight(`${ref.current.scrollHeight}px`);
       window.addEventListener('resize', onResize);
       return () => {
         window.removeEventListener('resize', onResize);
       };
-    }, [text]);
+    }, [minHeight, text]);
 
     useEffect(() => {
       setText(restProps.value || '');
