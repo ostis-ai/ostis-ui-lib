@@ -137,11 +137,7 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
                 <Modifier>
                   {modifiers.map((modifier) => (
                     <Fragment key={`${arc.addr}${modifier.addr}`}>
-                      <ScnLink
-                        addr={modifier.addr}
-                        loaderHeight={24}
-                        loaderWidth={'60vw'}
-                      />
+                      <ScnLink addr={modifier.addr} loaderHeight={24} loaderWidth={'25%%'} />
                       <ModifierArc type={modifier.modifierArcs[0].type} />
                     </Fragment>
                   ))}

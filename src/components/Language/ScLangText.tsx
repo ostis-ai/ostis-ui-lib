@@ -116,8 +116,9 @@ export const ScLangText = ({
 
   return (
     <>
-      {isLoading && <PseudoText height={loaderHeight} width={loaderWidth} />}
-      {!isLoading && renderText(text)}
+      {<PseudoText height={loaderHeight} width={loaderWidth} />}
+      {/* {isLoading && <PseudoText height={loaderHeight} width={loaderWidth} />} */}
+      {/* {!isLoading && renderText(text)} */}
     </>
   );
 };

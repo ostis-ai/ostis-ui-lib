@@ -37,7 +37,6 @@ export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskQuestion
           {isLoading && <ScnSkeleton />}
           {partialTree && !isLoading && <ScnElement tree={partialTree} isRoot />}
           {partialTree && renderRequestPanel && renderRequestPanel(partialTree.addr)}
-
           <Target ref={targetRef} />
         </Inner>
       </StyledScTag>
