@@ -1,5 +1,8 @@
+import { ButtonStory } from '@components/Button/ButtonStory';
 import { ChipStory } from '@components/Chip/ChipStory';
 import { DropdownStory } from '@components/Dropdown/DropdownStory';
+import { InputStory } from '@components/Input/InputStory';
+import { InputV2Story } from '@components/InputV2/InputV2Story';
 import { NotificationStory } from '@components/Notification/NotificationStory';
 import { PopupStory } from '@components/Popup/PopupStory';
 import { SkeletonStory } from '@components/Skeleton/story/SkeletonStory';
@@ -21,6 +24,9 @@ export const StorybookInit = () => {
     <>
       <Global />
       <Storybook>
+        <ButtonStory />
+        <InputStory />
+        <InputV2Story />
         <SwitchScgScnStory />
         <TooltipStory />
         <SpinnerStory />
