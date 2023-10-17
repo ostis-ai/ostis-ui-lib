@@ -56,3 +56,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Moved ts-sc-client to externals
+
+## [v0.0.1-beta.4] - 14.09.2023
+
+### Changed
+
+- One of Scn component props has been made optional.
