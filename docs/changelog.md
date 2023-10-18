@@ -62,3 +62,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - One of Scn component props has been made optional.
+
+## [v0.0.1-beta.5] - 18.10.2023
+
+### Changed
+
+- Add Input component.
+- Add Button component.
