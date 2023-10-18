@@ -7,6 +7,7 @@ const forkTsCheckerWebpackPlugin = require('./forkTsCheckerWebpackPlugin');
 const cleanWebpackPlugin = require('./cleanWebpackPlugin');
 const dotEnvPlugin = require('./dotEnvPlugin');
 const eslintPlugin = require('./eslintPlugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = (env) =>
   [
@@ -18,4 +19,5 @@ module.exports = (env) =>
     eslintPlugin,
     dotEnvPlugin(env.envFilePath),
     IS_DEV && reactRefreshWebpackPlugin,
+    new CompressionPlugin({ algorithm: 'gzip', deleteOriginalAssets: true }),
   ].filter(Boolean);
