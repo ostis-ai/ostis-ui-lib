@@ -63,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - One of Scn component props has been made optional.
 
-## [v0.0.1-beta.6] - 18.10.2023
+## [v0.0.1-beta.8] - 18.10.2023
 
 ### Changed
 
