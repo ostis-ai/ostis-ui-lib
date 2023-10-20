@@ -16,9 +16,10 @@ interface IProps {
   question: number;
   renderRequestPanel?: (addr: number) => ReactNode;
   onAskQuestion: TOnAskQuestion;
+  className?: string;
 }
 
-export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskQuestion, question }: IProps) => {
+export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskQuestion, question, className }: IProps) => {
   const { page, scrollRef, targetRef } = useInfiniteScroll({ total: tree?.children?.length || 1, pageSize: PAGE_SIZE });
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskQuestion
 
   return (
     <ScnProvider onAskQuestion={onAskQuestion} scgUrl={scgUrl}>
-      <StyledScTag ref={scrollRef} addr={question}>
+      <StyledScTag ref={scrollRef} addr={question} className={className}>
         <Inner>
           {isLoading && <ScnSkeleton />}
           {partialTree && !isLoading && <ScnElement tree={partialTree} isRoot />}

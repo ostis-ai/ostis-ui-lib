@@ -138,7 +138,8 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
                 <Modifier>
                   {modifiers.map((modifier) => (
                     <Fragment key={`${arc.addr}${modifier.addr}`}>
-                      <ScnLink addr={modifier.addr} loaderHeight={18} loaderWidth={`${getRandomInt(250, 350)}px`} />
+                      {/* <ScnLink addr={modifier.addr} loaderHeight={18} loaderWidth={`${getRandomInt(250, 350)}px`} /> */}
+                      <ScnLink addr={modifier.addr} loaderHeight={18} loaderWidth={`${getRandomInt(20, 60)}%`} />
                       <ModifierArc type={modifier.modifierArcs[0].type} />
                     </Fragment>
                   ))}

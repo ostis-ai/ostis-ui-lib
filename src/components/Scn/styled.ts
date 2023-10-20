@@ -37,8 +37,6 @@ export const StyledScTag = styled(ScTag)`
 
 export const Inner = styled.div`
   position: relative;
-  
-  margin-right: 120px;
 `;
 
 export const Target = styled.div`
