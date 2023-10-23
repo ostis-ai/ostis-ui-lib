@@ -52,18 +52,11 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
 
     return (
       <Styled.Wrapper
-        // className={cn(styles.wrapper, className, inputClassName, {
-        //   [styles.search]: isSearch,
-        //   [styles.search_focused]: isFocused && isSearch,
-        //   [styles.wrapper_focused]: isFocused,
-        //   [styles.wrapper_error]: status === 'error',
-        //   [styles.wrapper_disabled]: disabled,
-        // })}
         isSearch={isSearch}
         isFocused={isFocused}
         isError={status === 'error'}
         isDisabled={disabled}
-        className={`${className} ${inputClassName}`}
+        className={className}
         style={style}
         onClick={onWrapperClick}
         onMouseDown={(e) => e.preventDefault()}
@@ -76,6 +69,7 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
           type={inputType}
           disabled={disabled}
           {...restProps}
+          className={inputClassName}
           onFocus={onFocus}
           onBlur={onBlur}
           onMouseDown={onInputMouseDown}

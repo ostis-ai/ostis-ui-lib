@@ -12,9 +12,10 @@ import { Storybook } from '@components/Storybook';
 import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import { ScnStory } from '@components/Scn/ScnStory';
+import { defaultLight } from '@constants/theme';
 
 const Global = createGlobalStyle`
   body {
@@ -24,7 +25,7 @@ const Global = createGlobalStyle`
 
 export const StorybookInit = () => {
   return (
-    <>
+    <ThemeProvider theme={defaultLight}>
       <Global />
       <Storybook>
         <ButtonStory />
@@ -41,6 +42,6 @@ export const StorybookInit = () => {
         <NotificationStory />
         <ScnStory />
       </Storybook>
-    </>
+    </ThemeProvider>
   );
 };
