@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useClient } from '@components/ClientProvider';
-import { TLinkFormat } from '@components/Scn';
+import { TLinkFormat } from '@components/Scn/model';
 import { useInView } from '@hooks/useInView';
 import { ScAddr } from 'ts-sc-client';
 

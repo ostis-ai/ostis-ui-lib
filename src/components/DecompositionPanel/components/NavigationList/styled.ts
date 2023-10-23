@@ -1,5 +1,5 @@
 import { ButtonWithIcon } from '@components/ButtonWithIcon';
-import { ScTagLink } from '@components/ScTagLink';
+import { ScTagLink } from '@components/ScTag';
 import styled, { css, keyframes } from 'styled-components';
 
 import ArrowIcon from '../../icons/arrow.svg';

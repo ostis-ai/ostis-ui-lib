@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { ScTag } from '../../../ScTag';
-import { ScTagLink } from '../../../ScTagLink';
+import { ScTag, ScTagLink } from '../../../ScTag';
 import { ScnLink } from '../ScnLink';
 
 export const StyledScTag = styled(ScTag)<{ isHTML?: boolean }>`

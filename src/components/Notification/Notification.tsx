@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
-import { TLanguage, TTexts, useLanguage } from '@components/Language';
+import { useLanguage } from '@components/Language';
+import { TLanguage, TTexts } from '@components/Language/types';
 
 import CloseIcon from './icons/close.svg';
 import ErrorIcon from './icons/errorIcon.svg';
 import SuccessIcon from './icons/successIcon.svg';
 import WarningIcon from './icons/warningIcon.svg';
-import { CenterContainer, CloseButton,Icon, MainContainer, NotificationContainer, Text, Title } from './styled';
+import { CenterContainer, CloseButton, Icon, MainContainer, NotificationContainer, Text, Title } from './styled';
 
 const getTargetText = (text: TNotificationText, lang: TLanguage) => {
   if (typeof text === 'function') return text(lang);
@@ -42,9 +43,11 @@ const Notification = ({ type, title = '', text, onClose }: IProps) => {
             </CloseButton>
           )}
         </MainContainer>
-        {text && <Text>
-          <>{getTargetText(text, lang)}</>
-        </Text>}
+        {text && (
+          <Text>
+            <>{getTargetText(text, lang)}</>
+          </Text>
+        )}
       </CenterContainer>
     </NotificationContainer>
   );

@@ -1,4 +1,5 @@
 import { forwardRef, TextareaHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { InputStatus } from '@model/input';
 import { refSetter } from '@utils/refSetter';
 
 import { StyledTextarea } from './styled';
@@ -9,8 +10,6 @@ export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEleme
   maxHeight?: number;
   value?: string;
 }
-
-export type InputStatus = 'attention' | 'error';
 
 export const Textarea = forwardRef<HTMLTextAreaElement, ITextareaProps>(
   ({ className, status, onChange, onKeyDown, minHeight = 39, maxHeight = 84, ...restProps }, refFromProps) => {

@@ -1,4 +1,4 @@
-import { TLanguage } from '@components/Language';
+import { TLanguage } from '@components/Language/types';
 
 export const langToKeynode: Record<TLanguage, string> = {
   ru: 'lang_ru',

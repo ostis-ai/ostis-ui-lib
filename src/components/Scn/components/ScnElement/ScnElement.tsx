@@ -1,14 +1,21 @@
-import { Fragment, memo } from 'react';
-import { IScnNode } from '@components/Scn';
-import { ScType } from 'ts-sc-client';
+import { Fragment, memo, PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { useClient } from '@components/ClientProvider';
+import { useLanguage } from '@components/Language';
+import { IScnNode } from '@components/Scn/model';
+import { useScnContext } from '@components/Scn/ScnContext';
+import { useScUtils } from '@components/ScUtils';
+import { TScLanguageTab } from '@components/SwitchScgScn';
+import { SPINER_COLOR } from '@model/constants';
+import { langToKeynode } from '@utils/langToKeynode';
+import { snakeToCamelCase } from '@utils/snakeToCamelCase';
+import { ScAddr, ScTemplate, ScType } from 'ts-sc-client';
 
 import { arcMap } from '../../constants';
 import { EdgeNode, KeywordNode, LinkNode, SimpleNode, TupleNode } from '../Nodes';
 import { ScnLink } from '../ScnLink';
-import { ScStruct } from '../ScStruct';
+import { Struct, StyledScg, StyledSpinner, StyledSwitchScgScn } from '../ScStruct/styled';
 
-import { LinkedNode } from './LinkedNode';
-import { Arc, Child, LinkedNodes, Marker, Modifier, RightSide, Wrapper } from './styled';
+import { Arc, Child, LinkedNodes, Marker, Modifier, RightSide, StyledLinkedNode, Wrapper } from './styled';
 
 interface IProps {
   tree: IScnNode;
@@ -24,6 +31,83 @@ const ModifierArc = ({ type }: IModifierArcProps) => {
   const scType = new ScType(type);
   if (scType.isConst()) return <>:</>;
   return <>::</>;
+};
+
+const ScStruct = ({ tree }: IProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [question, setQuestion] = useState<number | null>(null);
+  const [tab, setTab] = useState<TScLanguageTab>('scn');
+
+  const { onAskQuestion, scgUrl } = useScnContext();
+
+  const getQuestion = useCallback(async () => {
+    setIsLoading(true);
+    const question = await onAskQuestion(tree.addr);
+    setIsLoading(false);
+    setQuestion(question);
+  }, [onAskQuestion, tree.addr]);
+
+  useEffect(() => {
+    getQuestion();
+  }, [getQuestion]);
+
+  const showScg = tab === 'scg';
+  const renderScg = showScg && !!question && !isLoading;
+  return (
+    <Struct isScg={showScg}>
+      <StyledSwitchScgScn tab={tab} onTabClick={setTab} />
+      {!showScg && <ScnElement tree={tree} isRoot />}
+      <StyledScg url={scgUrl} question={question || undefined} show={renderScg} readonly />
+      {showScg && isLoading && <StyledSpinner appearance={SPINER_COLOR} />}
+    </Struct>
+  );
+};
+
+interface ILinkedNodeProps {
+  node: IScnNode;
+  showMarker?: boolean;
+}
+
+const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) => {
+  const [show, setShow] = useState(true);
+
+  const lang = useLanguage();
+  const client = useClient();
+  const { findKeynodes } = useScUtils();
+
+  const scType = new ScType(node.type);
+
+  const isLink = scType.isLink();
+
+  useEffect(() => {
+    if (!isLink) return setShow(true);
+
+    (async () => {
+      const { languages, ...rest } = await findKeynodes('languages', langToKeynode[lang]);
+
+      const activeLangKeynode = rest[snakeToCamelCase(langToKeynode[lang])];
+
+      const template = new ScTemplate();
+
+      const langAlias = '_lang';
+
+      template.triple(languages, ScType.EdgeAccessVarPosPerm, [ScType.NodeVarClass, langAlias]);
+      template.triple(langAlias, ScType.EdgeAccessVarPosPerm, new ScAddr(node.addr));
+      const result = await client.templateSearch(template);
+      if (!result.length) return setShow(true);
+      const foundLang = result[0].get(langAlias);
+      setShow(foundLang.value === activeLangKeynode.value);
+    })();
+  }, [client, findKeynodes, isLink, lang, node.addr]);
+
+  if (!show) return null;
+
+  return (
+    <StyledLinkedNode>
+      {showMarker && <Marker />}
+      <ScnElement tree={node} />
+    </StyledLinkedNode>
+  );
 };
 
 const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {

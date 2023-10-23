@@ -1,4 +1,4 @@
-import { ScTagLink } from '@components/ScTagLink';
+import { ScTagLink } from '@components/ScTag';
 import styled from 'styled-components';
 
 export const EdgeWrapper = styled.div`

@@ -1,5 +1,5 @@
 import { FocusEvent, forwardRef, InputHTMLAttributes, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
-import { InputStatus } from '@components/Textarea';
+import { InputStatus } from '@model/input';
 import { refSetter } from '@utils/refSetter';
 
 import * as Styled from './styled';

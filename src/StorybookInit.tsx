@@ -1,3 +1,4 @@
+/* eslint-disable simple-import-sort/imports */
 import { ButtonStory } from '@components/Button/ButtonStory';
 import { ChipStory } from '@components/Chip/ChipStory';
 import { DropdownStory } from '@components/Dropdown/DropdownStory';
@@ -12,6 +13,8 @@ import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
 import { createGlobalStyle } from 'styled-components';
+
+import { ScnStory } from '@components/Scn/ScnStory';
 
 const Global = createGlobalStyle`
   body {
@@ -36,6 +39,7 @@ export const StorybookInit = () => {
         <DropdownStory />
         <PopupStory />
         <NotificationStory />
+        <ScnStory />
       </Storybook>
     </>
   );
