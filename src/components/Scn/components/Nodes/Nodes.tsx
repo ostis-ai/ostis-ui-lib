@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import { IScnNode } from '@components/Scn';
+import { IScnNode } from '@components/Scn/model';
 import { ScType } from 'ts-sc-client';
 
 import { ScLink } from '../ScLink';

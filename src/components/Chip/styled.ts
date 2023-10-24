@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { TSize } from './Chip';
+import { TChipSize } from './types';
 
-export const Wrapper = styled.div<{ disabled?: boolean; size: TSize; hasCloseIcon: boolean }>`
+export const Wrapper = styled.div<{ disabled?: boolean; size: TChipSize; hasCloseIcon: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -37,7 +37,7 @@ export const Wrapper = styled.div<{ disabled?: boolean; size: TSize; hasCloseIco
     `}
 `;
 
-export const Text = styled.div<{ size: TSize }>`
+export const Text = styled.div<{ size: TChipSize }>`
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 14px;

@@ -9,15 +9,17 @@ type ButtonProps = {
 export const Button = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ${({ theme }) => theme.button.gap};
   box-sizing: border-box;
   outline: none;
-  border-radius: 0.6rem;
+  border-radius: ${({ theme }) => theme.button.borderRadius};
   cursor: pointer;
-  font-family: Roboto;
+  font-family: ${({ theme }) => theme.button.font.fontFamily};
   font-weight: 500;
   letter-spacing: 0;
   user-select: none;
+
+  fill: currentColor;
 
   &:disabled {
     pointer-events: none;
@@ -34,64 +36,61 @@ export const Button = styled.button<ButtonProps>`
   ${(props) =>
     props.size === 'lg' &&
     css`
-      padding: 0.5rem 3rem;
-      font-size: 26px;
-      line-height: 30px;
+      padding: ${({ theme }) => theme.button.size.large.padding};
+      font-size: ${({ theme }) => theme.button.font.large.fontSize};
+      line-height: ${({ theme }) => theme.button.font.large.lineHeight};
     `}
 
   ${(props) =>
     props.size === 'md' &&
     css`
-      padding: 0.5rem 1rem;
-      font-size: 22px;
-      line-height: 26px;
+      padding: ${({ theme }) => theme.button.size.medium.padding};
+      font-size: ${({ theme }) => theme.button.font.medium.fontSize};
+      line-height: ${({ theme }) => theme.button.font.medium.lineHeight};
     `}
 
   ${(props) =>
     props.size === 'sm' &&
     css`
-      padding: 0.5rem 1rem;
-      font-size: 18px;
-      line-height: 20px;
+      padding: ${({ theme }) => theme.button.size.small.padding};
+      font-size: ${({ theme }) => theme.button.font.small.fontSize};
+      line-height: ${({ theme }) => theme.button.font.small.lineHeight};
     `}
 
   /* Colors */
   ${(props) =>
     props.color === 'primary' &&
     css`
-      background: #5896c0;
-      color: #ffffff;
+      background: ${({ theme }) => theme.button.colors.primary.backgroundInitial};
+      color: ${({ theme }) => theme.button.colors.primary.text};
 
       &:hover {
-        background: #4980a5;
+        background: ${({ theme }) => theme.button.colors.primary.backgroundHover};
       }
       &:active {
-        background: #4980a5;
+        background: ${({ theme }) => theme.button.colors.primary.backgroundActive};
       }
       &:disabled {
-        background: #c0c0c0;
+        background: ${({ theme }) => theme.button.colors.primary.backgroundDisabled};
+        color: ${({ theme }) => theme.button.colors.primary.textDisabled};
       }
     `}
 
   ${(props) =>
     props.color === 'secondary' &&
     css`
-      background: #ffffff;
-      color: #5896c0;
+      background: ${({ theme }) => theme.button.colors.secondary.backgroundInitial};
+      color: ${({ theme }) => theme.button.colors.secondary.text};
 
       &:hover {
-        background: #f5f5f5;
+        background: ${({ theme }) => theme.button.colors.secondary.backgroundHover};
       }
       &:active {
-        background: #f5f5f5;
+        background: ${({ theme }) => theme.button.colors.secondary.backgroundActive};
       }
       &:disabled {
-        background: #ffffff;
-        color: #a6a6a6;
-
-        & svg path {
-          stroke: #a6a6a6;
-        }
+        background: ${({ theme }) => theme.button.colors.secondary.backgroundDisabled};
+        color: ${({ theme }) => theme.button.colors.primary.textDisabled};
       }
     `}
 `;

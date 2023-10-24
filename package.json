@@ -10,7 +10,8 @@
     "lint:fix": "eslint src/**/*.{js,ts,tsx} --fix",
     "start": "webpack serve --node-env development",
     "build": "webpack && ttsc ./src/model/declarations.d.ts ./src/index.tsx",
-    "types": "ttsc"
+    "types": "ttsc",
+    "circular": "dpdm --no-warning --no-tree ./src/index.tsx"
   },
   "repository": {
     "type": "git",

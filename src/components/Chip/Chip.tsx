@@ -3,6 +3,7 @@ import { FC, MouseEvent, MouseEventHandler, ReactNode, useCallback } from 'react
 import CloseLarge from './icons/closeLarge.svg';
 import CloseMedium from './icons/closeMedium.svg';
 import { Icon, Text, Wrapper } from './styled';
+import { TChipSize } from './types';
 
 export interface IProps {
   children: ReactNode;
@@ -10,10 +11,8 @@ export interface IProps {
   disabled?: boolean;
   onClose?: () => void;
   onClick?: MouseEventHandler<HTMLDivElement>;
-  size?: TSize;
+  size?: TChipSize;
 }
-
-export type TSize = 'm' | 'l';
 
 export const Chip: FC<IProps> = ({ children, className, disabled, onClose, onClick, size = 'm' }) => {
   const handleClickCloseIcon = useCallback(

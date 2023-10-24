@@ -14,50 +14,53 @@ export const Wrapper = styled.div<WrapperProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 9px;
+  font-family: ${({ theme }) => theme.input.font.fontFamily};
+  gap: ${({ theme }) => theme.input.iconGap};
+
+  box-sizing: border-box;
 
   width: 100%;
   height: 40px;
 
-  padding: 8px 16px;
+  padding: ${({ theme }) => theme.input.size.padding};
 
-  border: 2px solid #ebebeb;
-  border-radius: 10px;
+  border: ${({ theme }) => theme.input.size.borderWidth} solid ${({ theme }) => theme.input.colors.initial.border};
+  border-radius: ${({ theme }) => theme.input.borderRadius};
 
   outline: none;
   cursor: text;
 
-  background-color: white;
+  background-color: ${({ theme }) => theme.input.colors.initial.background};
 
   &:hover {
-    border-color: #7ec0ee;
+    border-color: ${({ theme }) => theme.input.colors.borderHover};
   }
 
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: #7ec0ee;
+      border-color: ${({ theme }) => theme.input.colors.borderFocused};
 
       &:hover {
-        border-color: #7ec0ee;
+        border-color: ${({ theme }) => theme.input.colors.borderFocusedHover};
       }
     `}
 
   ${(props) =>
     props.isError &&
     css`
-      border-color: #f14747;
+      border-color: ${({ theme }) => theme.input.colors.borderError};
 
       &:hover {
-        border-color: #f14747;
+        border-color: ${({ theme }) => theme.input.colors.borderErrorHover};
       }
     `}
 
 	${(props) =>
     props.isDisabled &&
     css`
-      background-color: #fbfbfb;
-      border-color: #eeeeee;
+      background-color: ${({ theme }) => theme.input.colors.disabled.background};
+      border-color: ${({ theme }) => theme.input.colors.disabled.border};
 
       cursor: default;
       pointer-events: none;
@@ -77,25 +80,25 @@ export const Input = styled.input`
   padding: 0;
   min-width: 0;
 
-  font-family: 'Roboto';
+  font-family: inherit;
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-weight: ${({ theme }) => theme.input.font.inputWeight};
+  font-size: ${({ theme }) => theme.input.font.fontSize};
+  line-height: ${({ theme }) => theme.input.font.lineHeight};
 
   border: none;
   outline: none;
 
-  color: #323232;
+  color: ${({ theme }) => theme.input.colors.initial.text};
 
   &::placeholder {
-    color: #737373;
-    font-weight: 300;
+    color: ${({ theme }) => theme.input.colors.placeholder};
+    font-weight: ${({ theme }) => theme.input.font.placeholderWeight};
   }
 
   &:disabled {
-    background-color: #fbfbfb;
-    color: #737373;
+    background-color: ${({ theme }) => theme.input.colors.disabled.background};
+    color: ${({ theme }) => theme.input.colors.disabled.text};
 
     cursor: default;
   }

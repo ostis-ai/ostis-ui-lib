@@ -69,3 +69,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add Input component.
 - Add Button component.
+
+## [v0.0.2] - 24.10.2023
+
+### Changed
+
+- Mark inputV2 as deprecated
+- Add themeing for button and input
+- Add initial Scn Story
+- Remove most circular dependences

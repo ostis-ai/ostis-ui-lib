@@ -1,4 +1,4 @@
-import { TLanguage } from '@components/Language';
+import { TLanguage } from '@components/Language/types';
 import { findKeynodesBuilder } from '@utils/findKeynodes';
 import { langToKeynode } from '@utils/langToKeynode';
 import { snakeToCamelCase } from '@utils/snakeToCamelCase';

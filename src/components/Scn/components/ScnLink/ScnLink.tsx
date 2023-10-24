@@ -1,5 +1,5 @@
 import { ScLangText } from '@components/Language';
-import { ScTagLink } from '@components/ScTagLink';
+import { ScTagLink } from '@components/ScTag';
 
 export interface IScTagLinkProps {
   className?: string;

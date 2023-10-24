@@ -1,4 +1,4 @@
-import { IScnNode } from '@components/Scn';
+import { IScnNode } from '@components/Scn/model';
 import { getRandomInt } from '@utils/getRandomInt';
 
 import { arcMap } from '../../constants';

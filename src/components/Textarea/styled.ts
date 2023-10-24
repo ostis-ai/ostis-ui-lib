@@ -1,4 +1,4 @@
-import { InputStatus } from '@components/Textarea/Textarea';
+import { InputStatus } from '@model/input';
 import styled, { css } from 'styled-components';
 
 export const StyledTextarea = styled.textarea<{

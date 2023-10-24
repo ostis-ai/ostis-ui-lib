@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { ContextMenu } from '@components/ContextMenu';
 import { useLanguage } from '@components/Language';
+import { ContextMenu } from '@components/ScTag';
 import { useScUtils } from '@components/ScUtils';
 import { useBooleanState } from '@hooks/useBooleanState';
 import { langToKeynode } from '@utils/langToKeynode';
