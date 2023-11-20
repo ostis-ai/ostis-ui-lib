@@ -5,17 +5,18 @@ import { NavigationList } from './components/NavigationList';
 import { Skeleton } from './components/Skeleton';
 import { TextAreaItem } from './components/TextAreaItem';
 import { Nav } from './styled';
-import { ITransformedDecomposition, IUserData } from './types';
+import { ITransformedDecomposition } from './types';
 import { useDecompositionContext } from './useDecompositionContext';
 
 const emptyArray: ITransformedDecomposition[] = [];
 
 interface IProps {
-  user: IUserData | null;
   className?: string;
+  editable?: boolean;
+  deleteable?: boolean;
 }
 
-export const DecompositionPanel: FC<IProps> = ({ user, className }) => {
+export const DecompositionPanel: FC<IProps> = ({ className, editable = false, deleteable = false }) => {
   const {
     isMenuListLoading,
     menuList,
@@ -56,13 +57,11 @@ export const DecompositionPanel: FC<IProps> = ({ user, className }) => {
 
   useClickOutside(wrapperAddInputRef, saveAddItemValue);
 
-  if (!user) return null;
-
   return (
     <div className={className}>
       <Nav>
         {!isMenuListLoading && (
-          <NavigationList data={menuList?.children || emptyArray} user={user}>
+          <NavigationList data={menuList?.children || emptyArray} editable={editable} deleteable={deleteable}>
             <>
               {isAddInputShow && (
                 <TextAreaItem

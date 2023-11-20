@@ -3,7 +3,7 @@ import { useDecompositionContext } from '@components/DecompositionPanel/useDecom
 import { ScLangText } from '@components/Language';
 import { useClickOutside } from '@hooks/useClickOutside';
 
-import { ITransformedDecomposition, IUserData } from '../../types';
+import { ITransformedDecomposition } from '../../types';
 import { EditTextarea } from '../EditTextarea';
 import { Options } from '../Options';
 import { TextAreaItem } from '../TextAreaItem';
@@ -21,15 +21,21 @@ import {
 
 interface INavigationListProps {
   data: ITransformedDecomposition[];
-  user: IUserData | null;
   children?: ReactNode;
+  deleteable: boolean;
+  editable: boolean;
 }
 
-export const NavigationListInner = ({ data, user, children }: PropsWithChildren<INavigationListProps>) => {
+export const NavigationListInner = ({
+  data,
+  children,
+  deleteable,
+  editable,
+}: PropsWithChildren<INavigationListProps>) => {
   return (
     <ul>
       {data.map((item) => {
-        return <NavigationItem key={item.id} menuItem={item} user={user} />;
+        return <NavigationItem key={item.id} menuItem={item} deleteable={deleteable} editable={editable} />;
       })}
       {children}
     </ul>
@@ -38,10 +44,11 @@ export const NavigationListInner = ({ data, user, children }: PropsWithChildren<
 
 interface INavigationItemProps {
   menuItem: ITransformedDecomposition;
-  user: IUserData | null;
+  editable: boolean;
+  deleteable: boolean;
 }
 
-const NavigationItem = ({ menuItem, user }: INavigationItemProps) => {
+const NavigationItem = ({ menuItem, editable, deleteable }: INavigationItemProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isAddInputShow, setIsAddInputShow] = useState(false);
   const [isEditInputShow, setIsEditInputShow] = useState(false);
@@ -123,7 +130,6 @@ const NavigationItem = ({ menuItem, user }: INavigationItemProps) => {
     </>
   );
 
-  if (!user) return null;
   return (
     <>
       {menuItem.title && (
@@ -138,7 +144,7 @@ const NavigationItem = ({ menuItem, user }: INavigationItemProps) => {
             </StyledButtonWithIcon>
             <ScLangText addrOrSystemId={menuItem.id} renderText={renderItemText} />
 
-            {!!user.can_edit && !isEditInputShow && (
+            {editable && !isEditInputShow && (
               <OptionsBtnWrapper ref={optionsWrapperRef}>
                 <StyledButtonWithIcon options className="optionsBtn" onClick={onOptionsOpen}>
                   <Option />
@@ -151,7 +157,7 @@ const NavigationItem = ({ menuItem, user }: INavigationItemProps) => {
                       onDelete(menuItem.id);
                       closeOptions();
                     }}
-                    isAdmin={!!user.is_admin}
+                    deleteable={deleteable}
                   />
                 )}
               </OptionsBtnWrapper>
@@ -159,7 +165,7 @@ const NavigationItem = ({ menuItem, user }: INavigationItemProps) => {
           </ItemContentWrapper>
           {menuItem.expanded && !!menuItem.children.length && (
             <ChildrenWrapper>
-              <NavigationList data={menuItem.children} user={user}>
+              <NavigationList data={menuItem.children} deleteable={deleteable} editable={editable}>
                 {isAddInputShow && (
                   <TextAreaItem
                     value={addInputValue}

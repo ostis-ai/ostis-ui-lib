@@ -1,15 +1,3 @@
-// import { AxiosResponse } from 'axios';
-
-export interface IUserData {
-  login: string;
-  sc_addr: number;
-  is_admin: number;
-  can_edit: number;
-  has_entered: boolean;
-  first_time: number;
-  public_url: string;
-}
-
 export interface ITransformedDecomposition {
   id: number;
   title: string;
@@ -31,19 +19,13 @@ export interface IDecompositionItem {
   sectionName: string;
 }
 
-export type TAddDecompositionItemCallBack = (
-  parentID: string,
-  data: IDecompositionItem,
-) => Promise<number | null>;
+export type TAddDecompositionItemCallBack = (parentID: string, data: IDecompositionItem) => Promise<number | null>;
 
 export type TGetDecompositionCallback = () => Promise<Decomposition | null>;
 
 export type TEditDecompositionItemCallback = (id: number, value: string) => Promise<boolean | null>;
 
-export type TDeleteDecompositionItemCallback = (
-  parentID: string,
-  id: string,
-) => Promise<number | null>;
+export type TDeleteDecompositionItemCallback = (parentID: string, id: string) => Promise<number | null>;
 
 export interface IDecompositionContext {
   isMenuListLoading: boolean;
