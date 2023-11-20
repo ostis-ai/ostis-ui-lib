@@ -79,3 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add themeing for button and input
 - Add initial Scn Story
 - Remove most circular dependences
+
+### Fixed
+
+- export InputStatus

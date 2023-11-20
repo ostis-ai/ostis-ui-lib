@@ -43,3 +43,4 @@ export * from '@utils/refSetter';
 export * from '@utils/snakeToCamelCase';
 
 export * from '@model/utils';
+export * from '@model/input';
