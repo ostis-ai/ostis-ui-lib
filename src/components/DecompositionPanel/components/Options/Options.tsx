@@ -7,10 +7,10 @@ interface IProps {
   onAddClick: () => void;
   onEditClick: () => void;
   onDeleteClick: () => void;
-  isAdmin: boolean;
+  deleteable: boolean;
 }
 
-export const Options: FC<IProps> = ({ onAddClick, onEditClick, onDeleteClick, isAdmin }) => {
+export const Options: FC<IProps> = ({ onAddClick, onEditClick, onDeleteClick, deleteable }) => {
   const translate = useTranslate();
 
   return (
@@ -18,7 +18,7 @@ export const Options: FC<IProps> = ({ onAddClick, onEditClick, onDeleteClick, is
       <StyledButtonWithIcon onClick={onEditClick}>
         {translate({ ru: 'Переименовать', en: 'Rename' })}
       </StyledButtonWithIcon>
-      {isAdmin && (
+      {deleteable && (
         <StyledButtonWithIcon onClick={onDeleteClick}>
           {translate({ ru: 'Удалить', en: 'Delete' })}
         </StyledButtonWithIcon>
