@@ -1,55 +1,40 @@
 import { Chip } from '@components/Chip';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ChipBox = styled.div`
   display: flex;
-  max-width: fit-content;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-`;
-export const CounterChipWrap = styled.div`
-  display: flex;
-  width: 35px;
-  > * {
-    width: 35px;
-    border-radius: 8px;
-    // Убирает действие inline-block
-    display: flex;
-  }
-`;
-
-export const ShadowCounterChip = styled.div`
-  width: 35px;
-  height: 24px;
-`;
-
-export const ChipsHintWrap = styled.div`
-  display: flex;
-  gap: 4px;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-export const StyledChip = styled(Chip)`
-  margin-right: 4px;
-  // Убирает пробел от inline-flex
-  display: flex;
-  max-width: fit-content;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-`;
-
-export const StyledCounterChip = styled(Chip)`
-  display: flex;
   flex-shrink: 0;
-  flex-grow: 0;
-  justify-content: center;
-  align-items: center;
+  max-width: fit-content;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
 
-  width: 35px;
-  padding: 4px 0;
+export const OptionChipWrapper = styled.div<{ $vissible: boolean }>`
+  display: flex;
+  gap: 8px;
+  /* transition: all ease 0.15s; */
+
+  ${({ $vissible }) =>
+    !$vissible &&
+    css`
+      opacity: 0;
+      pointer-events: none;
+    `}
+`;
+
+export const StyledChip = styled(Chip)<{ $vissible: boolean }>`
+  max-width: fit-content;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+export const CounterChip = styled(Chip)<{ $vissible: boolean }>`
+  /* opacity: ${({ $vissible }) => ($vissible ? 1 : 0)}; */
+  /* transform: scale(${({ $vissible }) => ($vissible ? 1 : 0)}); */
+  display: ${({ $vissible }) => ($vissible ? 'unset' : 'none')};
+  /* transition: all ease 0.15s; */
 `;
 
 export const ContentTooltip = styled.div`

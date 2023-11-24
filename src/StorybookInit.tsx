@@ -12,6 +12,7 @@ import { SelectStory } from '@components/Select/SelectStory';
 import { SkeletonStory } from '@components/Skeleton/story/SkeletonStory';
 import { SpinnerStory } from '@components/Spinner/SpinnerStory';
 import { Storybook } from '@components/Storybook';
+import { StoryItem } from '@components/Storybook/StoryItem';
 import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
@@ -30,7 +31,9 @@ export const StorybookInit = () => {
       <ThemeProvider theme={defaultLight}>
         <Global />
         <Storybook>
-          <SelectStory />
+          <StoryItem path="Select">
+            <SelectStory />
+          </StoryItem>
           <ButtonStory />
           <InputStory />
           <TextareaStory />

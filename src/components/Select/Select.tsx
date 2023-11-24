@@ -21,9 +21,16 @@ import {
   StyledOpenStatusButton,
   ValueWrapper,
 } from './styled';
-import type { HighlightFormat, IConstantOption, IDropdownOption, SelectDimention } from './types';
+import type { HighlightFormat, IConstantOption, IDropdownOption } from './types';
 import { ConstantSearchSelectProvider, DropDownSearchSelectProvider } from './useSearchSelectContext';
 import { changeInputData, preventDefault, scrollToNotVisibleELem } from './utils';
+
+/**
+ * в multiple не работает поиск
+ * Дергание при открытии и закрытии
+ * Если остался скрытым один чипс - долго ведется. Убрать скрытый CounterChip
+ * theme
+ */
 
 type PartialOption = { value: string; disabled: boolean } & Record<string, any>;
 const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disabled }) => !disabled)?.value;
@@ -38,8 +45,8 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   isLoading?: boolean;
   /** Позволяет использовать Select с поиском */
   mode?: 'select' | 'search';
-  dimention?: SelectDimention;
-  appearance?: 'green' | 'brown';
+  // dimention?: SelectDimention;
+  // appearance?: 'green' | 'brown';
   loadingAppearance?: 'input' | 'options';
   /** Сообщение, отображаемое при наличии флага isLoading */
   loadingMessage?: React.ReactNode;
@@ -88,8 +95,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       children,
       status,
       renderedEmptyValue,
-      dimention = 's',
-      appearance = 'green',
       loadingAppearance = 'input',
       idleHeight = 'fixed',
       mode = 'select',
@@ -213,16 +218,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen;
 
     const renderMultipleSelectValue = useCallback(
-      () => (
-        <Chips
-          options={selectedOptions}
-          disabled={disabled}
-          shouldShowCount={shouldFixMultiSelectHeight}
-          onChipRemove={handleOptionSelect}
-          onChipClick={stopPropagation}
-        />
-      ),
-      [selectedOptions, shouldFixMultiSelectHeight, disabled, handleOptionSelect],
+      () => <Chips options={selectedOptions} disabled={disabled} onChipRemove={handleOptionSelect} />,
+      [selectedOptions, disabled, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !localValue?.length : !localValue;
@@ -450,6 +447,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         $disabled={disabled}
         $focused={isFocused}
         $multiple={multiple}
+        $status={status}
         style={style}
         ref={containerRef}
         onKeyUp={handleKeyUp}
@@ -484,12 +482,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </NativeSelect>
         {iconsLeft && <IconsLeft>{iconsLeft}</IconsLeft>}
-        <ValueWrapper
-          $shiftShips={multiple && !isEmpty}
-          $multiple={multiple}
-          $fixHeight={shouldFixHeight}
-          id="selectValueWrapper"
-        >
+        <ValueWrapper $multiple={multiple} $fixHeight={shouldFixHeight} id="selectValueWrapper">
           {shouldRenderSelectValue && wrappedVisibleValue}
           {((placeholder && isEmpty) || !modeIsSelect) && (
             <Input

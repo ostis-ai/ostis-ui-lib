@@ -1,11 +1,34 @@
 import { Dropdown } from '@components/Dropdown';
+import { InputStatus } from '@model/input';
 import styled, { css } from 'styled-components';
 
 import OpenStatusButton from './chevronDown.svg';
 
 const getSelectValueHeight = (multiple?: boolean) => (multiple ? '32px' : '26px');
 
-export const SelectWrapper = styled.div<{ $focused: boolean; $disabled: boolean; $multiple: boolean }>`
+type BorderColorProps = {
+  status?: InputStatus;
+  disabled?: boolean;
+  hovered?: boolean;
+};
+
+const getBorderColor = (props: BorderColorProps) => {
+  const { status, hovered, disabled } = props;
+  if (status === 'error') return '#EC7575';
+
+  if (disabled) return '#eeeeee';
+
+  if (hovered) return '#5D8FEF';
+
+  return '#EBEBEB';
+};
+
+export const SelectWrapper = styled.div<{
+  $focused: boolean;
+  $disabled: boolean;
+  $multiple: boolean;
+  $status?: InputStatus;
+}>`
   width: 100%;
   box-sizing: border-box;
 
@@ -20,7 +43,8 @@ export const SelectWrapper = styled.div<{ $focused: boolean; $disabled: boolean;
   min-height: 42px;
 
   background: #ffffff;
-  border: 1px solid #ebebeb;
+  border: 1px solid
+    ${({ $disabled, $status, $focused }) => getBorderColor({ status: $status, disabled: $disabled, hovered: $focused })};
   border-radius: 10px;
 
   font-family: 'Roboto';
@@ -37,20 +61,13 @@ export const SelectWrapper = styled.div<{ $focused: boolean; $disabled: boolean;
   }
 
   &:hover {
-    border-color: #7ec0ee;
+    border-color: ${({ $disabled, $status }) =>
+      getBorderColor({ status: $status, disabled: $disabled, hovered: true })};
   }
-
-  ${({ $focused }) =>
-    $focused &&
-    css`
-      border-color: #7ec0ee;
-    `}
 
   ${({ $disabled }) =>
     $disabled &&
     css`
-      border: 2px solid #eeeeee;
-
       background-color: #fafafa;
       color: #737373;
 
@@ -93,29 +110,16 @@ export const IconsLeft = styled.div`
   margin-right: 8px;
 `;
 
-export const ValueWrapper = styled.div<{ $shiftShips: boolean; $fixHeight: boolean; $multiple: boolean }>`
+export const ValueWrapper = styled.div<{ $fixHeight: boolean; $multiple: boolean }>`
   display: flex;
+  flex-wrap: ${({ $fixHeight }) => ($fixHeight ? 'unset' : 'wrap')};
+  align-items: center;
+  gap: 8px;
   flex: 1 1 auto;
-  gap: 4px;
 
   overflow: hidden;
   align-items: center;
 
-  ${({ $shiftShips }) =>
-    $shiftShips &&
-    css`
-      > * {
-        margin-left: -39px;
-      }
-      padding-left: 39px;
-    `}
-
-  ${({ $multiple }) =>
-    $multiple &&
-    css`
-      flex-wrap: wrap;
-    `}
-  
   ${({ $fixHeight, $multiple }) =>
     $fixHeight &&
     css`

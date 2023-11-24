@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.24.1",
+    "react-intersection-observer": "^9.5.3",
     "react-router": "^6.19.0",
     "react-router-dom": "^6.19.0"
   }
