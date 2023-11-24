@@ -13,11 +13,11 @@ export const ChipBox = styled.div`
 export const OptionChipWrapper = styled.div<{ $vissible: boolean }>`
   display: flex;
   gap: 8px;
-  /* transition: all ease 0.15s; */
 
   ${({ $vissible }) =>
     !$vissible &&
     css`
+      transition: all ease 0.15s;
       opacity: 0;
       pointer-events: none;
     `}

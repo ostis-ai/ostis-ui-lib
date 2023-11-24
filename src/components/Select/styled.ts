@@ -38,7 +38,7 @@ export const SelectWrapper = styled.div<{
   cursor: pointer;
 
   position: relative;
-  padding: ${({ $multiple }) => ($multiple ? '4px 15px 4px 7px' : '4px 15px')};
+  padding: ${({ $multiple }) => ($multiple ? '0 15px 0 7px' : '4px 15px')};
 
   min-height: 42px;
 
@@ -119,6 +119,9 @@ export const ValueWrapper = styled.div<{ $fixHeight: boolean; $multiple: boolean
 
   overflow: hidden;
   align-items: center;
+
+  /* In multiple select state padding is spicified in ValueWrapper because browser zooming cause Intersection observer wrong work */
+  padding: ${({ $multiple }) => ($multiple ? '4px 0' : 'unset')};
 
   ${({ $fixHeight, $multiple }) =>
     $fixHeight &&

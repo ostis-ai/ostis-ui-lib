@@ -73,8 +73,8 @@ const OptionChip = ({
 
 export const Chips = ({ options, disabled, onChipRemove }: IMultipleChipsProps) => {
   /**
-   * Сначала чипсы рендерятся невидимыми. После этого каждый чип возвращает виден ли он полностью.
-   * Чипы начинают показываться, когда не нашлось ни одного невидимосого или первый видимый
+   * Firstly chips are rendered with zero opacity. Then every chip return if it is shown
+   * We start showing them when there is no invisible chips or first inisible is found
    */
   const [isInnitialized, setIsInnitialized] = useState(false);
   const [invisibleELems, setInvisibleELems] = useState<string[]>([]);
@@ -98,31 +98,44 @@ export const Chips = ({ options, disabled, onChipRemove }: IMultipleChipsProps) 
 
   const isFirstInvisbleOptionFound = firstInvisibleOptionIndex !== -1;
 
-  const optionsToRender = isFirstInvisbleOptionFound ? options.slice(0, firstInvisibleOptionIndex + 1) : options;
-  const invisibleOptions = isFirstInvisbleOptionFound ? options.slice(firstInvisibleOptionIndex) : [];
+  // We should show 2 more values with opacity 0 for intersectionObserver to know if they are visible before showing them
+  const numberExtraOptionsToRender = 2;
+
+  const optionsToRender = isFirstInvisbleOptionFound
+    ? options.slice(0, firstInvisibleOptionIndex + numberExtraOptionsToRender)
+    : options;
 
   const isAllChipsInitiallyVisible = isInnitialized && !invisibleELems.length;
 
+  const getIsChipVisible = (value: string) => {
+    return isAllChipsInitiallyVisible || (isFirstInvisbleOptionFound && !invisibleELems.includes(value));
+  };
+
+  const getIsCounterVissible = (nextValue?: string) => {
+    // If there is no nextValue, current chip is last and there'i no need in counter
+    if (!nextValue) return false;
+
+    return !getIsChipVisible(nextValue);
+  };
+
   return (
     <>
-      {optionsToRender.map((option, ind) => (
-        <ChipBox key={option.value} onMouseDown={preventDefault}>
-          <OptionChip
-            className="chip"
-            option={option}
-            onChipRemove={onChipRemove}
-            onVisibiltyChange={onVisibiltyChange(option.value)}
-            disabled={disabled}
-            restChips={options.length - ind - 1}
-            chipVissible={
-              isAllChipsInitiallyVisible || (isFirstInvisbleOptionFound && !invisibleELems.includes(option.value))
-            }
-            counterVissible={
-              !!invisibleOptions.length && ind === optionsToRender.length - 2 && ind !== optionsToRender.length - 1
-            }
-          />
-        </ChipBox>
-      ))}
+      {optionsToRender.map((option, ind) => {
+        return (
+          <ChipBox key={option.value} onMouseDown={preventDefault}>
+            <OptionChip
+              className="chip"
+              option={option}
+              onChipRemove={onChipRemove}
+              onVisibiltyChange={onVisibiltyChange(option.value)}
+              disabled={disabled}
+              restChips={options.length - ind - 1}
+              chipVissible={getIsChipVisible(option.value)}
+              counterVissible={getIsCounterVissible(optionsToRender[ind + 1]?.value)}
+            />
+          </ChipBox>
+        );
+      })}
     </>
   );
 };

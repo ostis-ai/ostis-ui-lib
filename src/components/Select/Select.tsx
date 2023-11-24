@@ -27,8 +27,6 @@ import { changeInputData, preventDefault, scrollToNotVisibleELem } from './utils
 
 /**
  * в multiple не работает поиск
- * Дергание при открытии и закрытии
- * Если остался скрытым один чипс - долго ведется. Убрать скрытый CounterChip
  * theme
  */
 
