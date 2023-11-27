@@ -1,6 +1,6 @@
 import { Dropdown } from '@components/Dropdown';
 import { InputStatus } from '@model/input';
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 import OpenStatusButton from './chevronDown.svg';
 
@@ -10,17 +10,18 @@ type BorderColorProps = {
   status?: InputStatus;
   disabled?: boolean;
   hovered?: boolean;
+  theme: DefaultTheme;
 };
 
-const getBorderColor = (props: BorderColorProps) => {
-  const { status, hovered, disabled } = props;
-  if (status === 'error') return '#EC7575';
+const getBorderColor = ({ status, hovered, disabled, theme }: BorderColorProps) => {
+  if (status === 'error' && hovered) return theme.select.colors.borderError;
+  if (status === 'error' && !hovered) return theme.select.colors.borderErrorHover;
 
-  if (disabled) return '#eeeeee';
+  if (disabled) return theme.select.colors.borderDisabled;
 
-  if (hovered) return '#5D8FEF';
+  if (hovered) return theme.select.colors.borderHover;
 
-  return '#EBEBEB';
+  return theme.select.colors.borderInitial;
 };
 
 export const SelectWrapper = styled.div<{
@@ -40,29 +41,30 @@ export const SelectWrapper = styled.div<{
   position: relative;
   padding: ${({ $multiple }) => ($multiple ? '0 15px 0 7px' : '4px 15px')};
 
-  min-height: 42px;
+  min-height: ${({ theme }) => theme.select.size.initialHeight};
 
-  background: #ffffff;
-  border: 1px solid
-    ${({ $disabled, $status, $focused }) => getBorderColor({ status: $status, disabled: $disabled, hovered: $focused })};
-  border-radius: 10px;
+  background: ${({ theme }) => theme.select.colors.initialBackgroundColor};
+  border: ${({ theme }) => theme.select.size.borderWidth} solid
+    ${({ $disabled, $status, $focused, theme }) =>
+      getBorderColor({ theme, status: $status, disabled: $disabled, hovered: $focused })};
+  border-radius: ${({ theme }) => theme.select.borderRadius};
 
-  font-family: 'Roboto';
+  font-family: ${({ theme }) => theme.select.font.fontFamily};
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
+  font-weight: ${({ theme }) => theme.select.font.fontWeight};
+  font-size: ${({ theme }) => theme.select.font.fontSize};
+  line-height: ${({ theme }) => theme.select.font.lineHeight};
 
-  color: #323232;
+  color: ${({ theme }) => theme.select.colors.text};
 
   &::placeholder {
-    font-weight: 300;
-    color: #737373;
+    font-weight: ${({ theme }) => theme.select.font.placeholderWeight};
+    color: ${({ theme }) => theme.select.colors.placeholder};
   }
 
   &:hover {
-    border-color: ${({ $disabled, $status }) =>
-      getBorderColor({ status: $status, disabled: $disabled, hovered: true })};
+    border-color: ${({ $disabled, $status, theme }) =>
+      getBorderColor({ theme, status: $status, disabled: $disabled, hovered: true })};
   }
 
   ${({ $disabled }) =>
@@ -139,14 +141,14 @@ export const Input = styled.input<{ $multiple: boolean }>`
   padding: 0;
   background: transparent;
 
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
   text-overflow: ellipsis;
 
-  color: #323232;
+  color: inherit;
 
   border: none;
   outline: none;
@@ -202,16 +204,9 @@ export const StyledDropdown = styled(Dropdown)`
   }
 `;
 
+// This one is needed to show ... when value is too big
 export const StringValueWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-
-  color: #323232;
 `;

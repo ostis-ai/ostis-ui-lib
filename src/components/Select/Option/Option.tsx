@@ -1,7 +1,8 @@
 import { InputHTMLAttributes, MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { StyledChip } from '../Chips/styled';
 import { Highlight } from '../Highlight';
-import type { TRenderChip } from '../types';
+import type { RenderOptionValue, RenderOptionValueProps } from '../types';
 import {
   OptionProvider,
   useConstantSearchSelectContext,
@@ -18,12 +19,18 @@ interface IRenderOptionProps {
   isHovered?: boolean;
 }
 
+interface IRenderOptionProps {
+  disabled?: boolean;
+  searchValue?: string;
+  isHovered?: boolean;
+}
+
 interface IProps extends InputHTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   value: string;
   children?: ReactNode;
   renderOption?: (props: IRenderOptionProps) => ReactNode;
-  renderChip?: TRenderChip;
+  renderValue?: RenderOptionValue;
 }
 
 const DropDownOption = ({
@@ -31,7 +38,7 @@ const DropDownOption = ({
   value,
   children,
   renderOption,
-  renderChip: _renderChip,
+  renderValue: _renderValue,
   ...htmlProps
 }: IProps) => {
   const {
@@ -129,15 +136,25 @@ const DropDownOption = ({
   );
 };
 
-const ConstantOption = ({ disabled = false, value, children, renderOption, renderChip }: IProps) => {
-  const { searchValue, onConstantOptionMount, onConstantOptionUnMount } = useConstantSearchSelectContext();
+const ConstantOption = ({ disabled = false, value, children, renderOption, renderValue }: IProps) => {
+  const { searchValue, multiple, onConstantOptionMount, onConstantOptionUnMount } = useConstantSearchSelectContext();
   const optionGroupContext = useOptionGroupContext();
 
   const optionIsDiabled = optionGroupContext?.disabled || disabled;
 
-  const defaultRenderChip = useCallback(() => <>{children}</>, [children]);
+  const defaultRenderOptionValue = useCallback(
+    ({ onClose }: RenderOptionValueProps) => {
+      if (!multiple) return <>{children}</>;
+      return (
+        <StyledChip onClose={onClose} disabled={optionIsDiabled} size="l">
+          {children}
+        </StyledChip>
+      );
+    },
+    [children, multiple, optionIsDiabled],
+  );
 
-  const resultRenderChip = renderChip || defaultRenderChip;
+  const resultRenderValue = renderValue || defaultRenderOptionValue;
 
   const resultChildren = useMemo(
     () =>
@@ -155,9 +172,9 @@ const ConstantOption = ({ disabled = false, value, children, renderOption, rende
       value,
       disabled: optionIsDiabled,
       children: resultChildren,
-      renderChip: resultRenderChip,
+      renderValue: resultRenderValue,
     }),
-    [value, optionIsDiabled, resultChildren, resultRenderChip],
+    [value, optionIsDiabled, resultChildren, resultRenderValue],
   );
 
   useEffect(() => {

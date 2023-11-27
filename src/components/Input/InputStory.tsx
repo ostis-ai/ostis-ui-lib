@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react';
-import { StoryItem } from '@components/Storybook/StoryItem';
 
 import { Input } from './Input';
 
@@ -8,27 +7,25 @@ const Story = ({ children }: PropsWithChildren) => {
 };
 
 export const InputStory = () => (
-  <StoryItem path="Input">
-    <div style={{ display: 'grid', gridTemplateColumns: '350px 350px', gap: 30 }}>
-      <Story>
-        <Input placeholder="Логин*" />
-        <Input placeholder="Логин*" value="Логин" />
-        <Input placeholder="Логин*" value="Логин" status="error" />
-        <Input placeholder="Логин*" disabled />
-        <Input placeholder="Логин*" value="Логин" disabled />
-      </Story>
-      <Story>
-        <Input placeholder="Поиск..." isSearch />
-        <Input placeholder="Поиск..." value="Текст" isSearch />
-        <Input placeholder="Поиск..." disabled isSearch />
-      </Story>
-      <div />
-      <Story>
-        <Input type="password" placeholder="Пароль*" />
-        <Input type="password" placeholder="Пароль*" value="Пароль" />
-        <Input type="password" placeholder="Пароль*" value="Пароль" status="error" />
-        <Input type="password" placeholder="Пароль*" value="Пароль" disabled />
-      </Story>
-    </div>
-  </StoryItem>
+  <div style={{ display: 'grid', gridTemplateColumns: '350px 350px', gap: 30 }}>
+    <Story>
+      <Input placeholder="Логин*" />
+      <Input placeholder="Логин*" value="Логин" />
+      <Input placeholder="Логин*" value="Логин" status="error" />
+      <Input placeholder="Логин*" disabled />
+      <Input placeholder="Логин*" value="Логин" disabled />
+    </Story>
+    <Story>
+      <Input placeholder="Поиск..." isSearch />
+      <Input placeholder="Поиск..." value="Текст" isSearch />
+      <Input placeholder="Поиск..." disabled isSearch />
+    </Story>
+    <div />
+    <Story>
+      <Input type="password" placeholder="Пароль*" />
+      <Input type="password" placeholder="Пароль*" value="Пароль" />
+      <Input type="password" placeholder="Пароль*" value="Пароль" status="error" />
+      <Input type="password" placeholder="Пароль*" value="Пароль" disabled />
+    </Story>
+  </div>
 );

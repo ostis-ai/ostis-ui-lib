@@ -1,20 +1,10 @@
-import { isValidElement, MouseEvent, ReactNode, useCallback, useMemo, useState } from 'react';
+import { MouseEvent, useCallback, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import type { IChipProps, IConstantOption } from '../types';
+import type { IConstantOption } from '../types';
 import { preventDefault } from '../utils';
 
-import { ChipBox, CounterChip, OptionChipWrapper, StyledChip } from './styled';
-
-const chipIsChipMeta = (chip: IChipProps | ReactNode): chip is IChipProps =>
-  typeof chip === 'object' && chip !== null && !isValidElement(chip);
-
-const getChipMeta = ({ value, disabled, renderChip }: IConstantOption, onChipRemove: (value: string) => void) => {
-  const chip = renderChip();
-  return chipIsChipMeta(chip)
-    ? { ...chip, onClose: () => chip.onClose?.({ value, disabled }) }
-    : { disabled, onClose: () => onChipRemove(value), children: chip };
-};
+import { ChipBox, CounterChip, OptionChipWrapper } from './styled';
 
 interface IMultipleChipsProps {
   options: IConstantOption[];
@@ -30,7 +20,6 @@ interface IOptionChipProps {
   counterVissible?: boolean;
   restChips: number;
   onChipRemove: (value: string) => void;
-  onClick?: (evt: MouseEvent) => void;
   onVisibiltyChange?: (inView: boolean) => void;
 }
 
@@ -40,30 +29,23 @@ const OptionChip = ({
   restChips,
   chipVissible = false,
   counterVissible = false,
-  disabled: disabledFromProps,
+  disabled,
   onVisibiltyChange,
-  onClick,
   onChipRemove,
 }: IOptionChipProps) => {
   const [ref] = useInView({ threshold: 1, onChange: onVisibiltyChange });
 
-  const shipMeta = useMemo(() => getChipMeta(option, onChipRemove), [onChipRemove, option]);
-
-  const disabled = shipMeta.disabled || disabledFromProps;
-
   const onClose = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation();
-      shipMeta.onClose();
+      onChipRemove(option.value);
     },
-    [shipMeta],
+    [onChipRemove, option.value],
   );
 
   return (
     <OptionChipWrapper className={className} ref={ref} $vissible={chipVissible}>
-      <StyledChip onClick={onClick} onClose={onClose} disabled={disabled} size="l" $vissible={chipVissible}>
-        {shipMeta.children}
-      </StyledChip>
+      {option.renderValue({ onClose })}
       <CounterChip disabled={disabled} size="l" $vissible={counterVissible}>
         +{restChips}
       </CounterChip>

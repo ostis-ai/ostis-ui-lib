@@ -15,13 +15,7 @@ const Wrapper = styled.div<{ active?: boolean }>`
   ${({ active }) =>
     active &&
     css`
-      cursor: text;
-      color: rgb(255, 255, 255);
-      background: rgb(30, 167, 253);
-      &:hover {
-        color: rgb(255, 255, 255);
-        background: rgb(30, 167, 253);
-      }
+      color: rgb(93, 143, 239);
     `}
 `;
 
@@ -31,8 +25,10 @@ interface IProps {
   onClick: () => void;
 }
 
-export const StoryListItem = ({ children, active, onClick }: IProps) => (
-  <Wrapper active={active} onClick={onClick}>
-    {children}
-  </Wrapper>
-);
+export const StoryListItem = ({ children, active, onClick }: IProps) => {
+  return (
+    <Wrapper active={active} onClick={onClick}>
+      {children}
+    </Wrapper>
+  );
+};

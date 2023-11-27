@@ -3,16 +3,13 @@ import styled, { css } from 'styled-components';
 
 export const ChipBox = styled.div`
   display: flex;
-  flex-shrink: 0;
-  max-width: fit-content;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  max-width: 100%;
 `;
 
 export const OptionChipWrapper = styled.div<{ $vissible: boolean }>`
   display: flex;
   gap: 8px;
+  max-width: 100%;
 
   ${({ $vissible }) =>
     !$vissible &&
@@ -23,7 +20,7 @@ export const OptionChipWrapper = styled.div<{ $vissible: boolean }>`
     `}
 `;
 
-export const StyledChip = styled(Chip)<{ $vissible: boolean }>`
+export const StyledChip = styled(Chip)`
   max-width: fit-content;
   text-overflow: ellipsis;
   overflow: hidden;

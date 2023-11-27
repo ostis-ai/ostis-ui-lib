@@ -5,8 +5,6 @@ export { Button } from '@components/Button';
 export type { ButtonProps } from '@components/Button';
 export { Input } from '@components/Input';
 export type { IInputProps } from '@components/Input';
-export { InputV2 } from '@components/InputV2';
-export { InputV2Props } from '@components/InputV2';
 export * from '@components/Toasts';
 export * from '@components/Chip';
 export * from '@components/Spinner';

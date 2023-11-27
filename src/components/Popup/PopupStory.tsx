@@ -1,9 +1,8 @@
-import { StoryItem } from '@components/Storybook/StoryItem';
 import { useBooleanState } from '@hooks/useBooleanState';
 
 import { Popup } from './Popup';
 
-const PopupIndex = () => {
+export const PopupStory = () => {
   const [isPopupShown, showPopup, hidePopup] = useBooleanState(false);
 
   return (
@@ -15,13 +14,5 @@ const PopupIndex = () => {
         </Popup>
       )}
     </>
-  );
-};
-
-export const PopupStory = () => {
-  return (
-    <StoryItem path="Popup">
-      <PopupIndex />
-    </StoryItem>
   );
 };

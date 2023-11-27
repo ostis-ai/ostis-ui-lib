@@ -1,6 +1,5 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DropdownOption } from '@components/DropdownOption';
-import { useLanguage } from '@components/Language';
 import { Spinner } from '@components/Spinner';
 import { useClickOutside } from '@hooks/useClickOutside';
 import { InputStatus } from '@model/input';
@@ -26,8 +25,14 @@ import { ConstantSearchSelectProvider, DropDownSearchSelectProvider } from './us
 import { changeInputData, preventDefault, scrollToNotVisibleELem } from './utils';
 
 /**
- * в multiple не работает поиск
+ * TODO:
+ * refactor to display value in input if value is string
+ * IntersectionObserver -> manual DOM calcs?
+ * What to do if there are to many chips
  * theme
+ *
+ * Limit chips width
+ * Playground for Story
  */
 
 type PartialOption = { value: string; disabled: boolean } & Record<string, any>;
@@ -123,10 +128,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const [isFocused, setIsFocused] = useState(false);
     const [isDeleteButton, setIsDeleteButton] = useState(false);
 
-    const lang = useLanguage();
-
-    const loadingMessage = loadingMessageFromProps || defaultLoadingText[lang];
-    const emptyMessage = emptyMessageFromProps || defaultEmptyMessage[lang];
+    const loadingMessage = loadingMessageFromProps || defaultLoadingText;
+    const emptyMessage = emptyMessageFromProps || defaultEmptyMessage;
 
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
@@ -459,6 +462,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             onConstantOptionMount={onConstantOptionMount}
             onConstantOptionUnMount={onConstantOptionUnMount}
             searchValue={searchValue}
+            multiple={multiple}
           >
             {children}
           </ConstantSearchSelectProvider>
@@ -488,7 +492,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               $multiple={multiple}
               ref={inputRef}
               placeholder={isEmpty ? placeholder : undefined}
-              disabled={modeIsSelect}
+              disabled={disabled}
+              readOnly={modeIsSelect}
               value={searchValue}
               onChange={onLocalInputChange}
             />

@@ -5,10 +5,10 @@ import CheckMark from './checkMark.svg';
 export const Label = styled.label<{ $disabled: boolean }>`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: ${({ theme }) => theme.checkbox.labelGap};
 
   width: fit-content;
-  color: #454545;
+  color: ${({ theme }) => theme.checkbox.colors.label};
 
   cursor: pointer;
 
@@ -23,29 +23,29 @@ export const CustomCheckbox = styled.div<{ $disabled: boolean }>`
   position: relative;
   box-sizing: border-box;
 
-  width: 24px;
-  height: 24px;
+  width: ${({ theme }) => theme.checkbox.size.outer};
+  height: ${({ theme }) => theme.checkbox.size.outer};
 
-  border-radius: 5px;
+  border-radius: ${({ theme }) => theme.checkbox.size.outerRadius};
 
   flex-shrink: 0;
 
-  border: 2px solid #5896c0;
+  border: ${({ theme }) => theme.size.inputBorderWidth} solid ${({ theme }) => theme.checkbox.colors.borderInitial};
 
   &::before {
-    background-color: #5896c0;
+    background-color: ${({ theme }) => theme.checkbox.colors.borderInitial};
   }
 
   ${({ $disabled }) =>
     $disabled &&
     css`
-      border-color: #c0c0c0;
-      color: #c0c0c0;
+      border-color: ${({ theme }) => theme.checkbox.colors.disabled};
+      color: ${({ theme }) => theme.checkbox.colors.disabled};
 
       cursor: auto;
 
       &::before {
-        background-color: #c0c0c0;
+        background-color: ${({ theme }) => theme.checkbox.colors.disabled};
         cursor: auto;
       }
     `}
@@ -55,10 +55,10 @@ export const CustomCheckbox = styled.div<{ $disabled: boolean }>`
 
     position: absolute;
 
-    border-radius: 4px;
+    border-radius: ${({ theme }) => theme.checkbox.size.innerRadius};
 
-    width: 18px;
-    height: 18px;
+    width: ${({ theme }) => theme.checkbox.size.inner};
+    height: ${({ theme }) => theme.checkbox.size.inner};
     left: 50%;
     top: 50%;
 
@@ -97,11 +97,11 @@ export const CheckboxInput = styled.input`
   clip: rect(0 0 0 0);
 
   &:checked ~ ${CustomCheckbox} {
-    border-color: #5896c0;
+    border-color: ${({ theme }) => theme.checkbox.colors.borderInitial};
   }
 
   &:checked:disabled ~ ${CustomCheckbox} {
-    border-color: #c0c0c0;
+    border-color: ${({ theme }) => theme.checkbox.colors.disabled};
   }
 
   &:checked ~ ${CustomCheckbox}::before {
@@ -115,13 +115,13 @@ export const CheckboxInput = styled.input`
 `;
 
 export const LabelText = styled.div<{ $disabled: boolean }>`
-  font-family: 'Roboto';
-  font-size: 22px;
-  line-height: 26px;
+  font-family: ${({ theme }) => theme.checkbox.font.fontFamily};
+  font-size: ${({ theme }) => theme.checkbox.font.fontSize};
+  line-height: ${({ theme }) => theme.checkbox.font.lineHeight};
 
   ${({ $disabled }) =>
     $disabled &&
     css`
-      color: $beige-grey;
+      color: ${({ theme }) => theme.checkbox.colors.disabledLabel};
     `}
 `;

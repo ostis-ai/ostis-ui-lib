@@ -6,18 +6,18 @@ export interface IOnCloseProps {
   value: string;
   disabled?: boolean;
 }
-export type TRenderChip = () => React.ReactNode | IChipProps;
-export interface IChipProps {
-  children: React.ReactNode;
-  disabled?: boolean;
-  onClose?: (props: IOnCloseProps) => void;
-}
+
+export type RenderOptionValueProps = {
+  onClose: (e: React.MouseEvent) => void;
+};
+
+export type RenderOptionValue = (props: RenderOptionValueProps) => React.ReactNode;
 
 export interface IConstantOption {
   value: string;
   disabled: boolean;
   children: React.ReactNode;
-  renderChip: TRenderChip;
+  renderValue: RenderOptionValue;
 }
 
 export interface IDropdownOption {
@@ -30,6 +30,7 @@ export interface IConstantSearchSelectContext {
   onConstantOptionMount: (option: IConstantOption) => void;
   onConstantOptionUnMount: (option: IConstantOption) => void;
   searchValue: string;
+  multiple: boolean;
 }
 
 export interface IDropDownSearchSelectContext {

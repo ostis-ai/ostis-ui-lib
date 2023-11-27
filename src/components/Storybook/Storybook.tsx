@@ -2,7 +2,8 @@ import { ReactNode, useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { IStoryItem } from './model';
-import { StoryListItem } from './StoryListItem';
+import { StoryItems } from './StoryItems';
+import { ContentWithHeader } from './StoryListItem/Header';
 import { StorybookProvider } from './useStorybook';
 
 const Wrapper = styled.div`
@@ -43,24 +44,39 @@ export const Storybook = ({ children }: IProps) => {
   }, []);
 
   const removeStoryItem = useCallback((path: string) => {
-    setStoryItems((prev) => prev.filter((item) => item.path !== path));
+    setStoryItems((prev) => prev.filter((item) => item.name !== path));
   }, []);
 
   const targetActiveItem = activeItem || storyItems[0];
+
+  const grouped = storyItems.reduce((acc, curr) => {
+    return {
+      ...acc,
+      [curr.header || '_empty']: [...(acc[curr.header || '_empty'] || []), curr],
+    };
+  }, {} as Record<string, IStoryItem[]>);
 
   return (
     <StorybookProvider addStoryItem={addStoryItem} removeStoryItem={removeStoryItem}>
       <Wrapper>
         <Left>
-          {storyItems.map((item) => (
-            <StoryListItem
-              key={item.path}
-              active={item.path === targetActiveItem?.path}
-              onClick={() => setActiveItem(item)}
-            >
-              {item.path}
-            </StoryListItem>
-          ))}
+          {Object.entries(grouped).map(([header, items]) => {
+            if (header === '_empty') {
+              return (
+                <StoryItems
+                  key={header}
+                  storyItems={items}
+                  activeName={targetActiveItem?.name}
+                  onClick={setActiveItem}
+                />
+              );
+            }
+            return (
+              <ContentWithHeader header={header} key={header}>
+                <StoryItems storyItems={items} activeName={targetActiveItem?.name} onClick={setActiveItem} />
+              </ContentWithHeader>
+            );
+          })}
         </Left>
         <Right>{targetActiveItem?.children}</Right>
       </Wrapper>

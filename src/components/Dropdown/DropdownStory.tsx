@@ -1,12 +1,11 @@
 import { useRef } from 'react';
 import { DropdownOption } from '@components/DropdownOption';
-import { StoryItem } from '@components/Storybook/StoryItem';
 import { useBooleanState } from '@hooks/useBooleanState';
 import { useClickOutside } from '@hooks/useClickOutside';
 
 import { Dropdown } from './Dropdown';
 
-const IndexStoryItem = () => {
+export const DropdownStory = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isDropDownOpen, , onClose, toggleDropDown] = useBooleanState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -31,13 +30,5 @@ const IndexStoryItem = () => {
         </Dropdown>
       )}
     </>
-  );
-};
-
-export const DropdownStory = () => {
-  return (
-    <StoryItem path="Dropdown">
-      <IndexStoryItem />
-    </StoryItem>
   );
 };

@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren,useContext } from 'react';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 import {
   IConstantSearchSelectContext,
@@ -13,6 +13,7 @@ const ConstantSearchSelectContext = createContext<IConstantSearchSelectContext>(
   onConstantOptionMount: noop,
   onConstantOptionUnMount: noop,
   searchValue: '',
+  multiple: false,
 });
 
 export const useConstantSearchSelectContext = () => useContext(ConstantSearchSelectContext);
