@@ -14,6 +14,7 @@ interface IProps {
   loaderHeight?: number | string;
   loaderWidth?: number | string;
   renderText?: (text: string) => ReactNode;
+  setIsLoad?: (val: boolean) => void;
 }
 
 export const ScLangText = ({
@@ -22,6 +23,7 @@ export const ScLangText = ({
   loaderWidth,
   defaultText = '...',
   renderText = defaultRenderText,
+  setIsLoad,
 }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState('');
@@ -114,9 +116,16 @@ export const ScLangText = ({
     };
   }, [client, changeContentEventId]);
 
+
+  useEffect(() => {
+    if (text) {
+      setIsLoad && setIsLoad(false);
+    }
+  }, [text]);
+
   return (
     <>
-      {isLoading && <PseudoText height={loaderHeight} width={loaderWidth} />}
+      {!setIsLoad && isLoading && <PseudoText height={loaderHeight} width={loaderWidth} />}
       {!isLoading && renderText(text)}
     </>
   );

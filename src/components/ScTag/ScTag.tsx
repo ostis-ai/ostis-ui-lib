@@ -180,7 +180,7 @@ export const ScTagLink = ({
   return (
     <StyledScTag
       className={className}
-      as={as}
+      forwardedAs={as}
       addr={addr}
       systemId={systemId}
       showMenu={showMenu}

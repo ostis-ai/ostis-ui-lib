@@ -8,7 +8,7 @@ export const SwitchWrap = styled.div`
 
 export const Tabs = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: end;
 
   width: 100%;
 `;

@@ -7,7 +7,9 @@ import { ILoaderInfo, IPseudoText } from './types';
 import { normalizeSize } from './utils';
 
 export const PseudoText = forwardRef<HTMLSpanElement, IPseudoText>(
+  // ({ width: propsWidth = `${getRandomInt(250, 350)}px`, height: propsHeight, className }, ref) => {
   ({ width: propsWidth = `${getRandomInt(20, 60)}%`, height: propsHeight, className }, ref) => {
+
     const [loaderInfo, setLoaderInfo] = useState<ILoaderInfo | null>(null);
 
     const loaderRef = useRef<HTMLSpanElement>(null);
