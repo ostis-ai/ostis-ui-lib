@@ -1,4 +1,55 @@
-export const defaultLight = {
+export const defaultLightTheme = {
+  size: {
+    inputBorderWidth: '1px',
+  },
+  colors: {
+    primary: '#5D8FEF',
+  },
+  checkbox: {
+    labelGap: '8px',
+    colors: {
+      label: '#454545',
+      borderInitial: '#5D8FEF',
+      borderHover: '#5D8FEF',
+      disabled: '#C1C1C1',
+      disabledLabel: '#454545',
+    },
+    size: {
+      outerRadius: '6px',
+      innerRadius: '4px',
+      outer: '24px',
+      inner: '18px',
+    },
+    font: {
+      fontFamily: 'Roboto',
+      fontSize: '22px',
+      lineHeight: '26px',
+    },
+  },
+  select: {
+    borderRadius: '10px',
+    colors: {
+      placeholder: '#737373',
+      text: '#414141',
+      initialBackgroundColor: '#ffffff',
+      borderInitial: '#EBEBEB',
+      borderHover: '#5D8FEF',
+      borderDisabled: '#eeeeee',
+      borderError: '#EC7575',
+      borderErrorHover: '#EC7575',
+    },
+    size: {
+      borderWidth: '1px',
+      initialHeight: '42px',
+    },
+    font: {
+      fontFamily: 'Roboto',
+      fontSize: '20px',
+      lineHeight: '23px',
+      fontWeight: '400',
+      placeholderWeight: '300',
+    },
+  },
   input: {
     iconGap: '9px',
     borderRadius: '10px',
@@ -82,4 +133,4 @@ export const defaultLight = {
   },
 };
 
-export type Theme = typeof defaultLight;
+export type Theme = typeof defaultLightTheme;

@@ -1,21 +1,24 @@
 import { ReactNode, useEffect } from 'react';
 
+import { useStoryHeader } from '../StoryHeader/useStoryHeader';
 import { useStorybook } from '../useStorybook';
 
 interface IProps {
-  path: string;
+  name: string;
   children: ReactNode;
 }
 
-export const StoryItem = ({ path, children }: IProps) => {
+export const StoryItem = ({ name, children }: IProps) => {
+  const storyHeader = useStoryHeader();
+
   const { addStoryItem, removeStoryItem } = useStorybook();
 
   useEffect(() => {
-    addStoryItem({ path, children });
+    addStoryItem({ name, children, header: storyHeader?.header });
     return () => {
-      removeStoryItem(path);
+      removeStoryItem(name);
     };
-  }, [addStoryItem, removeStoryItem, children, path]);
+  }, [addStoryItem, removeStoryItem, children, name, storyHeader?.header]);
 
   return null;
 };

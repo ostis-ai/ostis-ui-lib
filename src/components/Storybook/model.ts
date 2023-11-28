@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 
 export interface IStoryItem {
-  path: string;
+  header?: string;
+  name: string;
   children: ReactNode;
 }
 

@@ -1,12 +1,8 @@
 export * from '@components/SwitchScgScn';
 export * from '@components/Tooltip';
 export * from '@components/Toast';
-export { Button } from '@components/Button';
-export type { ButtonProps } from '@components/Button';
-export { Input } from '@components/Input';
-export type { IInputProps } from '@components/Input';
-export { InputV2 } from '@components/InputV2';
-export { InputV2Props } from '@components/InputV2';
+export * from '@components/Button';
+export * from '@components/Input';
 export * from '@components/Toasts';
 export * from '@components/Chip';
 export * from '@components/Spinner';
@@ -29,6 +25,8 @@ export * from '@components/Scn/model';
 export * from '@components/ScTag';
 export * from '@components/DecompositionPanel';
 export * from '@components/Expandable';
+export * from '@components/Select';
+export * from '@components/Checkbox';
 
 export * from '@hooks/useBooleanState';
 export * from '@hooks/useClickOutside';
@@ -43,3 +41,6 @@ export * from '@utils/refSetter';
 export * from '@utils/snakeToCamelCase';
 
 export * from '@model/utils';
+export * from '@model/input';
+
+export * from '@constants/theme';

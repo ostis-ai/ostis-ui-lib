@@ -58,7 +58,7 @@ const Decomposition = () => {
 };
 
 export const DecompositionStory = () => (
-  <StoryItem path="DecompositonPanel">
+  <StoryItem name="DecompositonPanel">
     <Decomposition />
   </StoryItem>
 );
