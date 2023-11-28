@@ -150,6 +150,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const dropDownChildren = useMemo(() => {
       if (isLoading && loadingAppearance === 'options') return <DropdownOption>{loadingMessage}</DropdownOption>;
+
       return (
         <>
           {!dropDownOptions.length && <DropdownOption>{emptyMessage}</DropdownOption>}
@@ -167,14 +168,20 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     });
 
     const onConstantOptionMount = useCallback(
-      (option: IConstantOption) => setConstantOptions((prev) => [...prev, option]),
+      (option: IConstantOption) =>
+        setConstantOptions((prev) => {
+          if (prev.some(({ value }) => value === option.value)) return prev;
+          return [...prev, option];
+        }),
       [],
     );
 
     const onConstantOptionUnMount = useCallback(
       (option: IConstantOption) =>
-        setConstantOptions((prev) => prev.filter((prevOption) => prevOption.value !== option.value)),
-      [],
+        setConstantOptions((prev) =>
+          prev.filter((prevOption) => prevOption.value !== option.value || localValue?.includes(option.value)),
+        ),
+      [localValue],
     );
 
     const onDropDownOptionMount = useCallback(

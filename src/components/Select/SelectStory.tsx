@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Chip } from '@components/Chip';
+import { getRandomInt } from '@utils/getRandomInt';
 import styled from 'styled-components';
 
 import { Option } from './Option';
@@ -62,7 +63,7 @@ export const MultiSearchSelectStory = () => {
   };
 
   return (
-    <Select mode="search" multiple value={selectValue} onChange={onChange} placeholder="asd">
+    <Select mode="search" multiple value={selectValue} onChange={onChange} placeholder="Placeholder">
       <Option value="0">Really big one really big one really big one really big one really big one</Option>
       <Option value="1">String 1</Option>
       <Option value="2">Some more info</Option>
@@ -91,7 +92,7 @@ export const CustomChipsStory = () => {
   };
 
   return (
-    <Select mode="search" multiple value={selectValue} onChange={onChange} placeholder="asd">
+    <Select mode="search" multiple value={selectValue} onChange={onChange} placeholder="Placeholder">
       <Option value="0">Really big one really big one really big one really big one really big one</Option>
       <Option
         value="1"
@@ -117,10 +118,99 @@ export const CustomChipsStory = () => {
   );
 };
 
-export const Playground = () => {
+const shuffle = <T,>(arr: T[]): T[] => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const rand = Math.floor(Math.random() * i);
+    [arr[i], arr[rand]] = [arr[rand], arr[i]];
+  }
+
+  return arr;
+};
+
+const wait = (time: number) =>
+  new Promise<void>((resolve) => {
+    window.setTimeout(() => resolve(), time);
+  });
+
+export const AsyncSingleSelectStory = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState<string[] | null>(null);
+  const [selectValue, setSelectValue] = useState('');
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectValue(e.target.value);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => {
+      // async request imitation
+      await wait(3000);
+      setOptions(shuffle(Array.from({ length: 5 }).map((_, ind) => String(ind))).slice(0, getRandomInt(2, 4)));
+      setIsLoading(false);
+    })();
+  }, []);
+
+  const emptyMessage = !options ? 'Options is loading...' : undefined;
+
   return (
-    <Select>
-      <Option value="3">Hello</Option>
+    <Select
+      mode="search"
+      value={selectValue}
+      isLoading={isLoading}
+      onChange={onChange}
+      emptyMessage={emptyMessage}
+      placeholder="Placeholder"
+    >
+      {options?.map((value) => (
+        <Option key={value} value={value}>
+          {value}
+        </Option>
+      ))}
+    </Select>
+  );
+};
+
+export const AsyncMultipleSelectStory = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState<string[] | null>(null);
+  const [selectValue, setSelectValue] = useState<string[]>([]);
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
+    setSelectValue(newValues);
+  };
+
+  const onInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.value) return setOptions(null);
+
+    setIsLoading(true);
+
+    // async request imitation
+    await wait(1500);
+    setOptions(shuffle(Array.from({ length: 5 }).map((_, ind) => String(ind))).slice(0, getRandomInt(1, 3)));
+    setIsLoading(false);
+  };
+
+  const emptyMessage = !options ? 'Enter your string to search' : undefined;
+
+  return (
+    <Select
+      mode="search"
+      multiple
+      value={selectValue}
+      isLoading={isLoading}
+      defaultHighlighted={false}
+      onChange={onChange}
+      emptyMessage={emptyMessage}
+      placeholder="Start typing"
+      onInputChange={onInputChange}
+    >
+      {options?.map((value) => (
+        <Option key={value} value={value}>
+          {value}
+        </Option>
+      ))}
     </Select>
   );
 };

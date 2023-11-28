@@ -9,6 +9,8 @@ import { NotificationStory } from '@components/Notification/NotificationStory';
 import { PopupStory } from '@components/Popup/PopupStory';
 import { ScnStory } from '@components/Scn/ScnStory';
 import {
+  AsyncMultipleSelectStory,
+  AsyncSingleSelectStory,
   CustomChipsStory,
   MultiSearchSelectStory,
   SearchSelectStory,
@@ -58,6 +60,12 @@ export const StorybookInit = () => {
               </StoryItem>
               <StoryItem name="Custom chips">
                 <CustomChipsStory />
+              </StoryItem>
+              <StoryItem name="Async single select">
+                <AsyncSingleSelectStory />
+              </StoryItem>
+              <StoryItem name="Async miltiple select">
+                <AsyncMultipleSelectStory />
               </StoryItem>
             </StoryHeader>
             <StoryItem name="Button">
