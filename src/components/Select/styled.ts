@@ -1,6 +1,7 @@
 import { Dropdown } from '@components/Dropdown';
+import { Theme } from '@constants/theme';
 import { InputStatus } from '@model/input';
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import OpenStatusButton from './chevronDown.svg';
 
@@ -10,7 +11,7 @@ type BorderColorProps = {
   status?: InputStatus;
   disabled?: boolean;
   hovered?: boolean;
-  theme: DefaultTheme;
+  theme: Theme;
 };
 
 const getBorderColor = ({ status, hovered, disabled, theme }: BorderColorProps) => {

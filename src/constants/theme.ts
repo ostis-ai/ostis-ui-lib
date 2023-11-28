@@ -1,4 +1,4 @@
-export const defaultLight = {
+export const defaultLightTheme = {
   size: {
     inputBorderWidth: '1px',
   },
@@ -133,4 +133,4 @@ export const defaultLight = {
   },
 };
 
-export type Theme = typeof defaultLight;
+export type Theme = typeof defaultLightTheme;

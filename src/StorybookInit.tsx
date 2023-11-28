@@ -26,7 +26,7 @@ import { StoryItem } from '@components/Storybook/StoryItem';
 import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
-import { defaultLight } from '@constants/theme';
+import { defaultLightTheme } from '@constants/theme';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 const Global = createGlobalStyle`
@@ -38,7 +38,7 @@ const Global = createGlobalStyle`
 export const StorybookInit = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={defaultLight}>
+      <ThemeProvider theme={defaultLightTheme}>
         <LanguageProvider defaultLanguage="en">
           <Global />
           <Storybook>
