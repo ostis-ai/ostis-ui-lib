@@ -70,23 +70,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Input component.
 - Add Button component.
 
-## [v0.0.1-beta.7] - 24.10.2023
+## [v0.0.1] - 29.11.2023
 
 ### Added
 
 - Add Select component
-- Add Checkbox
+- Add Checkbox component
 
 ### Changed
 
 - Remove user prop from Decomposition
-- Remove inputV2, InptSearch, InputPassword
+- Remove inputV2, InputSearch, InputPassword
 - Add themeing for button and input
 - Add initial Scn Story
 - Remove most circular dependences
-- Story making
+- Story making components
 
 ### Fixed
 
-- export InputStatus
+- Export InputStatus
 - Change style of skeleton of SCn
