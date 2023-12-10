@@ -15,6 +15,6 @@ export const Option = styled.div`
   padding: 8px 16px;
 
   background-color: transparent;
-  
+
   cursor: pointer;
 `;

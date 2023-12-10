@@ -2,7 +2,7 @@ import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import { ToastContext } from './constants';
-import { IToast, IToastParams, TAddToastParams,TToastComponent } from './model';
+import { IToast, IToastParams, TAddToastParams, TToastComponent } from './model';
 
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<IToast[]>([]);

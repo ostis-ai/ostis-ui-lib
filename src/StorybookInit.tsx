@@ -23,7 +23,7 @@ import { SpinnerStory } from '@components/Spinner/SpinnerStory';
 import { Storybook } from '@components/Storybook';
 import { StoryHeader } from '@components/Storybook/StoryHeader';
 import { StoryItem } from '@components/Storybook/StoryItem';
-import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
+import { SwitchViewModeStory } from '@components/SwitchViewMode/SwitchViewModeStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
 import { defaultLightTheme } from '@constants/theme';
@@ -80,8 +80,8 @@ export const StorybookInit = () => {
             <StoryItem name="Checkbox">
               <CheckboxStory />
             </StoryItem>
-            <StoryItem name="SwitchScgScn">
-              <SwitchScgScnStory />
+            <StoryItem name="SwitchViewMode">
+              <SwitchViewModeStory />
             </StoryItem>
             <StoryItem name="Tooltip">
               <TooltipStory />

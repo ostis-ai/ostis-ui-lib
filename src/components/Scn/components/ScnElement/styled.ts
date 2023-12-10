@@ -52,7 +52,7 @@ export const RightSide = styled.div`
 export const Modifier = styled.div`
   display: flex;
   align-items: center;
-  
+
   margin-bottom: 6px;
 `;
 

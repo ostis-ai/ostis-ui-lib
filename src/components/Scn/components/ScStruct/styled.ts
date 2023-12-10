@@ -1,6 +1,6 @@
 import { Scg } from '@components/Scg';
 import { Spinner } from '@components/Spinner';
-import { SwitchScgScn } from '@components/SwitchScgScn';
+import { SwitchViewMode } from '@components/SwitchViewMode';
 import styled, { css } from 'styled-components';
 
 export const Struct = styled.div<{ isScg?: boolean }>`
@@ -25,7 +25,7 @@ export const Struct = styled.div<{ isScg?: boolean }>`
     `}
 `;
 
-export const StyledSwitchScgScn = styled(SwitchScgScn)`
+export const StyledSwitchViewMode = styled(SwitchViewMode)`
   top: 8px !important;
 `;
 
