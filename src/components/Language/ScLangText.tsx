@@ -116,7 +116,6 @@ export const ScLangText = ({
     };
   }, [client, changeContentEventId]);
 
-
   useEffect(() => {
     if (text) {
       setIsLoad && setIsLoad(false);

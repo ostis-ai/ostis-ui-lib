@@ -1,4 +1,4 @@
-import { cloneElement,useCallback, useEffect } from 'react';
+import { cloneElement, useCallback, useEffect } from 'react';
 
 import { TToastComponent } from './model';
 import { useToast } from './useToast';

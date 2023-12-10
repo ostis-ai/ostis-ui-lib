@@ -1,4 +1,4 @@
-This page describes rules to create Pull Requests.  
+This page describes rules to create Pull Requests.
 
 ### Commits message format
 
@@ -10,11 +10,12 @@ _**You can do not use scope. For example `feat: ...`, `fix: ...`**_
 
 Each commit should have not much differences excluding cases, with:
 
-  - CodeStyle changes;
-  - Renames;
-  - Code formatting;
+- CodeStyle changes;
+- Renames;
+- Code formatting;
 
 **Do atomic commits for each changes.** For example if you rename some members in `ClassX` and `ClassY`, then do two commits:
+
 ```
 fix(<scope>): rename members in ClassX according to codestyle
 fix(<scope>): rename members in ClassY according to codestyle
@@ -26,27 +27,27 @@ _**All commit, that not applies to this rules, should be split by this rules. An
 
 ### Pull Request Preparation
 
- - Read rules to create PR in documentation
- - Update changelog
- - Update documentation
+- Read rules to create PR in documentation
+- Update changelog
+- Update documentation
 
 ### Pull Request creation
- 
- - Create PR on GitHub
- - Check that CI checks were passed successfully
- - Assign PR reviewers
- - Send link to PR to project development chat
- 
+
+- Create PR on GitHub
+- Check that CI checks were passed successfully
+- Assign PR reviewers
+- Send link to PR to project development chat
+
 ### Pull Request Review
 
- - Reviewer should test code from PR if CI don't do it
- - Reviewer submit review as set of conversations
- - Author make review fixes at `Review fixes` commits
- - Author re-request review
- - Reviewer resolve conversations if they were fixed and approve PR
- 
+- Reviewer should test code from PR if CI don't do it
+- Reviewer submit review as set of conversations
+- Author make review fixes at `Review fixes` commits
+- Author re-request review
+- Reviewer resolve conversations if they were fixed and approve PR
+
 ### After Pull Request Review
 
- - Author can update commits history for remove `Review fixes` commits
- - Author merge PR to base branch
- - Author test work at base branch
+- Author can update commits history for remove `Review fixes` commits
+- Author merge PR to base branch
+- Author test work at base branch

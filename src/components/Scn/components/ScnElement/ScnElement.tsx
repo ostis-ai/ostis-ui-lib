@@ -4,7 +4,7 @@ import { useLanguage } from '@components/Language';
 import { IScnNode } from '@components/Scn/model';
 import { useScnContext } from '@components/Scn/ScnContext';
 import { useScUtils } from '@components/ScUtils';
-import { TScLanguageTab } from '@components/SwitchScgScn';
+import { TScLanguageTab } from '@components/SwitchViewMode';
 import { SPINER_COLOR } from '@model/constants';
 import { langToKeynode } from '@utils/langToKeynode';
 import { snakeToCamelCase } from '@utils/snakeToCamelCase';
@@ -13,7 +13,7 @@ import { ScAddr, ScTemplate, ScType } from 'ts-sc-client';
 import { arcMap } from '../../constants';
 import { EdgeNode, KeywordNode, LinkNode, SimpleNode, TupleNode } from '../Nodes';
 import { ScnLink } from '../ScnLink';
-import { Struct, StyledScg, StyledSpinner, StyledSwitchScgScn } from '../ScStruct/styled';
+import { Struct, StyledScg, StyledSpinner, StyledSwitchViewMode } from '../ScStruct/styled';
 
 import { Arc, Child, LinkedNodes, Marker, Modifier, RightSide, StyledLinkedNode, Wrapper } from './styled';
 import { getRandomInt } from '@utils/getRandomInt';
@@ -56,7 +56,7 @@ const ScStruct = ({ tree }: IProps) => {
   const renderScg = showScg && !!question && !isLoading;
   return (
     <Struct isScg={showScg}>
-      <StyledSwitchScgScn tab={tab} onTabClick={setTab} />
+      <StyledSwitchViewMode tab={tab} onTabClick={setTab} />
       {!showScg && <ScnElement tree={tree} isRoot />}
       <StyledScg url={scgUrl} question={question || undefined} show={renderScg} readonly />
       {showScg && isLoading && <StyledSpinner appearance={SPINER_COLOR} />}

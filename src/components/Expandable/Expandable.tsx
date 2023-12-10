@@ -1,16 +1,11 @@
-import {
-  PropsWithChildren, useEffect, useRef, useState,
-} from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-type ExpandProperty = "width" | "height";
-type PropertyAccordance = Record<
-ExpandProperty,
-"scrollWidth" | "scrollHeight"
->;
+type ExpandProperty = 'width' | 'height';
+type PropertyAccordance = Record<ExpandProperty, 'scrollWidth' | 'scrollHeight'>;
 
 const propertyAccordance: PropertyAccordance = {
-  width: "scrollWidth",
-  height: "scrollHeight",
+  width: 'scrollWidth',
+  height: 'scrollHeight',
 };
 
 interface IProps {
@@ -29,13 +24,13 @@ export const Expandable = ({
   className,
   initialSize = 0,
   unmountOnEnd = initialSize === 0,
-  growProperty = "height",
-  transitionDuration = "0.3s",
-  transitionTimingFunction = "ease",
+  growProperty = 'height',
+  transitionDuration = '0.3s',
+  transitionTimingFunction = 'ease',
 }: PropsWithChildren<IProps>) => {
   const [visible, setVisible] = useState(!unmountOnEnd);
-  const [overflow, setOverflow] = useState<"hidden" | "visible">("hidden");
-  const [targetSize, setTargetSize] = useState<number | "auto">(initialSize);
+  const [overflow, setOverflow] = useState<'hidden' | 'visible'>('hidden');
+  const [targetSize, setTargetSize] = useState<number | 'auto'>(initialSize);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -46,7 +41,7 @@ export const Expandable = ({
       const currentSize = node[propertyAccordance[growProperty]];
 
       setTargetSize(currentSize);
-      setOverflow("hidden");
+      setOverflow('hidden');
       window.requestAnimationFrame(() => setTargetSize(initialSize));
     }
   }, [expanded, growProperty, initialSize]);
@@ -61,8 +56,8 @@ export const Expandable = ({
 
   const onTransitionEnd = () => {
     if (expanded) {
-      setTargetSize("auto");
-      setOverflow("visible");
+      setTargetSize('auto');
+      setOverflow('visible');
     } else if (unmountOnEnd) {
       setVisible(false);
     }

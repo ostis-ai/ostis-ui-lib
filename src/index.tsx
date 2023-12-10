@@ -1,4 +1,4 @@
-export * from '@components/SwitchScgScn';
+export * from '@components/SwitchViewMode';
 export * from '@components/Tooltip';
 export * from '@components/Toast';
 export * from '@components/Button';

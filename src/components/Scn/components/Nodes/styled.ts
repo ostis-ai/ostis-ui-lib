@@ -16,6 +16,6 @@ export const LeftSide = styled.span`
   width: 20px;
 
   color: #2a6496;
-  
+
   flex-shrink: 0;
 `;

@@ -2,17 +2,19 @@ import { Tooltip } from '@components/Tooltip';
 
 import ScgSwitch from './icons/scg.svg';
 import ScnSwitch from './icons/scn.svg';
+import NativeSwitch from './icons/native.svg';
+
 import { Divider, SwitchWrap, Tab, Tabs } from './styled';
 
-export type TScLanguageTab = 'scn' | 'scg';
+export type TScLanguageTab = 'scn' | 'scg' | 'native';
 
-export interface ISwitchScgScnProps {
+export interface ISwitchViewModeProps {
   className?: string;
   tab: TScLanguageTab;
   onTabClick: (tab: TScLanguageTab) => void;
 }
 
-export const SwitchScgScn = ({ tab, className, onTabClick }: ISwitchScgScnProps) => {
+export const SwitchViewMode = ({ tab, className, onTabClick }: ISwitchViewModeProps) => {
   const onClick = (newTab: TScLanguageTab) => () => {
     onTabClick(newTab);
   };
@@ -29,6 +31,12 @@ export const SwitchScgScn = ({ tab, className, onTabClick }: ISwitchScgScnProps)
         <Tooltip title={'SCg-код'} placement="bottom-end">
           <Tab isActive={tab === 'scg'} onClick={onClick('scg')}>
             <ScgSwitch />
+          </Tab>
+        </Tooltip>
+        <Divider />
+        <Tooltip title={'ЕЯ-код'} placement="bottom-end">
+          <Tab isActive={tab === 'native'} onClick={onClick('native')}>
+            <NativeSwitch />
           </Tab>
         </Tooltip>
       </Tabs>
