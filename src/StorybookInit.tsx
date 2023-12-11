@@ -14,6 +14,7 @@ import {
   CustomChipsStory,
   MultiSearchSelectStory,
   SearchSelectStory,
+  SelectPlaygroundStory,
   SelectWithCustomOptionsStory,
   SimpleMultiSelectStory,
   SimpleSelectStory,
@@ -43,6 +44,9 @@ export const StorybookInit = () => {
           <Global />
           <Storybook>
             <StoryHeader header="Select">
+              <StoryItem name="Select Playground">
+                <SelectPlaygroundStory />
+              </StoryItem>
               <StoryItem name="Simple select">
                 <SimpleSelectStory />
               </StoryItem>

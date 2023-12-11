@@ -41,39 +41,24 @@ const findAbledOptionValue = (options: PartialOption[]) => options.find(({ disab
 const stopPropagation = (evt: React.BaseSyntheticEvent) => evt.stopPropagation();
 
 export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectElement>, 'onFocus' | 'onBlur'> {
-  /** Отображаемое значение, когда value селекта не совпадает ни с одной опцией */
   renderedEmptyValue?: React.ReactNode;
   value?: string | string[];
-  /** Отображать статус загрузки данных */
   isLoading?: boolean;
-  /** Позволяет использовать Select с поиском */
   mode?: 'select' | 'search';
   // dimention?: SelectDimention;
   // appearance?: 'green' | 'brown';
   loadingAppearance?: 'input' | 'options';
-  /** Сообщение, отображаемое при наличии флага isLoading */
   loadingMessage?: React.ReactNode;
   emptyMessage?: React.ReactNode;
-  /** Добавить селекту возможность множественного выбора */
   multiple?: boolean;
   status?: InputStatus;
-  /** По умолчанию, если в компоннет Option передан текст и только текст, то в зависимости от набранного в Input значения,
-   * опции будут подсвечиваться. Описываемый флаг отключает это поведение. */
   defaultHighlighted?: boolean;
-  /** По умолчанию, если multiple = true, в опции присутствует checkbox. Данный флаг позволяет убрать его */
   showCheckbox?: boolean;
-  /** Значение по умолчанию для некотролируемого селекта */
   defaultValue?: string | string[];
-  displayStatusIcon?: boolean;
   idleHeight?: 'full' | 'fixed';
-  /** По умолчанию опции подсвечиваются отдельно по каждой разделенной пробелом части в поисковой строке. Данная опция
-   * позволяет искать по строке целиком */
   highlightFormat?: HighlightFormat;
-  /** Референс на контейнер для правильного позиционирования выпадающего списка */
   portalTargetRef?: React.RefObject<HTMLElement>;
-  /** Иконки для отображения в правом углу поля */
   iconsRight?: React.ReactNode;
-  /** Иконки для отображения в левом углу поля */
   iconsLeft?: React.ReactNode;
   containerRef?: React.RefObject<HTMLDivElement>;
   renderSelectValue?: (value: string | string[] | undefined, searchText: string) => React.ReactNode;
