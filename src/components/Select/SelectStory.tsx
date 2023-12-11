@@ -1,10 +1,115 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Chip } from '@components/Chip';
+import { Playground } from '@components/Playground/Playground';
+import { PlaygroundContent } from '@components/Playground/PlaygroundContent';
+import { PlaygroundRow } from '@components/Playground/PlaygroundRow';
 import { getRandomInt } from '@utils/getRandomInt';
 import styled from 'styled-components';
 
+import { defaultEmptyMessage, defaultLoadingText } from './constants';
 import { Option } from './Option';
 import { Select } from './Select';
+
+const BasicOptions = () => {
+  return (
+    <>
+      <Option value="text1">This is text</Option>
+      <Option value="text2">One more text</Option>
+      <Option value="text3">Why cant we make one more option</Option>
+      <Option value="big">Really big one really big one really big one really big one really big one</Option>
+      {Array.from({ length: 15 }).map((_, ind) => (
+        <Option key={ind} value={String(ind + 1)}>
+          {ind + 1}
+        </Option>
+      ))}
+    </>
+  );
+};
+
+export const SelectPlaygroundStory = () => {
+  return (
+    <Playground>
+      <PlaygroundContent>
+        {(props) => (
+          <Select {...props}>
+            <BasicOptions />
+          </Select>
+        )}
+      </PlaygroundContent>
+      <PlaygroundRow
+        name="renderedEmptyValue"
+        type="input"
+        description="Rendered value, when select value is empty or is not mathing with any option"
+        default=""
+      />
+      <PlaygroundRow name="isLoading" type="boolean" description="Shows loading status" default={false} />
+      <PlaygroundRow name="disabled" type="boolean" description="Is select disabled" default={false} />
+      <PlaygroundRow
+        name="mode"
+        type="select"
+        description="Select with or without search"
+        default="select"
+        options={['select', 'search']}
+      />
+      <PlaygroundRow
+        name="loadingAppearance"
+        type="select"
+        description="Specifies loader appearance"
+        default="input"
+        options={['input', 'options']}
+      />
+      <PlaygroundRow
+        name="loadingMessage"
+        type="input"
+        description="Message displayed in dropdown when isLoading is enabled and no options is present"
+        default={defaultLoadingText}
+      />
+      <PlaygroundRow
+        name="emptyMessage"
+        type="input"
+        description="Component in dropdown when no option is matching value in search input"
+        default={defaultEmptyMessage}
+      />
+      <PlaygroundRow name="multiple" type="boolean" description="Makes select multiple" default={false} />
+      <PlaygroundRow name="status" type="select" description="Visual status" options={['attention', 'error']} />
+      <PlaygroundRow
+        name="defaultHighlighted"
+        type="boolean"
+        description="By default, when text and only text is passed to Option children, depending on search input value options will be highlighted. This flag disables this logic"
+      />
+      <PlaygroundRow
+        name="showCheckbox"
+        type="boolean"
+        default={true}
+        description="Shows checkbox in option when multiple is true"
+      />
+      <PlaygroundRow
+        name="defaultValue"
+        type="input"
+        description="Default value when select is in uncontrolled state"
+      />
+      <PlaygroundRow
+        name="idleHeight"
+        type="select"
+        description="Specifies initial height in closed select. Can be used to initially show all checked options in multiple select"
+        default="fixed"
+        options={['full', 'fixed']}
+      />
+      <PlaygroundRow
+        name="highlightFormat"
+        type="select"
+        description="Word - option text is splitted by words and searches in every word. Wholly - search by whole text"
+        default="word"
+        options={['word', 'wholly']}
+      />
+      <PlaygroundRow
+        name="portalTargetRef"
+        type="empty"
+        description="Ref to position a portal. By default rendered befory closing body tag"
+      />
+    </Playground>
+  );
+};
 
 export const SimpleSelectStory = () => {
   const [value, setValue] = useState('');

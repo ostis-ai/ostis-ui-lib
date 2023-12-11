@@ -1,4 +1,5 @@
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { IStoryItem } from './model';
@@ -21,6 +22,7 @@ const Left = styled.div`
   padding: 20px;
   height: 100vh;
   overflow: auto;
+  box-sizing: border-box;
 `;
 
 const Right = styled.div`
@@ -29,6 +31,7 @@ const Right = styled.div`
   background-color: #fff;
   height: 100vh;
   overflow: auto;
+  box-sizing: border-box;
 `;
 
 interface IProps {
@@ -36,8 +39,11 @@ interface IProps {
 }
 
 export const Storybook = ({ children }: IProps) => {
-  const [activeItem, setActiveItem] = useState<IStoryItem | null>(null);
+  const [params] = useSearchParams();
+  const activeItemName = params.get('activeItem');
   const [storyItems, setStoryItems] = useState<IStoryItem[]>([]);
+
+  const navigate = useNavigate();
 
   const addStoryItem = useCallback((item: IStoryItem) => {
     setStoryItems((prev) => [...prev, item]);
@@ -47,7 +53,7 @@ export const Storybook = ({ children }: IProps) => {
     setStoryItems((prev) => prev.filter((item) => item.name !== path));
   }, []);
 
-  const targetActiveItem = activeItem || storyItems[0];
+  const activeItem = storyItems.find((item) => item.name === activeItemName);
 
   const grouped = storyItems.reduce((acc, curr) => {
     return {
@@ -56,29 +62,47 @@ export const Storybook = ({ children }: IProps) => {
     };
   }, {} as Record<string, IStoryItem[]>);
 
+  const goToItem = useCallback(
+    (activeItem: string) => {
+      navigate({
+        pathname: '/',
+        search: createSearchParams({ activeItem }).toString(),
+      });
+    },
+    [navigate],
+  );
+
+  const onItemClick = useCallback(
+    (item: IStoryItem) => {
+      goToItem(item.name);
+    },
+    [goToItem],
+  );
+
+  useEffect(() => {
+    const firstItem = storyItems[0];
+    if (!firstItem) return;
+    if (activeItem && activeItemName) return;
+
+    goToItem(firstItem.name);
+  }, [activeItem, activeItemName, goToItem, storyItems]);
+
   return (
     <StorybookProvider addStoryItem={addStoryItem} removeStoryItem={removeStoryItem}>
       <Wrapper>
         <Left>
           {Object.entries(grouped).map(([header, items]) => {
             if (header === '_empty') {
-              return (
-                <StoryItems
-                  key={header}
-                  storyItems={items}
-                  activeName={targetActiveItem?.name}
-                  onClick={setActiveItem}
-                />
-              );
+              return <StoryItems key={header} storyItems={items} activeName={activeItem?.name} onClick={onItemClick} />;
             }
             return (
               <ContentWithHeader header={header} key={header}>
-                <StoryItems storyItems={items} activeName={targetActiveItem?.name} onClick={setActiveItem} />
+                <StoryItems storyItems={items} activeName={activeItem?.name} onClick={onItemClick} />
               </ContentWithHeader>
             );
           })}
         </Left>
-        <Right>{targetActiveItem?.children}</Right>
+        <Right>{activeItem?.children}</Right>
       </Wrapper>
       {children}
     </StorybookProvider>
