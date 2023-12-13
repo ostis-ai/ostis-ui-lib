@@ -19,9 +19,10 @@ interface IProps {
   title: ReactNode;
   placement?: Placement;
   children: ReactNode;
+  className?: string;
 }
 
-export const Tooltip = ({ title, placement = 'bottom', children }: IProps) => {
+export const Tooltip = ({ title, placement = 'bottom', children, className }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -52,7 +53,7 @@ export const Tooltip = ({ title, placement = 'bottom', children }: IProps) => {
         {children}
       </div>
       {isOpen && (
-        <Content ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+        <Content className={className} ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
           {title}
         </Content>
       )}

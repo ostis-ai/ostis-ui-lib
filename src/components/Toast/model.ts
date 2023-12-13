@@ -1,5 +1,7 @@
 import { ReactElement } from 'react';
 
+import { toastPositions } from './constants';
+
 interface IComponentProps {
   [x: string]: any;
   onClose?: () => void;
@@ -7,21 +9,13 @@ interface IComponentProps {
 
 export type TToastComponent = ReactElement<IComponentProps, string | React.JSXElementConstructor<any>>;
 
-export type TToastPosition =
-  | 'topLeft'
-  | 'topCenter'
-  | 'topRight'
-  | 'centerLeft'
-  | 'center'
-  | 'centerRight'
-  | 'bottomLeft'
-  | 'bottomCenter'
-  | 'bottomRight';
+export type TToastPosition = (typeof toastPositions)[number];
 
 export interface IToastParams {
   id: string;
   position: TToastPosition;
   duration: number | 'infinity';
+  closeable: boolean;
 }
 
 export type TAddToastParams = Partial<IToastParams>;
@@ -32,9 +26,3 @@ export interface IToast {
 }
 
 export type TAddToast = (component: TToastComponent, params?: TAddToastParams) => void;
-
-export interface IToastContext {
-  toasts: IToast[];
-  addToast: TAddToast;
-  removeToast: (id: string) => void;
-}

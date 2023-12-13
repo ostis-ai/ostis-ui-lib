@@ -5,7 +5,11 @@ import { StyledToasts, Wrapper } from './styled';
 
 type TGropedToasts = Record<TToastPosition, IToast[]>;
 
-export const Toasts = () => {
+type Props = {
+  className?: string;
+};
+
+export const Toasts = ({ className }: Props) => {
   const { toasts } = useToast();
 
   const toastsByPosition = useMemo(
@@ -21,14 +25,14 @@ export const Toasts = () => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {Object.entries(toastsByPosition).map(([key, toasts]) => {
         const position = key as TToastPosition;
 
         return (
           <StyledToasts key={key} position={position}>
-            {toasts.map(({ params, component }) => (
-              <Toast key={params.id} id={params.id} component={component} duration={params.duration} />
+            {toasts.map(({ params }) => (
+              <Toast key={params.id} id={params.id} />
             ))}
           </StyledToasts>
         );

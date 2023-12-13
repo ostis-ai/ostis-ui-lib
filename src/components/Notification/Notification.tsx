@@ -24,7 +24,7 @@ interface IProps {
   onClose?: () => void;
 }
 
-const Notification = ({ type, title = '', text, onClose }: IProps) => {
+export const Notification = ({ type, title = '', text, onClose }: IProps) => {
   const lang = useLanguage();
 
   return (
