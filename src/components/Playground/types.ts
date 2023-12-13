@@ -10,7 +10,7 @@ export type BooleanRow = {
 
 export type SelectRow = {
   type: 'select';
-  options: string[];
+  options: readonly string[];
 };
 
 export type InputRow = {

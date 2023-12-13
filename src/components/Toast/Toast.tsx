@@ -1,28 +1,59 @@
-import { cloneElement,useCallback, useEffect } from 'react';
+import { cloneElement, useCallback, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 
-import { TToastComponent } from './model';
-import { useToast } from './useToast';
+import { useInnerToast, useToast } from './useToast';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+`;
+
+const fadeOut = keyframes`
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+`;
+
+const ToastWrapper = styled.div<{ $isDisapearing?: boolean }>`
+  animation: ${({ $isDisapearing }) => ($isDisapearing ? fadeOut : fadeIn)} 0.3s ease both;
+`;
 
 interface IProps {
-  duration?: number | 'infinity';
   id: string;
-  component: TToastComponent;
 }
 
-export const Toast = ({ duration = 'infinity', id, component }: IProps) => {
-  const { removeToast } = useToast();
+export const Toast = ({ id }: IProps) => {
+  const { removeToast: markToastToDelete, toasts } = useToast();
+  const { removeToast, deletingToasts } = useInnerToast();
+
+  const toast = toasts.find((toast) => toast.params.id === id);
 
   const onClose = useCallback(() => {
-    removeToast(id);
-    component.props.onClose?.();
-  }, [component.props, id, removeToast]);
+    markToastToDelete(id);
+    toast?.component.props.onClose?.();
+  }, [id, markToastToDelete, toast?.component.props]);
 
   useEffect(() => {
-    if (duration === 'infinity') return;
-    setInterval(onClose, duration);
-  }, [duration, onClose]);
+    if (toast?.params.duration === 'infinity') return;
+    setTimeout(onClose, toast?.params.duration);
+  }, [toast?.params.duration, onClose]);
 
-  const newComponent = cloneElement(component, { onClose });
+  const newComponent = toast
+    ? cloneElement(toast.component, { onClose: toast.params.closeable ? onClose : undefined })
+    : null;
 
-  return <>{newComponent}</>;
+  const isDisapearing = deletingToasts.includes(id);
+
+  const onAnimationEnd = () => {
+    if (isDisapearing) removeToast(id);
+  };
+
+  return (
+    <ToastWrapper $isDisapearing={isDisapearing} onAnimationEnd={onAnimationEnd}>
+      {newComponent}
+    </ToastWrapper>
+  );
 };

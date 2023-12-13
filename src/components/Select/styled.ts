@@ -58,11 +58,6 @@ export const SelectWrapper = styled.div<{
 
   color: ${({ theme }) => theme.select.colors.text};
 
-  &::placeholder {
-    font-weight: ${({ theme }) => theme.select.font.placeholderWeight};
-    color: ${({ theme }) => theme.select.colors.placeholder};
-  }
-
   &:hover {
     border-color: ${({ $disabled, $status, theme }) =>
       getBorderColor({ theme, status: $status, disabled: $disabled, hovered: true })};
@@ -155,6 +150,11 @@ export const Input = styled.input<{ $multiple: boolean }>`
   outline: none;
   appearance: none;
   height: ${({ $multiple }) => getSelectValueHeight($multiple)};
+
+  &::placeholder {
+    font-weight: ${({ theme }) => theme.select.font.placeholderWeight};
+    color: ${({ theme }) => theme.select.colors.placeholder};
+  }
 `;
 
 export const StyledOpenStatusButton = styled(OpenStatusButton)<{ $opened: boolean }>`
