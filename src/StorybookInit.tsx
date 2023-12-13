@@ -14,6 +14,7 @@ import {
   CustomChipsStory,
   MultiSearchSelectStory,
   SearchSelectStory,
+  SelectPlaygroundStory,
   SelectWithCustomOptionsStory,
   SimpleMultiSelectStory,
   SimpleSelectStory,
@@ -25,6 +26,8 @@ import { StoryHeader } from '@components/Storybook/StoryHeader';
 import { StoryItem } from '@components/Storybook/StoryItem';
 import { SwitchScgScnStory } from '@components/SwitchScgScn/SwitchScgScnStory';
 import { TextareaStory } from '@components/Textarea/TextareaStory';
+import { ToastProvider } from '@components/Toast';
+import { CustomToastPositionStory, ToastPlaygroundStory, ToastStory } from '@components/Toast/ToastStory';
 import { TooltipStory } from '@components/Tooltip/TooltipStory';
 import { defaultLightTheme } from '@constants/theme';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
@@ -43,6 +46,9 @@ export const StorybookInit = () => {
           <Global />
           <Storybook>
             <StoryHeader header="Select">
+              <StoryItem name="Select Playground">
+                <SelectPlaygroundStory />
+              </StoryItem>
               <StoryItem name="Simple select">
                 <SimpleSelectStory />
               </StoryItem>
@@ -66,6 +72,21 @@ export const StorybookInit = () => {
               </StoryItem>
               <StoryItem name="Async miltiple select">
                 <AsyncMultipleSelectStory />
+              </StoryItem>
+            </StoryHeader>
+            <StoryHeader header="Toast">
+              <StoryItem name="Toast Playground">
+                <ToastProvider>
+                  <ToastPlaygroundStory />
+                </ToastProvider>
+              </StoryItem>
+              <StoryItem name="Toast variants">
+                <ToastProvider>
+                  <ToastStory />
+                </ToastProvider>
+              </StoryItem>
+              <StoryItem name="Custom toast position">
+                <CustomToastPositionStory />
               </StoryItem>
             </StoryHeader>
             <StoryItem name="Button">
