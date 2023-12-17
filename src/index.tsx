@@ -9,6 +9,7 @@ export * from '@components/Spinner';
 export * from '@components/PositionInPortal';
 export * from '@components/Textarea';
 export * from '@components/Skeleton';
+export * from "@components/NativeLanguage"
 export * from '@components/InfiniteScroll';
 export * from '@components/ClientProvider';
 export * from '@components/CommandProvider';
