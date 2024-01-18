@@ -83,6 +83,38 @@ export const defaultLightTheme = {
       fontFamily: 'Roboto',
     },
   },
+  textarea: {
+    borderRadius: '10px',
+    colors: {
+      disabled: {
+        background: '#fafafa',
+        border: '#eeeeee',
+        text: '#737373',
+      },
+      initial: {
+        background: '#ffffff',
+        border: '#ebebeb',
+        text: '#323232',
+      },
+      borderHover: '#7ec0ee',
+      borderFocused: '#7ec0ee',
+      borderFocusedHover: '#7ec0ee',
+      borderError: '#f14747',
+      borderErrorHover: '#f14747',
+      placeholder: '#737373',
+    },
+    size: {
+      padding: '6px 14px',
+      borderWidth: '2px',
+    },
+    font: {
+      fontSize: '20px',
+      lineHeight: '24px',
+      inputWeight: '400',
+      placeholderWeight: '300',
+      fontFamily: 'Roboto',
+    },
+  },
   button: {
     gap: '8px',
     borderRadius: '10px',
