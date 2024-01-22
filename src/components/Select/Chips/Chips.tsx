@@ -9,7 +9,7 @@ import { ChipBox, CounterChip, OptionChipWrapper } from './styled';
 interface IMultipleChipsProps {
   options: IConstantOption[];
   disabled?: boolean;
-  onChipRemove: (value: string) => void;
+  onChipRemove?: (value: string) => void;
 }
 
 interface IOptionChipProps {
@@ -19,7 +19,7 @@ interface IOptionChipProps {
   chipVissible?: boolean;
   counterVissible?: boolean;
   restChips: number;
-  onChipRemove: (value: string) => void;
+  onChipRemove?: (value: string) => void;
   onVisibiltyChange?: (inView: boolean) => void;
 }
 
@@ -38,14 +38,14 @@ const OptionChip = ({
   const onClose = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation();
-      onChipRemove(option.value);
+      onChipRemove?.(option.value);
     },
     [onChipRemove, option.value],
   );
 
   return (
     <OptionChipWrapper className={className} ref={ref} $vissible={chipVissible}>
-      {option.renderValue({ onClose })}
+      {option.renderValue({ onClose: onChipRemove ? onClose : undefined })}
       <CounterChip disabled={disabled} size="l" $vissible={counterVissible}>
         +{restChips}
       </CounterChip>

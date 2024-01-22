@@ -1,4 +1,5 @@
 import { Dropdown } from '@components/Dropdown';
+import { Popup } from '@components/Popup';
 import { Theme } from '@constants/theme';
 import { InputStatus } from '@model/input';
 import styled, { css } from 'styled-components';
@@ -128,7 +129,7 @@ export const ValueWrapper = styled.div<{ $fixHeight: boolean; $multiple: boolean
     `}
 `;
 
-export const Input = styled.input<{ $multiple: boolean }>`
+export const SelectInput = styled.input<{ $multiple: boolean }>`
   box-sizing: border-box;
 
   flex: 1 1 auto;
@@ -210,4 +211,29 @@ export const StringValueWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const PopupInputWrapper = styled.div`
+  padding: 0 8px;
+  margin-bottom: 16px;
+`;
+
+export const PopupValuesWrapper = styled.div`
+  overflow: auto;
+`;
+
+export const PopupChipsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 2px 8px;
+  margin-bottom: 16px;
+  max-height: 155px;
+  overflow: auto;
+  flex-shrink: 0;
+`;
+
+export const StyledPopup = styled(Popup)`
+  padding-bottom: 8px;
+  box-sizing: border-box;
 `;

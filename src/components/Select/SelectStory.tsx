@@ -36,6 +36,7 @@ export const SelectPlaygroundStory = () => {
           </Select>
         )}
       </PlaygroundContent>
+      <PlaygroundRow name="mobile" type="boolean" description="Toggle for mobile select view" default="" />
       <PlaygroundRow
         name="renderedEmptyValue"
         type="input"
@@ -316,6 +317,27 @@ export const AsyncMultipleSelectStory = () => {
           {value}
         </Option>
       ))}
+    </Select>
+  );
+};
+
+export const MobileMultipleSelectStory = () => {
+  const [selectValue, setSelectValue] = useState<string[]>(['1', '2', '3']);
+
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newValues = Array.from(e.target.selectedOptions).map((option) => option.value);
+    setSelectValue(newValues);
+  };
+
+  return (
+    <Select mode="search" multiple value={selectValue} onChange={onChange} placeholder="Placeholder" mobile>
+      <Option value="0">Really big one really big one really big one really big one really big one</Option>
+      <Option value="1">String 1</Option>
+      <Option value="2">Some more info</Option>
+      <Option value="3">Hello</Option>
+      {Array.from({ length: 20 }).map((_, ind) => {
+        return <Option key={ind} value={String(ind + 4)}>{`Value ${ind}`}</Option>;
+      })}
     </Select>
   );
 };

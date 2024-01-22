@@ -131,6 +131,21 @@ export const defaultLightTheme = {
       },
     },
   },
+  popup: {
+    contentBorderRadius: '15px',
+    colors: {
+      // overlayBackground: '#00000021',
+      // contentBackground: '#ffffff',
+      contentBackground: 'transparent',
+      overlayBackground: 'rgba(250, 250, 250, 0.65)',
+    },
+    size: {
+      // contentWidth: 'calc(100vw - 32px)',
+      // contentHeight: 'calc(100vh - 110px)',
+      contentWidth: 'unset',
+      contentHeight: 'unset',
+    },
+  },
 };
 
 export type Theme = typeof defaultLightTheme;
