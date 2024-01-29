@@ -27,7 +27,7 @@ import {
   StyledPopup,
   ValueWrapper,
 } from './styled';
-import type { HighlightFormat, IConstantOption, IDropdownOption } from './types';
+import type { HighlightFormat, IConstantOption, IdleSelectHeight, IDropdownOption } from './types';
 import { ConstantSearchSelectProvider, DropDownSearchSelectProvider } from './useSearchSelectContext';
 import { changeInputData, preventDefault, scrollToNotVisibleELem } from './utils';
 
@@ -63,7 +63,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   defaultHighlighted?: boolean;
   showCheckbox?: boolean;
   defaultValue?: string | string[];
-  idleHeight?: 'full' | 'fixed';
+  idleHeight?: IdleSelectHeight;
   highlightFormat?: HighlightFormat;
   portalTargetRef?: React.RefObject<HTMLElement>;
   iconsRight?: React.ReactNode;
@@ -221,9 +221,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const renderMultipleSelectValue = useCallback(
       () => (
-        <Chips options={selectedOptions} disabled={disabled} onChipRemove={mobile ? undefined : handleOptionSelect} />
+        <Chips
+          options={selectedOptions}
+          idleHeight={idleHeight}
+          disabled={disabled}
+          onChipRemove={mobile ? undefined : handleOptionSelect}
+        />
       ),
-      [selectedOptions, disabled, mobile, handleOptionSelect],
+      [selectedOptions, idleHeight, disabled, mobile, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !localValue?.length : !localValue;

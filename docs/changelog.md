@@ -105,3 +105,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Toasts Animation
 - Custom Toast positions
 - Tooltip classname
+
+## [v0.2.0] - 13.12.2023
+
+### Added
+
+- Theming for Chips, Popup, DropdownOption
+- Select mobile version

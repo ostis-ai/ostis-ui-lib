@@ -180,7 +180,7 @@ export const IconClose = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #ececec;
+    background-color: ${({ theme }) => theme.select.colors.closeButtonBackgroundHover};
   }
 `;
 
@@ -194,12 +194,12 @@ export const IconPanel = styled.div`
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
+  padding: ${({ theme }) => theme.select.size.dropdownPadding};
 
-  max-height: 256px;
+  max-height: ${({ theme }) => theme.select.size.dropdownMaxHeight};
   overflow: auto;
 
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.select.dropdownBoxShadow};
 
   option {
     display: none;

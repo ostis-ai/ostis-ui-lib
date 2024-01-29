@@ -28,6 +28,7 @@ export const defaultLightTheme = {
   },
   select: {
     borderRadius: '10px',
+    dropdownBoxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
     colors: {
       placeholder: '#737373',
       text: '#414141',
@@ -37,10 +38,13 @@ export const defaultLightTheme = {
       borderDisabled: '#eeeeee',
       borderError: '#EC7575',
       borderErrorHover: '#EC7575',
+      closeButtonBackgroundHover: '#ececec',
     },
     size: {
       borderWidth: '1px',
       initialHeight: '42px',
+      dropdownMaxHeight: '256px',
+      dropdownPadding: '8px 0',
     },
     font: {
       fontFamily: 'Roboto',
@@ -134,16 +138,33 @@ export const defaultLightTheme = {
   popup: {
     contentBorderRadius: '15px',
     colors: {
-      // overlayBackground: '#00000021',
-      // contentBackground: '#ffffff',
       contentBackground: 'transparent',
       overlayBackground: 'rgba(250, 250, 250, 0.65)',
     },
     size: {
-      // contentWidth: 'calc(100vw - 32px)',
-      // contentHeight: 'calc(100vh - 110px)',
       contentWidth: 'unset',
       contentHeight: 'unset',
+    },
+  },
+  chip: {
+    font: {
+      fontFamily: 'Roboto',
+      fontSize: '20px',
+      lineHeight: '24px',
+      fontWeight: '400',
+    },
+  },
+  dropdownOption: {
+    colors: {
+      text: '#454545',
+    },
+    size: {
+      padding: '8px 16px',
+    },
+    font: {
+      fontFamily: 'Roboto',
+      fontSize: '20px',
+      lineHeight: '24px',
     },
   },
 };

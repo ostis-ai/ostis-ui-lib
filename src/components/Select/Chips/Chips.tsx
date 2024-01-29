@@ -1,7 +1,7 @@
 import { MouseEvent, useCallback, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import type { IConstantOption } from '../types';
+import type { IConstantOption, IdleSelectHeight } from '../types';
 import { preventDefault } from '../utils';
 
 import { ChipBox, CounterChip, OptionChipWrapper } from './styled';
@@ -9,6 +9,7 @@ import { ChipBox, CounterChip, OptionChipWrapper } from './styled';
 interface IMultipleChipsProps {
   options: IConstantOption[];
   disabled?: boolean;
+  idleHeight: IdleSelectHeight;
   onChipRemove?: (value: string) => void;
 }
 
@@ -53,7 +54,7 @@ const OptionChip = ({
   );
 };
 
-export const Chips = ({ options, disabled, onChipRemove }: IMultipleChipsProps) => {
+export const Chips = ({ options, disabled, idleHeight, onChipRemove }: IMultipleChipsProps) => {
   /**
    * Firstly chips are rendered with zero opacity. Then every chip return if it is shown
    * We start showing them when there is no invisible chips or first inisible is found
@@ -90,10 +91,14 @@ export const Chips = ({ options, disabled, onChipRemove }: IMultipleChipsProps) 
   const isAllChipsInitiallyVisible = isInnitialized && !invisibleELems.length;
 
   const getIsChipVisible = (value: string) => {
+    if (idleHeight === 'full') return true;
+
     return isAllChipsInitiallyVisible || (isFirstInvisbleOptionFound && !invisibleELems.includes(value));
   };
 
   const getIsCounterVissible = (nextValue?: string) => {
+    if (idleHeight === 'full') return false;
+
     // If there is no nextValue, current chip is last and there'i no need in counter
     if (!nextValue) return false;
 

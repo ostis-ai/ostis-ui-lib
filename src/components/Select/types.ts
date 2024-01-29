@@ -58,3 +58,5 @@ export interface IOptionGroupContext {
 }
 
 export type SelectDimention = 's' | 'm';
+
+export type IdleSelectHeight = 'full' | 'fixed';

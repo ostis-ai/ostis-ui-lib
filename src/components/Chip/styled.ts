@@ -26,10 +26,10 @@ export const Wrapper = styled.div<{ $disabled?: boolean; $size: TChipSize; $hasC
 `;
 
 export const Text = styled.div<{ size: TChipSize }>`
-  font-family: 'Roboto';
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  font-family: ${({ theme }) => theme.chip.font.fontFamily};
+  font-weight: ${({ theme }) => theme.chip.font.fontWeight};
+  font-size: ${({ theme }) => theme.chip.font.fontSize};
+  line-height: ${({ theme }) => theme.chip.font.lineHeight};
   max-width: fit-content;
   text-overflow: ellipsis;
   overflow: hidden;
