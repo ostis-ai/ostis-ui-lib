@@ -11,6 +11,9 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   hidePasswordIcon?: ReactNode;
   status?: InputStatus;
   inputClassName?: string;
+  /**
+   * @deprecated unused
+   */
   isSearch?: boolean;
 }
 
@@ -23,7 +26,6 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
       status,
       className,
       inputClassName,
-      isSearch = false,
       disabled,
       style,
       showPasswordIcon = <Styled.ShowPassword />,
@@ -67,7 +69,6 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
 
     return (
       <Styled.Wrapper
-        $isSearch={isSearch}
         $isFocused={isFocused}
         $isError={status === 'error'}
         $isDisabled={disabled}

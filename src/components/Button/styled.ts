@@ -59,7 +59,7 @@ export const Button = styled.button<ButtonProps>`
 
   /* Colors */
   ${(props) =>
-    props.color === 'primary' &&
+    props.$color === 'primary' &&
     css`
       background: ${({ theme }) => theme.button.colors.primary.backgroundInitial};
       color: ${({ theme }) => theme.button.colors.primary.text};
@@ -78,7 +78,7 @@ export const Button = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.color === 'secondary' &&
+    props.$color === 'secondary' &&
     css`
       background: ${({ theme }) => theme.button.colors.secondary.backgroundInitial};
       color: ${({ theme }) => theme.button.colors.secondary.text};

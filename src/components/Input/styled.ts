@@ -6,7 +6,6 @@ import AuthPasswordCrossed from './assets/eyeCrossed.svg';
 type WrapperProps = {
   $isFocused: boolean;
   $isDisabled?: boolean;
-  $isSearch: boolean;
   $isError: boolean;
 };
 
