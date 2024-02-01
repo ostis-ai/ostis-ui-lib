@@ -119,3 +119,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - IconButton component
 - Possibility to change password icon in password input
 - Easy popup styling via className
+
+## [v0.2.1] - 01.02.2024
+
+### Fixed
+
+- Button colors
