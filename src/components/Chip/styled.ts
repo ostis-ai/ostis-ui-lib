@@ -29,9 +29,9 @@ export const Wrapper = styled.div<{ $disabled?: boolean; $size: TChipSize; $hasC
 
 export const Text = styled.div<{ size: TChipSize }>`
   font-family: ${({ theme }) => theme.chip.font.fontFamily};
-  font-weight: ${({ theme }) => theme.chip.size.fontWeight};
-  font-size: ${({ theme }) => theme.chip.size.fontWeight};
-  line-height: ${({ theme }) => theme.chip.size.lineHeight};
+  font-weight: ${({ theme }) => theme.chip.font.fontWeight};
+  font-size: ${({ theme }) => theme.chip.font.fontSize};
+  line-height: ${({ theme }) => theme.chip.font.lineHeight};
   max-width: ${({ theme }) => theme.chip.size.maxWidthText};
   text-overflow: ellipsis;
   overflow: hidden;
