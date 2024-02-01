@@ -28,6 +28,7 @@ export const defaultLightTheme = {
   },
   select: {
     borderRadius: '10px',
+    dropdownBoxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
     colors: {
       placeholder: '#737373',
       text: '#414141',
@@ -37,10 +38,13 @@ export const defaultLightTheme = {
       borderDisabled: '#eeeeee',
       borderError: '#EC7575',
       borderErrorHover: '#EC7575',
+      closeButtonBackgroundHover: '#ececec',
     },
     size: {
       borderWidth: '1px',
       initialHeight: '42px',
+      dropdownMaxHeight: '256px',
+      dropdownPadding: '8px 0',
     },
     font: {
       fontFamily: 'Roboto',
@@ -73,6 +77,38 @@ export const defaultLightTheme = {
     },
     size: {
       padding: '8px 16px',
+      borderWidth: '2px',
+    },
+    font: {
+      fontSize: '20px',
+      lineHeight: '24px',
+      inputWeight: '400',
+      placeholderWeight: '300',
+      fontFamily: 'Roboto',
+    },
+  },
+  textarea: {
+    borderRadius: '10px',
+    colors: {
+      disabled: {
+        background: '#fafafa',
+        border: '#eeeeee',
+        text: '#737373',
+      },
+      initial: {
+        background: '#ffffff',
+        border: '#ebebeb',
+        text: '#323232',
+      },
+      borderHover: '#7ec0ee',
+      borderFocused: '#7ec0ee',
+      borderFocusedHover: '#7ec0ee',
+      borderError: '#f14747',
+      borderErrorHover: '#f14747',
+      placeholder: '#737373',
+    },
+    size: {
+      padding: '6px 14px',
       borderWidth: '2px',
     },
     font: {
@@ -128,6 +164,96 @@ export const defaultLightTheme = {
       small: {
         fontSize: '18px',
         lineHeight: '20px',
+      },
+    },
+  },
+  popup: {
+    colors: {
+      overlayBackground: 'rgba(250, 250, 250, 0.65)',
+    },
+  },
+  dropdownOption: {
+    colors: {
+      text: '#454545',
+    },
+    size: {
+      padding: '8px 16px',
+    },
+    font: {
+      fontFamily: 'Roboto',
+      fontSize: '20px',
+      lineHeight: '24px',
+    },
+  },
+  chip: {
+    font: {
+      fontFamily: 'Roboto',
+      fontWeight: 400,
+      fontSize: '20px',
+      lineHeight: '24px',
+    },
+    size: {
+      maxWidth: '190px',
+      width: 'fit-content',
+      gap: '4px',
+      maxWidthText: 'fit-content',
+      padding: '3px 7px',
+      paddingWithIcon: '3px 3px 3px 7px',
+      border: '1px',
+      borderRadius: '8px',
+      borderRadiusIcon: '4px',
+      disabled: {
+        border: '1px',
+      },
+    },
+    colors: {
+      backgroundColor: '#ffffff',
+      color: '#454545',
+      border: '#5d8fef',
+      disabled: {
+        color: '#a6a6a6',
+        border: '#ffffff',
+        backgroundColorIcon: '#ececec',
+        fillIcon: '#ececec',
+      },
+      hover: {
+        backgroundColorIcon: '#ececec',
+        fillIcon: '#959595',
+      },
+    },
+  },
+  iconButton: {
+    borderRadius: '10px',
+    colors: {
+      background: '#ffffff',
+      backgroundHover: '#ebebeb',
+      borderActive: '#dadada',
+      backgroundDisabled: '#ebebeb',
+    },
+    size: {
+      xlarge: {
+        width: '48px',
+        height: '48px',
+        borderRadius: '10px',
+        padding: '12px',
+      },
+      large: {
+        width: '42px',
+        height: '42px',
+        borderRadius: '10px',
+        padding: '9px',
+      },
+      medium: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '8px',
+        padding: '6px',
+      },
+      small: {
+        width: '24px',
+        height: '24px',
+        borderRadius: '4px',
+        padding: 'unset',
       },
     },
   },

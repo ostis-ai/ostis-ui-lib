@@ -1,4 +1,5 @@
 import { Dropdown } from '@components/Dropdown';
+import { Popup } from '@components/Popup';
 import { Theme } from '@constants/theme';
 import { InputStatus } from '@model/input';
 import styled, { css } from 'styled-components';
@@ -128,7 +129,7 @@ export const ValueWrapper = styled.div<{ $fixHeight: boolean; $multiple: boolean
     `}
 `;
 
-export const Input = styled.input<{ $multiple: boolean }>`
+export const SelectInput = styled.input<{ $multiple: boolean }>`
   box-sizing: border-box;
 
   flex: 1 1 auto;
@@ -179,7 +180,7 @@ export const IconClose = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: #ececec;
+    background-color: ${({ theme }) => theme.select.colors.closeButtonBackgroundHover};
   }
 `;
 
@@ -193,12 +194,12 @@ export const IconPanel = styled.div`
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  padding: 8px 0;
+  padding: ${({ theme }) => theme.select.size.dropdownPadding};
 
-  max-height: 256px;
+  max-height: ${({ theme }) => theme.select.size.dropdownMaxHeight};
   overflow: auto;
 
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.select.dropdownBoxShadow};
 
   option {
     display: none;
@@ -210,4 +211,43 @@ export const StringValueWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const PopupInputWrapper = styled.div`
+  padding: 0 8px;
+  margin-bottom: 16px;
+`;
+
+export const PopupValuesWrapper = styled.div`
+  overflow: auto;
+`;
+
+export const PopupChipsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 2px 8px;
+  margin-bottom: 16px;
+  max-height: 155px;
+  overflow: auto;
+  flex-shrink: 0;
+`;
+
+export const StyledPopup = styled(Popup)`
+  display: flex;
+  flex-direction: column;
+
+  background-color: #ffffff;
+  width: calc(100% - 32px);
+  height: calc(100% - 110px);
+  border-radius: 15px;
+
+  padding-bottom: 8px;
+  box-sizing: border-box;
+`;
+
+export const PopupHeader = styled.div`
+  padding: 16px 16px;
+  display: flex;
+  justify-content: flex-end;
 `;

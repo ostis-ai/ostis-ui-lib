@@ -105,3 +105,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Toasts Animation
 - Custom Toast positions
 - Tooltip classname
+
+## [v0.2.0] - 01.02.2024
+
+### Fixed
+
+- Console errors
+
+### Added
+
+- Theming for Chips, Popup, DropdownOption
+- Select mobile version
+- IconButton component
+- Possibility to change password icon in password input
+- Easy popup styling via className

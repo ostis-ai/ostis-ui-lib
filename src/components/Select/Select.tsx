@@ -1,26 +1,36 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Close from '@assets/close.svg';
 import { DropdownOption } from '@components/DropdownOption';
+import { IconButton } from '@components/IconButton';
+import { Input } from '@components/Input';
 import { Spinner } from '@components/Spinner';
+import { useBooleanState } from '@hooks/useBooleanState';
 import { useClickOutside } from '@hooks/useClickOutside';
 import { InputStatus } from '@model/input';
 import { refSetter } from '@utils/refSetter';
 
 import { Chips } from './Chips';
+import { StyledChip } from './Chips/styled';
 import { defaultEmptyMessage, defaultLoadingText } from './constants';
 import {
   Hidden,
   IconClose,
   IconPanel,
   IconsLeft,
-  Input,
   NativeSelect,
+  PopupChipsWrapper,
+  PopupHeader,
+  PopupInputWrapper,
+  PopupValuesWrapper,
+  SelectInput,
   SelectWrapper,
   StringValueWrapper,
   StyledDropdown,
   StyledOpenStatusButton,
+  StyledPopup,
   ValueWrapper,
 } from './styled';
-import type { HighlightFormat, IConstantOption, IDropdownOption } from './types';
+import type { HighlightFormat, IConstantOption, IdleSelectHeight, IDropdownOption } from './types';
 import { ConstantSearchSelectProvider, DropDownSearchSelectProvider } from './useSearchSelectContext';
 import { changeInputData, preventDefault, scrollToNotVisibleELem } from './utils';
 
@@ -44,6 +54,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   renderedEmptyValue?: React.ReactNode;
   value?: string | string[];
   isLoading?: boolean;
+  mobile?: boolean;
   mode?: 'select' | 'search';
   // dimention?: SelectDimention;
   // appearance?: 'green' | 'brown';
@@ -55,7 +66,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   defaultHighlighted?: boolean;
   showCheckbox?: boolean;
   defaultValue?: string | string[];
-  idleHeight?: 'full' | 'fixed';
+  idleHeight?: IdleSelectHeight;
   highlightFormat?: HighlightFormat;
   portalTargetRef?: React.RefObject<HTMLElement>;
   iconsRight?: React.ReactNode;
@@ -71,6 +82,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       value,
+      mobile = false,
       isLoading,
       className,
       style,
@@ -109,7 +121,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const [constantOptions, setConstantOptions] = useState<IConstantOption[]>([]);
     const [dropDownOptions, setDropDownOptions] = useState<IDropdownOption[]>([]);
 
-    const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(false);
+    const [isSearchPanelOpen, openSearchPanel, closeSearchPanel, toggleSearchPanel] = useBooleanState(false);
     const [isFocused, setIsFocused] = useState(false);
     const [isDeleteButton, setIsDeleteButton] = useState(false);
 
@@ -144,6 +156,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       );
     }, [isLoading, loadingMessage, children, dropDownOptions, emptyMessage, loadingAppearance]);
 
+    const popupInputRef = useRef<HTMLInputElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -181,11 +194,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     );
 
     const onCloseSelect = useCallback(() => {
-      setIsSearchPanelOpen(false);
+      closeSearchPanel();
       setHoverValue(Array.isArray(localValue) ? localValue[0] : localValue || '');
       if (inputRef.current) changeInputData(inputRef.current, { value: '' });
       setShouldRenderSelectValue(true);
-    }, [localValue]);
+    }, [closeSearchPanel, localValue]);
 
     const handleOptionSelect = useCallback(
       (optionValue: string) => {
@@ -208,11 +221,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [onCloseSelect, multiple],
     );
 
-    const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen;
+    const shouldFixMultiSelectHeight = idleHeight === 'fixed' && !isSearchPanelOpen && !mobile;
 
     const renderMultipleSelectValue = useCallback(
-      () => <Chips options={selectedOptions} disabled={disabled} onChipRemove={handleOptionSelect} />,
-      [selectedOptions, disabled, handleOptionSelect],
+      () => (
+        <Chips
+          options={selectedOptions}
+          idleHeight={idleHeight}
+          disabled={disabled}
+          onChipRemove={mobile ? undefined : handleOptionSelect}
+        />
+      ),
+      [selectedOptions, idleHeight, disabled, mobile, handleOptionSelect],
     );
 
     const isEmptyValue = multiple ? !localValue?.length : !localValue;
@@ -235,11 +255,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     ) : (
       visibleValue
     );
-
-    const handleSearchPanelToggle = () => {
-      setIsSearchPanelOpen((prev) => !prev);
-    };
-
+  
     const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
       evt.target.value = `${visibleValue}${evt.target.value}`;
@@ -276,13 +292,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onCloseSelect();
     };
 
-    const onClosedSelectEnter = () => setIsSearchPanelOpen(true);
-
     const onOpenedSelectEnter = () => chooseOptionOnEnter();
 
     const onEnter = () => {
       if (isSearchPanelOpen) return onOpenedSelectEnter();
-      onClosedSelectEnter();
+      openSearchPanel();
     };
 
     const scrollToOption = (optionValue: string) => {
@@ -345,7 +359,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const onWrapperClick = () => {
-      setIsSearchPanelOpen(true);
+      openSearchPanel();
     };
 
     const extendSelectValueToInputValue = () => {
@@ -386,7 +400,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
       if (!evt.currentTarget.contains(evt.relatedTarget)) {
         onBlurFromProps?.(evt);
-        onCloseSelect();
       }
     };
 
@@ -414,11 +427,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     useEffect(() => {
       if (isSearchPanelOpen) {
+        if (mobile) return popupInputRef.current?.focus();
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
       } else {
         modeIsSelect ? selectRef.current?.blur() : inputRef.current?.blur();
       }
-    }, [isSearchPanelOpen, modeIsSelect]);
+    }, [isSearchPanelOpen, mobile, modeIsSelect]);
 
     useEffect(() => {
       if (!selectIsUncontrolled) setLocalValue(value);
@@ -434,95 +448,122 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     useClickOutside([containerRef, dropDownRef], onCloseSelect);
 
-    return (
-      <SelectWrapper
-        className={className}
-        $disabled={disabled}
-        $focused={isFocused}
-        $multiple={multiple}
-        $status={status}
-        style={style}
-        ref={containerRef}
-        onKeyUp={handleKeyUp}
-        onKeyDown={onWrapperKeyDown}
-        onClick={onWrapperClick}
-        onBlur={onBlur}
-        onFocus={onFocus}
-      >
-        <Hidden>
-          <ConstantSearchSelectProvider
-            onConstantOptionMount={onConstantOptionMount}
-            onConstantOptionUnMount={onConstantOptionUnMount}
-            searchValue={searchValue}
-            multiple={multiple}
-          >
-            {children}
-          </ConstantSearchSelectProvider>
-        </Hidden>
-        <NativeSelect
-          ref={refSetter(ref, selectRef)}
-          value={localValue}
-          multiple={multiple}
-          disabled={disabled}
-          onKeyDown={onSelectKeyDown}
-          {...props}
-          onChange={onChange}
-        >
-          <option value="" />
-          {constantOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.value}
-            </option>
-          ))}
-        </NativeSelect>
-        {iconsLeft && <IconsLeft>{iconsLeft}</IconsLeft>}
-        <ValueWrapper $multiple={multiple} $fixHeight={shouldFixHeight} id="selectValueWrapper">
-          {shouldRenderSelectValue && wrappedVisibleValue}
-          {((placeholder && isEmpty) || !modeIsSelect) && (
-            <Input
-              tabIndex={-1}
-              $multiple={multiple}
-              ref={inputRef}
-              placeholder={isEmpty ? placeholder : undefined}
-              disabled={disabled}
-              readOnly={modeIsSelect}
-              value={searchValue}
-              onChange={onLocalInputChange}
-            />
-          )}
-        </ValueWrapper>
-        {isSearchPanelOpen && (
-          <StyledDropdown
-            id="selectDropdownContainer"
-            targetRef={portalTargetRef || containerRef}
-            onMouseDown={preventDefault}
-            ref={dropDownRef}
-            container={containerRefFromProps}
-          >
-            <DropDownSearchSelectProvider
-              onOptionClick={handleOptionSelect}
-              setHoverValue={setHoverValue}
-              onDropDownOptionMount={onDropDownOptionMount}
-              onDropDownOptionUnMount={onDropDownOptionUnMount}
-              highlightFormat={highlightFormat}
-              selectValue={localValue}
-              searchValue={searchValue}
-              hoverValue={hoverValue}
-              multiple={multiple}
-              defaultHighlighted={defaultHighlighted}
-              showCheckbox={showCheckbox}
-            >
-              {dropDownChildren}
-            </DropDownSearchSelectProvider>
-          </StyledDropdown>
-        )}
+    const dropdownProviderProps = {
+      onOptionClick: handleOptionSelect,
+      setHoverValue,
+      onDropDownOptionMount,
+      onDropDownOptionUnMount,
+      highlightFormat,
+      selectValue: localValue,
+      searchValue,
+      hoverValue,
+      multiple,
+      defaultHighlighted,
+      showCheckbox,
+      mobile,
+    };
 
-        <IconPanel onClick={stopPropagation} onMouseDown={preventDefault}>
-          {iconsRight && isDeleteButton && <IconClose onClick={handleClickCloseIcon}>{iconsRight}</IconClose>}
-          {isLoading && loadingAppearance === 'input' && <Spinner size={22} appearance="#5896C0" />}
-          <StyledOpenStatusButton $opened={isSearchPanelOpen} onClick={handleSearchPanelToggle} aria-hidden />
-        </IconPanel>
-      </SelectWrapper>
+    return (
+      <>
+        <SelectWrapper
+          className={className}
+          $disabled={disabled}
+          $focused={isFocused}
+          $multiple={multiple}
+          $status={status}
+          style={style}
+          ref={containerRef}
+          onKeyUp={handleKeyUp}
+          onKeyDown={onWrapperKeyDown}
+          onClick={onWrapperClick}
+          onBlur={onBlur}
+          onFocus={onFocus}
+        >
+          <Hidden>
+            <ConstantSearchSelectProvider
+              onConstantOptionMount={onConstantOptionMount}
+              onConstantOptionUnMount={onConstantOptionUnMount}
+              searchValue={searchValue}
+              multiple={multiple}
+            >
+              {children}
+            </ConstantSearchSelectProvider>
+          </Hidden>
+          <NativeSelect
+            ref={refSetter(ref, selectRef)}
+            value={localValue}
+            multiple={multiple}
+            disabled={disabled}
+            onKeyDown={onSelectKeyDown}
+            {...props}
+            onChange={onChange}
+          >
+            <option value="" />
+            {constantOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.value}
+              </option>
+            ))}
+          </NativeSelect>
+          {iconsLeft && <IconsLeft>{iconsLeft}</IconsLeft>}
+          <ValueWrapper $multiple={multiple} $fixHeight={shouldFixHeight} id="selectValueWrapper">
+            {shouldRenderSelectValue && wrappedVisibleValue}
+            {((placeholder && isEmpty) || !modeIsSelect) && (
+              <SelectInput
+                tabIndex={-1}
+                $multiple={multiple}
+                ref={inputRef}
+                placeholder={isEmpty ? placeholder : undefined}
+                disabled={disabled}
+                readOnly={modeIsSelect}
+                value={searchValue}
+                onChange={onLocalInputChange}
+              />
+            )}
+          </ValueWrapper>
+          {isSearchPanelOpen && !mobile && (
+            <StyledDropdown
+              id="selectDropdownContainer"
+              targetRef={portalTargetRef || containerRef}
+              onMouseDown={preventDefault}
+              ref={dropDownRef}
+              container={containerRefFromProps}
+            >
+              <DropDownSearchSelectProvider {...dropdownProviderProps}>{dropDownChildren}</DropDownSearchSelectProvider>
+            </StyledDropdown>
+          )}
+
+          <IconPanel onClick={stopPropagation} onMouseDown={preventDefault}>
+            {iconsRight && isDeleteButton && <IconClose onClick={handleClickCloseIcon}>{iconsRight}</IconClose>}
+            {isLoading && loadingAppearance === 'input' && <Spinner size={22} appearance="#5896C0" />}
+            <StyledOpenStatusButton $opened={isSearchPanelOpen} onClick={toggleSearchPanel} aria-hidden />
+          </IconPanel>
+        </SelectWrapper>
+        {isSearchPanelOpen && mobile && (
+          <StyledPopup onClose={onCloseSelect} >
+            <PopupHeader>
+              <IconButton onClick={onCloseSelect}>
+                <Close />
+              </IconButton>
+            </PopupHeader>
+            <DropDownSearchSelectProvider {...dropdownProviderProps}>
+              {!!selectedOptions.length && (
+                <PopupChipsWrapper>
+                  {selectedOptions.map((option) => (
+                    <StyledChip key={option.value} onClose={() => handleOptionSelect(option.value)}>
+                      {option.children}
+                    </StyledChip>
+                  ))}
+                </PopupChipsWrapper>
+              )}
+              <PopupInputWrapper>
+                <Input placeholder={placeholder} value={searchValue} onChange={onLocalInputChange} ref={popupInputRef} />
+              </PopupInputWrapper>
+              <PopupValuesWrapper>{dropDownChildren}</PopupValuesWrapper>
+            </DropDownSearchSelectProvider>
+          </StyledPopup>
+        )}
+      </>
     );
   },
 );

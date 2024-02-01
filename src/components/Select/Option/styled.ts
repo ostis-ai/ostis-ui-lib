@@ -12,7 +12,13 @@ export const StyledDropdownOption = styled(DropdownOption)<{
   $disabled: boolean;
   $selected: boolean;
   $active: boolean;
+  $mobile: boolean;
 }>`
+  ${({ $mobile }) =>
+    $mobile &&
+    css`
+      box-shadow: inset 0 -1px 0 0 #f6f6f6;
+    `}
   ${({ $disabled }) =>
     $disabled &&
     css`

@@ -7,7 +7,7 @@ export const Overlay = styled.div`
   right: 0;
   bottom: 0;
 
-  background-color: rgba(250, 250, 250, 0.65);
+  background-color: ${({ theme }) => theme.popup.colors.overlayBackground};
 
   z-index: 3;
 `;
@@ -21,3 +21,4 @@ export const ModalWrap = styled.div`
 
   z-index: 3;
 `;
+

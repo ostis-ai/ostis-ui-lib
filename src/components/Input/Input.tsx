@@ -7,6 +7,8 @@ import * as Styled from './styled';
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
+  showPasswordIcon?: ReactNode;
+  hidePasswordIcon?: ReactNode;
   status?: InputStatus;
   inputClassName?: string;
   isSearch?: boolean;
@@ -14,7 +16,20 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, IInputProps>(
   (
-    { iconLeft, iconRight, type, status, className, inputClassName, isSearch = false, disabled, style, ...restProps },
+    {
+      iconLeft,
+      iconRight,
+      type,
+      status,
+      className,
+      inputClassName,
+      isSearch = false,
+      disabled,
+      style,
+      showPasswordIcon = <Styled.ShowPassword />,
+      hidePasswordIcon = <Styled.HidePassword />,
+      ...restProps
+    },
     ref,
   ) => {
     const [isFocused, setIsFocused] = useState(false);
@@ -52,10 +67,10 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
 
     return (
       <Styled.Wrapper
-        isSearch={isSearch}
-        isFocused={isFocused}
-        isError={status === 'error'}
-        isDisabled={disabled}
+        $isSearch={isSearch}
+        $isFocused={isFocused}
+        $isError={status === 'error'}
+        $isDisabled={disabled}
         className={className}
         style={style}
         onClick={onWrapperClick}
@@ -76,8 +91,16 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
         />
         {(iconRight || isPassword) && (
           <Styled.RightIcon>
-            {isPassword && isShowPassword && <Styled.ShowPassword onClick={onMakePasswordVisible} />}
-            {isPassword && !isShowPassword && <Styled.HidePassword onClick={onMakePasswordVisible} />}
+            {isPassword && isShowPassword && (
+              <Styled.PasswordIconWrapper onClick={onMakePasswordVisible}>
+                {showPasswordIcon}
+              </Styled.PasswordIconWrapper>
+            )}
+            {isPassword && !isShowPassword && (
+              <Styled.PasswordIconWrapper onClick={onMakePasswordVisible}>
+                {hidePasswordIcon}
+              </Styled.PasswordIconWrapper>
+            )}
             {iconRight}
           </Styled.RightIcon>
         )}

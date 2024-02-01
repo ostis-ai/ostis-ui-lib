@@ -10,50 +10,51 @@ export const StyledTextarea = styled.textarea<{
   max-height: 80px;
   min-height: 40px;
 
-  padding: 6px 14px;
+  padding: ${({ theme }) => theme.textarea.size.padding};
 
-  background: #ffffff;
-  border: 2px solid #ebebeb;
-  border-radius: 10px;
+  background-color: ${({ theme }) => theme.textarea.colors.initial.background};
 
-  font-size: 20px;
-  line-height: 24px;
+  border: ${({ theme }) => theme.textarea.size.borderWidth} solid ${({ theme }) => theme.textarea.colors.initial.border};
+  border-radius: ${({ theme }) => theme.textarea.borderRadius};
+
+  font-size: ${({ theme }) => theme.textarea.font.fontSize};
+  line-height: ${({ theme }) => theme.textarea.font.lineHeight};
 
   resize: none;
 
   overflow: hidden;
   outline: none;
 
-  color: #323232;
+  color: ${({ theme }) => theme.textarea.colors.initial.text};
 
   &::placeholder {
-    font-weight: 300;
-    color: #737373;
+    color: ${({ theme }) => theme.textarea.colors.placeholder};
+    font-weight: ${({ theme }) => theme.textarea.font.placeholderWeight};
   }
 
   &:hover,
   &:focus {
-    border-color: #7ec0ee;
+    border-color: ${({ theme }) => theme.textarea.colors.borderHover};
   }
 
   ${({ disabled }) =>
     disabled &&
     css`
-      background-color: #fafafa;
-      border-color: #eeeeee;
+      background-color: ${({ theme }) => theme.textarea.colors.disabled.background};
+      border-color: ${({ theme }) => theme.textarea.colors.disabled.border};
 
       &:hover {
-        border-color: #eeeeee;
+        border-color: ${({ theme }) => theme.textarea.colors.disabled.border};
       }
     `}
 
   ${({ status }) =>
     status === 'error' &&
     css`
-      border-color: #f14747;
+      border-color: ${({ theme }) => theme.textarea.colors.borderError};
 
       &:hover {
-        border-color: #f14747;
+        border-color: ${({ theme }) => theme.textarea.colors.borderErrorHover};
       }
     `}
 

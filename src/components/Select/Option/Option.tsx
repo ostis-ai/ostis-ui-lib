@@ -45,6 +45,7 @@ const DropDownOption = ({
     defaultHighlighted,
     showCheckbox,
     selectValue,
+    mobile,
     multiple,
     searchValue,
     hoverValue,
@@ -125,6 +126,7 @@ const DropDownOption = ({
       $disabled={optionIsDiabled}
       $selected={selectValue === value}
       $active={hoverValue === value}
+      $mobile={mobile}
       ref={ref}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseOnOption}
