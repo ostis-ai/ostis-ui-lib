@@ -188,14 +188,14 @@ export const defaultLightTheme = {
   chip: {
     font: {
       fontFamily: 'Roboto',
+      fontWeight: 400,
+      fontSize: '20px',
+      lineHeight: '24px',
     },
     size: {
       maxWidth: '190px',
       width: 'fit-content',
       gap: '4px',
-      fontWeight: 400,
-      fontSize: '20px',
-      lineHeight: '24px',
       maxWidthText: 'fit-content',
       padding: '3px 7px',
       paddingWithIcon: '3px 3px 3px 7px',
@@ -219,6 +219,41 @@ export const defaultLightTheme = {
       hover: {
         backgroundColorIcon: '#ececec',
         fillIcon: '#959595',
+      },
+    },
+  },
+  iconButton: {
+    borderRadius: '10px',
+    colors: {
+      background: '#ffffff',
+      backgroundHover: '#ebebeb',
+      borderActive: '#dadada',
+      backgroundDisabled: '#ebebeb',
+    },
+    size: {
+      xlarge: {
+        width: '48px',
+        height: '48px',
+        borderRadius: '10px',
+        padding: '12px',
+      },
+      large: {
+        width: '42px',
+        height: '42px',
+        borderRadius: '10px',
+        padding: '9px',
+      },
+      medium: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '8px',
+        padding: '6px',
+      },
+      small: {
+        width: '24px',
+        height: '24px',
+        borderRadius: '4px',
+        padding: 'unset',
       },
     },
   },
