@@ -1,5 +1,7 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Close from '@assets/close.svg';
 import { DropdownOption } from '@components/DropdownOption';
+import { IconButton } from '@components/IconButton';
 import { Input } from '@components/Input';
 import { Spinner } from '@components/Spinner';
 import { useBooleanState } from '@hooks/useBooleanState';
@@ -17,6 +19,7 @@ import {
   IconsLeft,
   NativeSelect,
   PopupChipsWrapper,
+  PopupHeader,
   PopupInputWrapper,
   PopupValuesWrapper,
   SelectInput,
@@ -153,6 +156,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       );
     }, [isLoading, loadingMessage, children, dropDownOptions, emptyMessage, loadingAppearance]);
 
+    const popupInputRef = useRef<HTMLInputElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -251,7 +255,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     ) : (
       visibleValue
     );
-
+  
     const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
       evt.target.value = `${visibleValue}${evt.target.value}`;
@@ -423,11 +427,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     useEffect(() => {
       if (isSearchPanelOpen) {
+        if (mobile) return popupInputRef.current?.focus();
         modeIsSelect ? selectRef.current?.focus() : inputRef.current?.focus();
       } else {
         modeIsSelect ? selectRef.current?.blur() : inputRef.current?.blur();
       }
-    }, [isSearchPanelOpen, modeIsSelect]);
+    }, [isSearchPanelOpen, mobile, modeIsSelect]);
 
     useEffect(() => {
       if (!selectIsUncontrolled) setLocalValue(value);
@@ -535,7 +540,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </IconPanel>
         </SelectWrapper>
         {isSearchPanelOpen && mobile && (
-          <StyledPopup onClose={onCloseSelect} withCloseIcon>
+          <StyledPopup onClose={onCloseSelect} >
+            <PopupHeader>
+              <IconButton onClick={onCloseSelect}>
+                <Close />
+              </IconButton>
+            </PopupHeader>
             <DropDownSearchSelectProvider {...dropdownProviderProps}>
               {!!selectedOptions.length && (
                 <PopupChipsWrapper>
@@ -547,7 +557,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 </PopupChipsWrapper>
               )}
               <PopupInputWrapper>
-                <Input placeholder={placeholder} value={searchValue} onChange={onLocalInputChange} />
+                <Input placeholder={placeholder} value={searchValue} onChange={onLocalInputChange} ref={popupInputRef} />
               </PopupInputWrapper>
               <PopupValuesWrapper>{dropDownChildren}</PopupValuesWrapper>
             </DropDownSearchSelectProvider>

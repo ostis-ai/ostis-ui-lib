@@ -234,6 +234,20 @@ export const PopupChipsWrapper = styled.div`
 `;
 
 export const StyledPopup = styled(Popup)`
+  display: flex;
+  flex-direction: column;
+
+  background-color: #ffffff;
+  width: calc(100% - 32px);
+  height: calc(100% - 110px);
+  border-radius: 15px;
+
   padding-bottom: 8px;
   box-sizing: border-box;
+`;
+
+export const PopupHeader = styled.div`
+  padding: 16px 16px;
+  display: flex;
+  justify-content: flex-end;
 `;

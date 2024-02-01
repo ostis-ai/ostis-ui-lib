@@ -1,24 +1,16 @@
-import { PropsWithChildren, ReactNode, useCallback, useEffect } from 'react';
+import { PropsWithChildren, useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { IconButton } from '@components/IconButton';
 
-import Close from './close.svg';
-import { Header, ModalWrap, Overlay } from './styled';
-
-const body = document.body;
+import { ModalWrap, Overlay } from './styled';
 
 export interface IPopupProps {
   onClose: () => void;
-  withCloseIcon?: boolean;
-  closeIcon?: ReactNode;
   className?: string;
 }
 
 export const Popup = ({
   children,
   className,
-  closeIcon,
-  withCloseIcon = false,
   onClose,
 }: PropsWithChildren<IPopupProps>) => {
   const closeByEscape = useCallback(
@@ -39,18 +31,9 @@ export const Popup = ({
     <>
       <Overlay onClick={onClose} />
       <ModalWrap className={className}>
-        {withCloseIcon && (
-          <Header>
-            {closeIcon || (
-              <IconButton onClick={onClose}>
-                <Close />
-              </IconButton>
-            )}
-          </Header>
-        )}
         {children}
       </ModalWrap>
     </>,
-    body,
+    document.body,
   );
 };

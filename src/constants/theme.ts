@@ -136,14 +136,9 @@ export const defaultLightTheme = {
     },
   },
   popup: {
-    contentBorderRadius: '15px',
     colors: {
-      contentBackground: 'transparent',
       overlayBackground: 'rgba(250, 250, 250, 0.65)',
-    },
-    size: {
-      contentWidth: 'unset',
-      contentHeight: 'unset',
+      // overlayBackground: '#00000021',
     },
   },
   chip: {
