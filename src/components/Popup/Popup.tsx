@@ -8,11 +8,7 @@ export interface IPopupProps {
   className?: string;
 }
 
-export const Popup = ({
-  children,
-  className,
-  onClose,
-}: PropsWithChildren<IPopupProps>) => {
+export const Popup = ({ children, className, onClose }: PropsWithChildren<IPopupProps>) => {
   const closeByEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -24,15 +20,15 @@ export const Popup = ({
 
   useEffect(() => {
     window.addEventListener('keydown', closeByEscape);
-    return window.removeEventListener('keydown', closeByEscape);
+    return () => {
+      window.removeEventListener('keydown', closeByEscape);
+    };
   }, [onClose, closeByEscape]);
 
   return ReactDOM.createPortal(
     <>
       <Overlay onClick={onClose} />
-      <ModalWrap className={className}>
-        {children}
-      </ModalWrap>
+      <ModalWrap className={className}>{children}</ModalWrap>
     </>,
     document.body,
   );

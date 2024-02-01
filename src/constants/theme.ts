@@ -138,15 +138,6 @@ export const defaultLightTheme = {
   popup: {
     colors: {
       overlayBackground: 'rgba(250, 250, 250, 0.65)',
-      // overlayBackground: '#00000021',
-    },
-  },
-  chip: {
-    font: {
-      fontFamily: 'Roboto',
-      fontSize: '20px',
-      lineHeight: '24px',
-      fontWeight: '400',
     },
   },
   dropdownOption: {
