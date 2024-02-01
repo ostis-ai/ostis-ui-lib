@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom';
 
 import { ModalWrap, Overlay } from './styled';
 
-const body = document.body;
-
-interface IProps {
+export interface IPopupProps {
   onClose: () => void;
+  className?: string;
 }
 
-export const Popup = ({ children, onClose }: PropsWithChildren<IProps>) => {
+export const Popup = ({ children, className, onClose }: PropsWithChildren<IPopupProps>) => {
   const closeByEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -20,15 +19,17 @@ export const Popup = ({ children, onClose }: PropsWithChildren<IProps>) => {
   );
 
   useEffect(() => {
-    window.addEventListener('keydown', (e) => closeByEscape(e));
-    return window.removeEventListener('keydown', (e) => closeByEscape(e));
+    window.addEventListener('keydown', closeByEscape);
+    return () => {
+      window.removeEventListener('keydown', closeByEscape);
+    };
   }, [onClose, closeByEscape]);
 
   return ReactDOM.createPortal(
     <>
-      <Overlay onClick={() => onClose()} />
-      <ModalWrap>{children}</ModalWrap>
+      <Overlay onClick={onClose} />
+      <ModalWrap className={className}>{children}</ModalWrap>
     </>,
-    body,
+    document.body,
   );
 };

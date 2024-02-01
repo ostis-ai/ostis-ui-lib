@@ -36,6 +36,7 @@ const DropDownSearchSelectContext = createContext<IDropDownSearchSelectContext>(
   multiple: false,
   defaultHighlighted: true,
   showCheckbox: true,
+  mobile: false,
 });
 
 export const useDropDownSearchSelectContext = () => useContext(DropDownSearchSelectContext);

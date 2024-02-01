@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
 type ButtonProps = {
-  variant: 'contained' | 'outlined';
-  color: 'primary' | 'secondary';
-  size: 'lg' | 'md' | 'sm';
+  $variant: 'contained' | 'outlined';
+  $color: 'primary' | 'secondary';
+  $size: 'lg' | 'md' | 'sm';
 };
 
 export const Button = styled.button<ButtonProps>`
@@ -27,14 +27,14 @@ export const Button = styled.button<ButtonProps>`
 
   /* Variants */
   ${(props) =>
-    props.variant === 'contained' &&
+    props.$variant === 'contained' &&
     css`
       border: none;
     `}
 
   /* Sizes */
   ${(props) =>
-    props.size === 'lg' &&
+    props.$size === 'lg' &&
     css`
       padding: ${({ theme }) => theme.button.size.large.padding};
       font-size: ${({ theme }) => theme.button.font.large.fontSize};
@@ -42,7 +42,7 @@ export const Button = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.size === 'md' &&
+    props.$size === 'md' &&
     css`
       padding: ${({ theme }) => theme.button.size.medium.padding};
       font-size: ${({ theme }) => theme.button.font.medium.fontSize};
@@ -50,7 +50,7 @@ export const Button = styled.button<ButtonProps>`
     `}
 
   ${(props) =>
-    props.size === 'sm' &&
+    props.$size === 'sm' &&
     css`
       padding: ${({ theme }) => theme.button.size.small.padding};
       font-size: ${({ theme }) => theme.button.font.small.fontSize};

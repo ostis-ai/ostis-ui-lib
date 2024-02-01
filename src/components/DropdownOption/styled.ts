@@ -5,16 +5,16 @@ export const Option = styled.div`
   flex: 0 0 auto;
   align-items: center;
 
-  font-family: 'Roboto';
-  font-size: 20px;
-  line-height: 24px;
-  color: #454545;
+  font-family: ${({ theme }) => theme.dropdownOption.font.fontFamily};
+  font-size: ${({ theme }) => theme.dropdownOption.font.fontSize};
+  line-height: ${({ theme }) => theme.dropdownOption.font.lineHeight};
+  color: ${({ theme }) => theme.dropdownOption.colors.text};
 
   word-break: break-word;
 
-  padding: 8px 16px;
+  padding: ${({ theme }) => theme.dropdownOption.size.padding};
 
   background-color: transparent;
-  
+
   cursor: pointer;
 `;

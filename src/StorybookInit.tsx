@@ -12,6 +12,7 @@ import {
   AsyncMultipleSelectStory,
   AsyncSingleSelectStory,
   CustomChipsStory,
+  MobileMultipleSelectStory,
   MultiSearchSelectStory,
   SearchSelectStory,
   SelectPlaygroundStory,
@@ -46,7 +47,7 @@ export const StorybookInit = () => {
           <Global />
           <Storybook>
             <StoryHeader header="Select">
-              <StoryItem name="Select Playground">
+              <StoryItem name="Select playground">
                 <SelectPlaygroundStory />
               </StoryItem>
               <StoryItem name="Simple select">
@@ -70,12 +71,15 @@ export const StorybookInit = () => {
               <StoryItem name="Async single select">
                 <AsyncSingleSelectStory />
               </StoryItem>
-              <StoryItem name="Async miltiple select">
+              <StoryItem name="Async multiple select">
                 <AsyncMultipleSelectStory />
+              </StoryItem>
+              <StoryItem name="Mobile multiple select">
+                <MobileMultipleSelectStory />
               </StoryItem>
             </StoryHeader>
             <StoryHeader header="Toast">
-              <StoryItem name="Toast Playground">
+              <StoryItem name="Toast playground">
                 <ToastProvider>
                   <ToastPlaygroundStory />
                 </ToastProvider>

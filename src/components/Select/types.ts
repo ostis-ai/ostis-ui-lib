@@ -8,7 +8,7 @@ export interface IOnCloseProps {
 }
 
 export type RenderOptionValueProps = {
-  onClose: (e: React.MouseEvent) => void;
+  onClose?: (e: React.MouseEvent) => void;
 };
 
 export type RenderOptionValue = (props: RenderOptionValueProps) => React.ReactNode;
@@ -45,6 +45,7 @@ export interface IDropDownSearchSelectContext {
   multiple: boolean;
   defaultHighlighted: boolean;
   showCheckbox: boolean;
+  mobile: boolean;
 }
 
 export interface IOptionContext {
@@ -57,3 +58,5 @@ export interface IOptionGroupContext {
 }
 
 export type SelectDimention = 's' | 'm';
+
+export type IdleSelectHeight = 'full' | 'fixed';

@@ -4,10 +4,10 @@ import AuthPassword from './assets/authorization-password.svg';
 import AuthPasswordCrossed from './assets/eyeCrossed.svg';
 
 type WrapperProps = {
-  isFocused: boolean;
-  isDisabled?: boolean;
-  isSearch: boolean;
-  isError: boolean;
+  $isFocused: boolean;
+  $isDisabled?: boolean;
+  $isSearch: boolean;
+  $isError: boolean;
 };
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -37,7 +37,7 @@ export const Wrapper = styled.div<WrapperProps>`
   }
 
   ${(props) =>
-    props.isFocused &&
+    props.$isFocused &&
     css`
       border-color: ${({ theme }) => theme.input.colors.borderFocused};
 
@@ -47,7 +47,7 @@ export const Wrapper = styled.div<WrapperProps>`
     `}
 
   ${(props) =>
-    props.isError &&
+    props.$isError &&
     css`
       border-color: ${({ theme }) => theme.input.colors.borderError};
 
@@ -57,7 +57,7 @@ export const Wrapper = styled.div<WrapperProps>`
     `}
 
 	${(props) =>
-    props.isDisabled &&
+    props.$isDisabled &&
     css`
       background-color: ${({ theme }) => theme.input.colors.disabled.background};
       border-color: ${({ theme }) => theme.input.colors.disabled.border};
@@ -109,6 +109,10 @@ export const RightIcon = styled.div`
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
+`;
+
+export const PasswordIconWrapper = styled.div`
+  flex-shrink: 0;
 `;
 
 export const HidePassword = styled(AuthPassword)`
