@@ -69,6 +69,7 @@ export const Button = styled.button<ButtonProps>`
       }
       &:active {
         background: ${({ theme }) => theme.button.colors.primary.backgroundActive};
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
       &:disabled {
         background: ${({ theme }) => theme.button.colors.primary.backgroundDisabled};
@@ -87,6 +88,7 @@ export const Button = styled.button<ButtonProps>`
       }
       &:active {
         background: ${({ theme }) => theme.button.colors.secondary.backgroundActive};
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
       &:disabled {
         background: ${({ theme }) => theme.button.colors.secondary.backgroundDisabled};

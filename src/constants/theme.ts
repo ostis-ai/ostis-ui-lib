@@ -188,15 +188,15 @@ export const defaultLightTheme = {
   chip: {
     font: {
       fontFamily: 'Roboto',
-      fontWeight: 400,
-      fontSize: '20px',
-      lineHeight: '24px',
-      maxWidth: 'fit-content',
     },
     size: {
       maxWidth: '190px',
       width: 'fit-content',
       gap: '4px',
+      fontWeight: 400,
+      fontSize: '20px',
+      lineHeight: '24px',
+      maxWidthText: 'fit-content',
       padding: '3px 7px',
       paddingWithIcon: '3px 3px 3px 7px',
       border: '1px',
