@@ -6,31 +6,34 @@ export const Wrapper = styled.div<{ $disabled?: boolean; $size: TChipSize; $hasC
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  gap: 4px;
-  padding: ${({ $hasCloseIcon }) => ($hasCloseIcon ? '3px 3px 3px 7px' : '3px 7px')};
-  width: fit-content;
-  max-width: 190px;
-  border-radius: 8px;
-  border: 1px solid #5d8fef;
-  background-color: #ffffff;
+  gap: ${({ theme }) => theme.chip.size.gap};
+  padding: ${({ $hasCloseIcon }) =>
+    $hasCloseIcon ? ({ theme }) => theme.chip.size.paddingWithIcon : ({ theme }) => theme.chip.size.padding};
+  width: ${({ theme }) => theme.chip.size.width};
+  max-width: ${({ theme }) => theme.chip.size.maxWidth};
+  border-radius: ${({ theme }) => theme.chip.size.borderRadius};
+  border: ${({ theme }) => theme.chip.size.border} solid ${({ theme }) => theme.chip.colors.border};
+  background-color: ${({ theme }) => theme.chip.colors.backgroundColor};
 
-  color: #454545;
+  color: ${({ theme }) => theme.chip.colors.color};
 
   ${({ $disabled }) =>
     $disabled &&
     css`
-      color: #a6a6a6;
-      border: 1px solid #ffffff;
+      color: ${({ theme }) => theme.chip.colors.disabled.color};
+      border: ${({ theme }) => theme.chip.size.disabled.border} solid
+        ${({ theme }) => theme.chip.colors.disabled.border};
       pointer-events: none;
     `}
 `;
 
 export const Text = styled.div<{ size: TChipSize }>`
   font-family: 'Roboto';
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  max-width: fit-content;
+  font-family: ${({ theme }) => theme.chip.font.fontFamily};
+  font-weight: ${({ theme }) => theme.chip.font.fontWeight};
+  font-size: ${({ theme }) => theme.chip.font.fontWeight};
+  line-height: ${({ theme }) => theme.chip.font.lineHeight};
+  max-width: ${({ theme }) => theme.chip.font.maxWidth};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -38,13 +41,13 @@ export const Text = styled.div<{ size: TChipSize }>`
 
 export const Icon = styled.div<{ $disabled?: boolean }>`
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: ${({ theme }) => theme.chip.size.borderRadiusIcon};
   cursor: pointer;
 
   &:hover {
-    background-color: #ececec;
+    background-color: ${({ theme }) => theme.chip.colors.hover.backgroundColorIcon};
     path: {
-      fill: #959595;
+      fill: ${({ theme }) => theme.chip.colors.hover.fillIcon};
     }
   }
 
@@ -52,10 +55,9 @@ export const Icon = styled.div<{ $disabled?: boolean }>`
     $disabled &&
     css`
       pointer-events: none;
-      background-color: #fff;
-      background-color: #ececec;
+      background-color: ${({ theme }) => theme.chip.colors.disabled.backgroundColorIcon};
       path: {
-        fill: #c7c7c7;
+        fill: ${({ theme }) => theme.chip.colors.disabled.fillIcon};
       }
     `}
 `;

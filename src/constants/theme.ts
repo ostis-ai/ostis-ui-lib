@@ -185,6 +185,43 @@ export const defaultLightTheme = {
       lineHeight: '24px',
     },
   },
+  chip: {
+    font: {
+      fontFamily: 'Roboto',
+      fontWeight: 400,
+      fontSize: '20px',
+      lineHeight: '24px',
+      maxWidth: 'fit-content',
+    },
+    size: {
+      maxWidth: '190px',
+      width: 'fit-content',
+      gap: '4px',
+      padding: '3px 7px',
+      paddingWithIcon: '3px 3px 3px 7px',
+      border: '1px',
+      borderRadius: '8px',
+      borderRadiusIcon: '4px',
+      disabled: {
+        border: '1px',
+      },
+    },
+    colors: {
+      backgroundColor: '#ffffff',
+      color: '#454545',
+      border: '#5d8fef',
+      disabled: {
+        color: '#a6a6a6',
+        border: '#ffffff',
+        backgroundColorIcon: '#ececec',
+        fillIcon: '#ececec',
+      },
+      hover: {
+        backgroundColorIcon: '#ececec',
+        fillIcon: '#959595',
+      },
+    },
+  },
 };
 
 export type Theme = typeof defaultLightTheme;
