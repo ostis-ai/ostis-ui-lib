@@ -54,7 +54,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, ITextareaProps>(
         className={className}
         disabled={restProps.disabled}
         status={status}
-        isScrollable={isScrollable}
+        $isScrollable={isScrollable}
         style={{
           height: textAreaHeight,
         }}
