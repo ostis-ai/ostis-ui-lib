@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 export const StyledTextarea = styled.textarea<{
   disabled: boolean | undefined;
   status?: InputStatus;
-  isScrollable: boolean;
+  $isScrollable: boolean;
 }>`
   width: 100%;
   max-height: 80px;
@@ -58,8 +58,8 @@ export const StyledTextarea = styled.textarea<{
       }
     `}
 
-    ${({ isScrollable }) =>
-    isScrollable &&
+    ${({ $isScrollable }) =>
+    $isScrollable &&
     css`
       margin-right: 6px;
 

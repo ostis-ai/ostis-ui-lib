@@ -111,6 +111,7 @@ export const RightIcon = styled.div`
 `;
 
 export const PasswordIconWrapper = styled.div`
+  display: flex;
   flex-shrink: 0;
 `;
 
