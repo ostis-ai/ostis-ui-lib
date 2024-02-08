@@ -35,7 +35,7 @@ export const Text = styled.div<{ size: TChipSize }>`
   max-width: ${({ theme }) => theme.chip.size.maxWidthText};
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: ${({ theme }) => theme.chip.font.whiteSpace};
 `;
 
 export const Icon = styled.div<{ $disabled?: boolean }>`

@@ -191,6 +191,7 @@ export const defaultLightTheme = {
       fontWeight: 400,
       fontSize: '20px',
       lineHeight: '24px',
+      whiteSpace: 'nowrap',
     },
     size: {
       maxWidth: '190px',
