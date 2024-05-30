@@ -3,6 +3,7 @@ import { InputStatus } from '@model/input';
 import { refSetter } from '@utils/refSetter';
 
 import * as Styled from './styled';
+import { useFirstMountState } from '@hooks/useFirstMountState';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconLeft?: ReactNode;
@@ -39,6 +40,9 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
     const [isShowPassword, setIsShowPassword] = useState(false);
 
     const innerRef = useRef<HTMLInputElement>(null);
+
+    const isFirstRender = useFirstMountState();
+
     const onMakePasswordVisible = () => {
       inputType === 'password' ? setInputType('text') : setInputType('password');
       setIsShowPassword((prev) => !prev);
@@ -62,6 +66,10 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
     };
 
     useEffect(() => {
+      if (isFirstRender) return;
+
+      if (inputType === 'number') return;
+
       innerRef.current?.setSelectionRange(innerRef.current?.value.length, innerRef.current?.value.length);
     }, [inputType]);
 
