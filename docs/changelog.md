@@ -125,3 +125,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Button colors
+
+## [v0.3.0] - 30.05.2024
+
+### Added
+
+- Hook useFirstMountState
+
+### Changed
+
+- Renamed the `isScrollable` prop to `$isScrollable` in the `StyledTextarea` component
+
+### Fixed
+
+- Prevent `Input` component focus on initial page load
+- Centered icons in the `Input` component
