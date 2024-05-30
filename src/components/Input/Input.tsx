@@ -39,6 +39,8 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
     const [isShowPassword, setIsShowPassword] = useState(false);
 
     const innerRef = useRef<HTMLInputElement>(null);
+    const hasMounted = useRef(false);
+
     const onMakePasswordVisible = () => {
       inputType === 'password' ? setInputType('text') : setInputType('password');
       setIsShowPassword((prev) => !prev);
@@ -62,7 +64,9 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
     };
 
     useEffect(() => {
-      innerRef.current?.setSelectionRange(innerRef.current?.value.length, innerRef.current?.value.length);
+      hasMounted.current
+        ? innerRef.current?.setSelectionRange(innerRef.current?.value.length, innerRef.current?.value.length)
+        : (hasMounted.current = true);
     }, [inputType]);
 
     const isPassword = type === 'password';
