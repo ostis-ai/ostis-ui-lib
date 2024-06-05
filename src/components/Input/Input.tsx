@@ -1,9 +1,9 @@
-import { FocusEvent, forwardRef, InputHTMLAttributes, MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
+import { FocusEvent, forwardRef, InputHTMLAttributes, MouseEvent, ReactNode, useRef, useState } from 'react';
 import { InputStatus } from '@model/input';
 import { refSetter } from '@utils/refSetter';
+import { setCursorPosition } from '@utils/setCursorPosition';
 
 import * as Styled from './styled';
-import { useFirstMountState } from '@hooks/useFirstMountState';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconLeft?: ReactNode;
@@ -17,6 +17,8 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
    */
   isSearch?: boolean;
 }
+
+
 
 export const Input = forwardRef<HTMLInputElement, IInputProps>(
   (
@@ -41,11 +43,13 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
 
     const innerRef = useRef<HTMLInputElement>(null);
 
-    const isFirstRender = useFirstMountState();
-
     const onMakePasswordVisible = () => {
       inputType === 'password' ? setInputType('text') : setInputType('password');
-      setIsShowPassword((prev) => !prev);
+      setIsShowPassword((prev) => !prev); 
+
+      if(innerRef.current)  {
+        setCursorPosition(innerRef.current, innerRef.current.value.length);
+      }
     };
 
     const onWrapperClick = () => {
@@ -64,14 +68,6 @@ export const Input = forwardRef<HTMLInputElement, IInputProps>(
       e.stopPropagation();
       restProps.onMouseDown?.(e);
     };
-
-    useEffect(() => {
-      if (isFirstRender) return;
-
-      if (inputType === 'number') return;
-
-      innerRef.current?.setSelectionRange(innerRef.current?.value.length, innerRef.current?.value.length);
-    }, [inputType]);
 
     const isPassword = type === 'password';
 

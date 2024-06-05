@@ -140,3 +140,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Prevent `Input` component focus on initial page load
 - Centered icons in the `Input` component
+
+## [v0.3.1] - 05.06.2024
+
+### Fixed
+
+- Show correct input cursor position when displaying password
