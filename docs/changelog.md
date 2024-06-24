@@ -146,3 +146,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Show correct input cursor position when displaying password
+
+## [v0.3.2] - 24.06.2024
+
+### Fixed
+
+- Correct work of input hover

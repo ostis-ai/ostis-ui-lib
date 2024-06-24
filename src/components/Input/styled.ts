@@ -31,8 +31,10 @@ export const Wrapper = styled.div<WrapperProps>`
 
   background-color: ${({ theme }) => theme.input.colors.initial.background};
 
-  &:hover {
-    border-color: ${({ theme }) => theme.input.colors.borderHover};
+  @media (hover: hover) {
+    &:hover {
+      border-color: ${({ theme }) => theme.input.colors.borderHover};
+    }
   }
 
   ${(props) =>
@@ -40,8 +42,10 @@ export const Wrapper = styled.div<WrapperProps>`
     css`
       border-color: ${({ theme }) => theme.input.colors.borderFocused};
 
-      &:hover {
-        border-color: ${({ theme }) => theme.input.colors.borderFocusedHover};
+      @media (hover: hover) {
+        &:hover {
+          border-color: ${({ theme }) => theme.input.colors.borderFocusedHover};
+        }
       }
     `}
 
@@ -49,9 +53,10 @@ export const Wrapper = styled.div<WrapperProps>`
     props.$isError &&
     css`
       border-color: ${({ theme }) => theme.input.colors.borderError};
-
-      &:hover {
-        border-color: ${({ theme }) => theme.input.colors.borderErrorHover};
+      @media (hover: hover) {
+        &:hover {
+          border-color: ${({ theme }) => theme.input.colors.borderErrorHover};
+        }
       }
     `}
 
