@@ -13,7 +13,7 @@ const RowItem = styled.div`
   align-items: center;
 `;
 
-const SelectControll = (props: CommonPlaygroundRow & SelectRow) => {
+const SelectControl = (props: CommonPlaygroundRow & SelectRow) => {
   const { onAddValue } = usePlayground();
   const { values } = usePlaygroundContent();
 
@@ -32,7 +32,7 @@ const SelectControll = (props: CommonPlaygroundRow & SelectRow) => {
   );
 };
 
-const CheckboxControll = (props: CommonPlaygroundRow & BooleanRow) => {
+const CheckboxControl = (props: CommonPlaygroundRow & BooleanRow) => {
   const { onAddValue } = usePlayground();
   const { values } = usePlaygroundContent();
 
@@ -43,7 +43,7 @@ const CheckboxControll = (props: CommonPlaygroundRow & BooleanRow) => {
   return <Checkbox onChange={onChange} checked={values[props.name] || false} />;
 };
 
-const InputControll = (props: CommonPlaygroundRow & InputRow) => {
+const InputControl = (props: CommonPlaygroundRow & InputRow) => {
   const { onAddValue } = usePlayground();
   const { values } = usePlaygroundContent();
 
@@ -54,10 +54,10 @@ const InputControll = (props: CommonPlaygroundRow & InputRow) => {
   return <Textarea onChange={onChange} value={values[props.name] || ''} />;
 };
 
-const Controll = (props: PlaygroundRowType) => {
-  if (props.type === 'boolean') return <CheckboxControll {...props} />;
-  if (props.type === 'select') return <SelectControll {...props} />;
-  if (props.type === 'input') return <InputControll {...props} />;
+const Control = (props: PlaygroundRowType) => {
+  if (props.type === 'boolean') return <CheckboxControl {...props} />;
+  if (props.type === 'select') return <SelectControl {...props} />;
+  if (props.type === 'input') return <InputControl {...props} />;
 
   return <>-</>;
 };
@@ -77,7 +77,7 @@ export const PlaygroundRow = (props: PlaygroundRowType) => {
       <RowItem>{props.description || '-'}</RowItem>
       <RowItem>{props.default || '-'}</RowItem>
       <RowItem>
-        <Controll {...props} />
+        <Control {...props} />
       </RowItem>
     </>
   );

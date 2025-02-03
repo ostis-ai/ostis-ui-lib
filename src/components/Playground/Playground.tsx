@@ -55,7 +55,7 @@ export const Playground = ({ children }: Props) => {
             <HeaderItem>Name</HeaderItem>
             <HeaderItem>Description</HeaderItem>
             <HeaderItem>Default</HeaderItem>
-            <HeaderItem>Controll</HeaderItem>
+            <HeaderItem>Control</HeaderItem>
             <ContentRows>{children}</ContentRows>
           </Rows>
         </Wrapper>

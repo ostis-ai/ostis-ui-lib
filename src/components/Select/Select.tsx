@@ -133,14 +133,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const selectIsUncontrolled = value === undefined;
     const modeIsSelect = mode === 'select';
 
-    const selectedOption = useMemo(
-      () => (multiple ? null : constantOptions.find((option) => option.value === localValue)),
-      [multiple, constantOptions, localValue],
-    );
-    const selectedOptions = useMemo(
-      () => (multiple ? constantOptions.filter((option) => localValue?.includes(option.value)) : []),
-      [constantOptions, localValue, multiple],
-    );
+    const selectedOption = useMemo(() => {
+      if (withoutValuesRender) {
+        return null;
+      }
+
+      return multiple ? null : constantOptions.find((option) => option.value === localValue);
+    }, [withoutValuesRender, multiple, constantOptions, localValue]);
+
+    const selectedOptions = useMemo(() => {
+      if (withoutValuesRender) {
+        return [];
+      }
+
+      return multiple ? constantOptions.filter((option) => localValue?.includes(option.value)) : [];
+    }, [constantOptions, localValue, multiple, withoutValuesRender]);
 
     const hoverOptionIndex = useMemo(
       () => dropDownOptions.findIndex((option) => option.value === hoverValue),
@@ -245,7 +252,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const renderedSelectedOption = selectedOption?.children;
     const renderedDefaultSelectValue = multiple ? renderMultipleSelectValue() : renderedSelectedOption;
     const visibleValue =
-      renderedSelectValue || renderedDefaultSelectValue || (renderedEmptyValue ?? localValue) || null;
+      renderedSelectValue ||
+      renderedDefaultSelectValue ||
+      (renderedEmptyValue ?? withoutValuesRender ? null : localValue) ||
+      null;
 
     const visibleValueIsString = typeof visibleValue === 'string';
 
