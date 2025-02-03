@@ -135,6 +135,17 @@ export const SearchSelectStory = () => (
   </Select>
 );
 
+export const SearchSelectStoryWithoutValuesRender = () => (
+  <Select mode="search" placeholder="Searching without values render" withoutValuesRender={true}>
+    <Option value="1">This is text</Option>
+    <Option value="2">One more text</Option>
+    <Option value="3">Why cant we make one more option</Option>
+    <Option value="4">Option 1</Option>
+    <Option value="5">Option 2</Option>
+    <Option value="6">Option 3</Option>
+  </Select>
+);
+
 export const SelectWithCustomOptionsStory = () => (
   <Select mode="search">
     <Option value="1">

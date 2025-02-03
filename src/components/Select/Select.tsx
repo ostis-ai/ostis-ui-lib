@@ -76,6 +76,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: (evt: React.FocusEvent<HTMLDivElement>) => void;
   onBlur?: (evt: React.FocusEvent<HTMLDivElement>) => void;
+  withoutValuesRender?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -107,6 +108,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       containerRef: containerRefFromProps,
       onInputChange,
       renderSelectValue,
+      withoutValuesRender,
       onFocus: onFocusFromProps,
       onBlur: onBlurFromProps,
       ...props
@@ -255,7 +257,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     ) : (
       visibleValue
     );
-  
+
     const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
       evt.target.value = `${visibleValue}${evt.target.value}`;
@@ -278,7 +280,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const deleteOrHideSelectValueOnBackspace = () => {
-      if (searchValue || !localValue) return;
+      if (searchValue || !localValue || withoutValuesRender) return;
       if (!multiple) return setShouldRenderSelectValue(false);
       onMultipleSelectBackSpace();
     };
@@ -507,13 +509,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </NativeSelect>
           {iconsLeft && <IconsLeft>{iconsLeft}</IconsLeft>}
           <ValueWrapper $multiple={multiple} $fixHeight={shouldFixHeight} id="selectValueWrapper">
-            {shouldRenderSelectValue && wrappedVisibleValue}
+            {shouldRenderSelectValue && wrappedVisibleValue && !withoutValuesRender}
             {((placeholder && isEmpty) || !modeIsSelect) && (
               <SelectInput
                 tabIndex={-1}
                 $multiple={multiple}
                 ref={inputRef}
-                placeholder={isEmpty ? placeholder : undefined}
+                placeholder={isEmpty || withoutValuesRender ? placeholder : undefined}
                 disabled={disabled}
                 readOnly={modeIsSelect}
                 value={searchValue}
@@ -540,7 +542,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </IconPanel>
         </SelectWrapper>
         {isSearchPanelOpen && mobile && (
-          <StyledPopup onClose={onCloseSelect} >
+          <StyledPopup onClose={onCloseSelect}>
             <PopupHeader>
               <IconButton onClick={onCloseSelect}>
                 <Close />
@@ -557,7 +559,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 </PopupChipsWrapper>
               )}
               <PopupInputWrapper>
-                <Input placeholder={placeholder} value={searchValue} onChange={onLocalInputChange} ref={popupInputRef} />
+                <Input
+                  placeholder={placeholder}
+                  value={searchValue}
+                  onChange={onLocalInputChange}
+                  ref={popupInputRef}
+                />
               </PopupInputWrapper>
               <PopupValuesWrapper>{dropDownChildren}</PopupValuesWrapper>
             </DropDownSearchSelectProvider>
