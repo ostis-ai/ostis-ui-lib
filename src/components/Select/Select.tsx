@@ -252,11 +252,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixSingleSelectHeight = idleHeight === 'fixed' && (visibleValueIsString || isEmpty);
     const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
-    const wrappedVisibleValue = visibleValueIsString ? (
-      <StringValueWrapper>{visibleValue}</StringValueWrapper>
-    ) : (
-      visibleValue
-    );
+    const wrappedVisibleValue = () => {
+      if (withoutValuesRender) return;
+
+      return visibleValueIsString ? <StringValueWrapper>{visibleValue}</StringValueWrapper> : visibleValue;
+    };
 
     const mutateAndExtendTargetInputValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
       if (!mutableState.current.shouldExtendInputValue || !visibleValueIsString) return;
@@ -509,7 +509,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </NativeSelect>
           {iconsLeft && <IconsLeft>{iconsLeft}</IconsLeft>}
           <ValueWrapper $multiple={multiple} $fixHeight={shouldFixHeight} id="selectValueWrapper">
-            {shouldRenderSelectValue && wrappedVisibleValue && !withoutValuesRender}
+            {shouldRenderSelectValue && wrappedVisibleValue()}
             {((placeholder && isEmpty) || !modeIsSelect) && (
               <SelectInput
                 tabIndex={-1}

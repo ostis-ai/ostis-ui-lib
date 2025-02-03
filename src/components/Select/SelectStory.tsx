@@ -40,7 +40,7 @@ export const SelectPlaygroundStory = () => {
       <PlaygroundRow
         name="renderedEmptyValue"
         type="input"
-        description="Rendered value, when select value is empty or is not mathing with any option"
+        description="Rendered value, when select value is empty or is not matching with any option"
         default=""
       />
       <PlaygroundRow name="isLoading" type="boolean" description="Shows loading status" default={false} />
@@ -106,7 +106,13 @@ export const SelectPlaygroundStory = () => {
       <PlaygroundRow
         name="portalTargetRef"
         type="empty"
-        description="Ref to position a portal. By default rendered befory closing body tag"
+        description="Ref to position a portal. By default rendered before closing body tag"
+      />
+      <PlaygroundRow
+        name="withoutValuesRender"
+        type="empty"
+        description="Displaying select without values render. At the same time you can tap options and select will return value"
+        default="false"
       />
     </Playground>
   );
