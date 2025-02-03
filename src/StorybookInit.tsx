@@ -15,6 +15,7 @@ import {
   MobileMultipleSelectStory,
   MultiSearchSelectStory,
   SearchSelectStory,
+  SearchSelectStoryWithoutValuesRender,
   SelectPlaygroundStory,
   SelectWithCustomOptionsStory,
   SimpleMultiSelectStory,
@@ -55,6 +56,9 @@ export const StorybookInit = () => {
               </StoryItem>
               <StoryItem name="Select with search">
                 <SearchSelectStory />
+              </StoryItem>
+              <StoryItem name="Select with search without values render">
+                <SearchSelectStoryWithoutValuesRender />
               </StoryItem>
               <StoryItem name="Select with custom options">
                 <SelectWithCustomOptionsStory />

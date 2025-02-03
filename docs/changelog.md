@@ -152,3 +152,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Correct work of input hover
+
+## [v0.3.3] - 03.02.2025
+
+### Fixed
+
+- Added new props in select - hideSelectedValues
