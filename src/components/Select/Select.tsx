@@ -76,7 +76,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   onInputChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: (evt: React.FocusEvent<HTMLDivElement>) => void;
   onBlur?: (evt: React.FocusEvent<HTMLDivElement>) => void;
-  withoutValuesRender?: boolean;
+  hideSelectedValues?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -108,7 +108,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       containerRef: containerRefFromProps,
       onInputChange,
       renderSelectValue,
-      withoutValuesRender,
+      hideSelectedValues,
       onFocus: onFocusFromProps,
       onBlur: onBlurFromProps,
       ...props
@@ -134,20 +134,20 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const modeIsSelect = mode === 'select';
 
     const selectedOption = useMemo(() => {
-      if (withoutValuesRender) {
+      if (hideSelectedValues) {
         return null;
       }
 
       return multiple ? null : constantOptions.find((option) => option.value === localValue);
-    }, [withoutValuesRender, multiple, constantOptions, localValue]);
+    }, [hideSelectedValues, multiple, constantOptions, localValue]);
 
     const selectedOptions = useMemo(() => {
-      if (withoutValuesRender) {
+      if (hideSelectedValues) {
         return [];
       }
 
       return multiple ? constantOptions.filter((option) => localValue?.includes(option.value)) : [];
-    }, [constantOptions, localValue, multiple, withoutValuesRender]);
+    }, [constantOptions, localValue, multiple, hideSelectedValues]);
 
     const hoverOptionIndex = useMemo(
       () => dropDownOptions.findIndex((option) => option.value === hoverValue),
@@ -254,7 +254,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const visibleValue =
       renderedSelectValue ||
       renderedDefaultSelectValue ||
-      (renderedEmptyValue ?? withoutValuesRender ? null : localValue) ||
+      (renderedEmptyValue ?? hideSelectedValues ? null : localValue) ||
       null;
 
     const visibleValueIsString = typeof visibleValue === 'string';
@@ -263,7 +263,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const shouldFixHeight = multiple ? shouldFixMultiSelectHeight : shouldFixSingleSelectHeight;
 
     const wrappedVisibleValue = () => {
-      if (withoutValuesRender) return;
+      if (hideSelectedValues) return;
 
       return visibleValueIsString ? <StringValueWrapper>{visibleValue}</StringValueWrapper> : visibleValue;
     };
@@ -290,7 +290,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     const deleteOrHideSelectValueOnBackspace = () => {
-      if (searchValue || !localValue || withoutValuesRender) return;
+      if (searchValue || !localValue || hideSelectedValues) return;
       if (!multiple) return setShouldRenderSelectValue(false);
       onMultipleSelectBackSpace();
     };
@@ -525,7 +525,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 tabIndex={-1}
                 $multiple={multiple}
                 ref={inputRef}
-                placeholder={isEmpty || withoutValuesRender ? placeholder : undefined}
+                placeholder={isEmpty || hideSelectedValues ? placeholder : undefined}
                 disabled={disabled}
                 readOnly={modeIsSelect}
                 value={searchValue}

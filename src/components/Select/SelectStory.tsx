@@ -109,7 +109,7 @@ export const SelectPlaygroundStory = () => {
         description="Ref to position a portal. By default rendered before closing body tag"
       />
       <PlaygroundRow
-        name="withoutValuesRender"
+        name="hideSelectedValues"
         type="empty"
         description="Displaying select without values render. At the same time you can tap options and select will return value"
         default="false"
@@ -142,7 +142,7 @@ export const SearchSelectStory = () => (
 );
 
 export const SearchSelectStoryWithoutValuesRender = () => (
-  <Select mode="search" placeholder="Searching without values render" withoutValuesRender={true}>
+  <Select mode="search" placeholder="Searching without values render" hideSelectedValues={true}>
     <Option value="1">This is text</Option>
     <Option value="2">One more text</Option>
     <Option value="3">Why cant we make one more option</Option>

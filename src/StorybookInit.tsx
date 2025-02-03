@@ -57,7 +57,7 @@ export const StorybookInit = () => {
               <StoryItem name="Select with search">
                 <SearchSelectStory />
               </StoryItem>
-              <StoryItem name="Select with search without values render ">
+              <StoryItem name="Select with search without values render">
                 <SearchSelectStoryWithoutValuesRender />
               </StoryItem>
               <StoryItem name="Select with custom options">
