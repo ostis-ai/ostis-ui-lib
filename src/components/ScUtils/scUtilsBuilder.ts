@@ -1,12 +1,12 @@
 import { TLanguage } from '@components/Language/types';
-import { findKeynodesBuilder } from '@utils/findKeynodes';
+import { searchKeynodesBuilder } from '@utils/searchKeynodes';
 import { langToKeynode } from '@utils/langToKeynode';
 import { snakeToCamelCase } from '@utils/snakeToCamelCase';
 import {
   ScAddr,
   ScClient,
   ScConstruction,
-  ScEventParams,
+  ScEventSubscriptionParams,
   ScEventType,
   ScLinkContent,
   ScLinkContentType,
@@ -19,24 +19,24 @@ interface IProps {
 }
 
 export const scUtilsBuilder = ({ client }: IProps) => {
-  const findKeynodes = findKeynodesBuilder(client);
+  const searchKeynodes = searchKeynodesBuilder(client);
 
   const getMainIdLinkAddr = async (addr: ScAddr, lang: TLanguage) => {
-    const { nrelMainIdtf, ...rest } = await findKeynodes('nrel_main_idtf', langToKeynode[lang]);
+    const { nrelMainIdtf, ...rest } = await searchKeynodes('nrel_main_idtf', langToKeynode[lang]);
     const foundLang = rest[snakeToCamelCase(langToKeynode[lang])];
 
     const template = new ScTemplate();
     const linkAlias = '_link';
 
-    template.tripleWithRelation(
+    template.quintuple(
       addr,
-      ScType.EdgeDCommonVar,
-      [ScType.LinkVar, linkAlias],
-      ScType.EdgeAccessVarPosPerm,
+      ScType.VarCommonArc,
+      [ScType.VarNodeLink, linkAlias],
+      ScType.VarPermPosArc,
       nrelMainIdtf,
     );
-    template.triple(foundLang, ScType.EdgeAccessVarPosPerm, linkAlias);
-    const result = await client.templateSearch(template);
+    template.triple(foundLang, ScType.VarPermPosArc, linkAlias);
+    const result = await client.searchByTemplate(template);
 
     if (result.length) {
       return result[0].get(linkAlias);
@@ -55,19 +55,19 @@ export const scUtilsBuilder = ({ client }: IProps) => {
   };
 
   const getSystemId = async (addr: ScAddr) => {
-    const { nrelSystemIdentifier } = await findKeynodes('nrel_system_identifier');
+    const { nrelSystemIdentifier } = await searchKeynodes('nrel_system_identifier');
 
     const template = new ScTemplate();
     const linkAlias = '_link';
 
-    template.tripleWithRelation(
+    template.quintuple(
       addr,
-      ScType.EdgeDCommonVar,
-      [ScType.LinkVar, linkAlias],
-      ScType.EdgeAccessVarPosPerm,
+      ScType.VarCommonArc,
+      [ScType.VarNodeLink, linkAlias],
+      ScType.VarPermPosArc,
       nrelSystemIdentifier,
     );
-    const result = await client.templateSearch(template);
+    const result = await client.searchByTemplate(template);
 
     if (result.length) {
       const contents = await client.getLinkContents([result[0].get(linkAlias)]);
@@ -87,56 +87,56 @@ export const scUtilsBuilder = ({ client }: IProps) => {
   const addrOrSystemIdAddr = async (addrOrSystemId: string | number) => {
     const numericAddr = Number(addrOrSystemId);
     if (numericAddr) return numericAddr;
-    const keynodes = await findKeynodes(String(addrOrSystemId));
+    const keynodes = await searchKeynodes(String(addrOrSystemId));
     return keynodes[snakeToCamelCase(String(addrOrSystemId))].value;
   };
 
-  const getAnswer = (actionNode: ScAddr) => {
+  const getResult = (actionNode: ScAddr) => {
     return new Promise<ScAddr>((resolve) => {
-      findKeynodes('nrel_answer').then(async ({ nrelAnswer }) => {
-        const onActionFinished = async (_subscibedAddr: ScAddr, arc: ScAddr, anotherAddr: ScAddr, eventId: number) => {
+      searchKeynodes('nrel_result').then(async ({ nrelResult }) => {
+        const onActionFinished = async (_subscribedAddr: ScAddr, arc: ScAddr, anotherAddr: ScAddr, eventId: number) => {
           const template = new ScTemplate();
-          template.triple(nrelAnswer, ScType.EdgeAccessVarPosPerm, arc);
-          const isNrelAnswer = (await client.templateSearch(template)).length;
-          if (!isNrelAnswer) return;
-          client.eventsDestroy(eventId);
+          template.triple(nrelResult, ScType.VarPermPosArc, arc);
+          const isnrelResult = (await client.searchByTemplate(template)).length;
+          if (!isnrelResult) return;
+          client.destroyElementaryEventSubscriptions(eventId);
           resolve(anotherAddr);
         };
 
-        const eventParams = new ScEventParams(actionNode, ScEventType.AddOutgoingEdge, onActionFinished);
+        const eventParams = new ScEventSubscriptionParams(actionNode, ScEventType.AfterGenerateOutgoingArc, onActionFinished);
 
-        const [eventId] = await client.eventsCreate(eventParams);
+        const [eventId] = await client.createElementaryEventSubscriptions(eventParams);
 
-        const answerAlias = '_answer';
+        const resultAlias = '_result';
 
         const template = new ScTemplate();
-        template.tripleWithRelation(
+        template.quintuple(
           actionNode,
-          ScType.EdgeDCommonVar,
-          [ScType.NodeVar, answerAlias],
-          ScType.EdgeAccessVarPosPerm,
-          nrelAnswer,
+          ScType.VarCommonArc,
+          [ScType.VarNode, resultAlias],
+          ScType.VarPermPosArc,
+          nrelResult,
         );
-        const searchRes = await client.templateSearch(template);
+        const searchRes = await client.searchByTemplate(template);
 
-        const answer = searchRes[0]?.get(answerAlias);
+        const result = searchRes[0]?.get(resultAlias);
 
-        if (!answer) return;
+        if (!result) return;
 
-        client.eventsDestroy(eventId.id);
-        resolve(answer);
+        client.destroyElementaryEventSubscriptions(eventId.id);
+        resolve(result);
       });
     });
   };
 
-  const createLink = async (item: string) => {
+  const generateLink = async (item: string) => {
     const constructionLink = new ScConstruction();
-    constructionLink.createLink(ScType.LinkConst, new ScLinkContent(item, ScLinkContentType.String));
+    constructionLink.generateLink(ScType.ConstNodeLink, new ScLinkContent(item, ScLinkContentType.String));
 
-    const resultLinkNode = await client.createElements(constructionLink);
+    const resultLinkNode = await client.generateElements(constructionLink);
     if (resultLinkNode.length) return resultLinkNode[0];
     return null;
   };
 
-  return { findKeynodes, getId, getMainIdLinkAddr, getMainId, getSystemId, addrOrSystemIdAddr, getAnswer, createLink };
+  return { searchKeynodes, getId, getMainIdLinkAddr, getMainId, getSystemId, addrOrSystemIdAddr, getResult, generateLink };
 };

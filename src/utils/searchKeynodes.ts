@@ -3,7 +3,7 @@ import { ScAddr, ScClient, ScType } from 'ts-sc-client';
 
 import { snakeToCamelCase } from './snakeToCamelCase';
 
-export type TFindKeynodes = <K extends [string, ...string[]]>(...keynodes: K) => Promise<KeynodesToObject<K>>;
+export type TsearchKeynodes = <K extends [string, ...string[]]>(...keynodes: K) => Promise<KeynodesToObject<K>>;
 
 type KeynodesToObject<T extends string[]> = string[] extends T
   ? Record<string, ScAddr>
@@ -33,13 +33,13 @@ const shiftMap = (map: Map<any, any>, to = 1) => {
   }
 };
 
-export const findKeynodesBuilder = (client: ScClient, cacheSize = DEFAULT_CACHE_SIZE): TFindKeynodes => {
+export const searchKeynodesBuilder = (client: ScClient, cacheSize = DEFAULT_CACHE_SIZE): TsearchKeynodes => {
   const cache = new Map<string, ScAddr>();
 
   return async (...keynodes) => {
     const newKeynodes = keynodes
       .filter((keynode) => !cache.get(keynode))
-      .map((keynode) => ({ id: keynode, type: ScType.NodeConst }));
+      .map((keynode) => ({ id: keynode, type: ScType.ConstNode }));
     const cacheKeynodes = keynodes.filter((keynode) => cache.get(keynode));
 
     const overflow = cache.size + newKeynodes.length - cacheSize;

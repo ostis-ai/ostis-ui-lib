@@ -1,10 +1,10 @@
 import { createContext, PropsWithChildren, useContext } from 'react';
 
-export type TOnAskQuestion = (addr: number) => number | null | Promise<number | null>;
+export type TOnAskAction = (addr: number) => number | null | Promise<number | null>;
 
 export interface IScnContext {
   scgUrl: string;
-  onAskQuestion: TOnAskQuestion;
+  onAskAction: TOnAskAction;
 }
 
 const SCnContext = createContext<IScnContext>({} as IScnContext);
