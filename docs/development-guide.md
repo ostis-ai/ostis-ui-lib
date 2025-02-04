@@ -2,7 +2,7 @@
 
 ## css
 
-In case of css modules (prefered) lets partly use BEM. In this case we do not need block, vut elements and modificators are quite usefull. We will use camelCase naming confection: `elemName_modName_modVal`. Also No-namespace style is ok to use.
+In case of css modules (preferred) lets partly use BEM. In this case we do not need block, vut elements and modificators are quite useful. We will use camelCase naming confection: `elemName_modName_modVal`. Also No-namespace style is ok to use.
 https://ru.bem.info/methodology/naming-convention/
 
 For ordinary css it is not a big deal.
@@ -18,7 +18,7 @@ js variables, object properties should only be named in camelCase.
 
 ## assets
 
-use dash separated words, like `my-icon.png`. All letters should be lovercased.
+use dash separated words, like `my-icon.png`. All letters should be lowercased.
 
 # css
 
@@ -34,7 +34,7 @@ const Comp = () => {
 };
 ```
 
-2. Create a `*.m.scss` file to use css-modules (prefered):
+2. Create a `*.m.scss` file to use css-modules (preferred):
 
 ```tsx
 import styles from './my-css.m.scss';
@@ -68,7 +68,7 @@ src
 ----hooks
 ```
 
-Icons also placed in the component they are required in. If icon is requred by many components move it to assets folder
+Icons also placed in the component they are required in. If icon is required by many components move it to assets folder
 
 ## Location of pictures, utilities, etc.
 
@@ -83,7 +83,7 @@ If the component is reusable, then put it in the root.
 
 # imports
 
-Do not use relative imports. Insted use absolute ones. The are listed in webpack/alias.js.
+Do not use relative imports. Instead use absolute ones. The are listed in webpack/alias.js.
 
 Bad:
 
@@ -131,7 +131,7 @@ Variables:
 
 When a boolean value is passed, if the prop is not standard `isProp`, if the prop is standard `<Prop name>`.
 
-Exemple: custom props - `isOpen`; standard props - `disabled`.
+Example: custom props - `isOpen`; standard props - `disabled`.
 
 Import images:
 

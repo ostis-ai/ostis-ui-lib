@@ -20,7 +20,7 @@ Attach a link to the task to the description of the pull request.
 
 `feature (or fix, release, hotfix)/<task number>-<task name>`: task number - number of task in trello; task name - appropriate task title;
 
-Exemple: `feature/<387>-authorization`.
+Example: `feature/<387>-authorization`.
 
 ### How to appoint reviewers:
 
