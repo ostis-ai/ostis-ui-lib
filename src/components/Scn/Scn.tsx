@@ -4,7 +4,7 @@ import { useInfiniteScroll } from '@components/InfiniteScroll';
 import { ScnElement } from './components/ScnElement';
 import { ScnSkeleton } from './components/ScnSkeleton';
 import { IScnNode } from './model';
-import { ScnProvider, TOnAskAction } from './ScnContext';
+import { ScnProvider, TonInitiateAction } from './ScnContext';
 import { Inner, StyledScTag, Target } from './styled';
 
 const PAGE_SIZE = 25;
@@ -15,11 +15,11 @@ interface IProps {
   isLoading?: boolean;
   action: number;
   renderRequestPanel?: (addr: number) => ReactNode;
-  onAskAction: TOnAskAction;
+  onInitiateAction: TonInitiateAction;
   className?: string;
 }
 
-export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskAction, action, className }: IProps) => {
+export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onInitiateAction, action, className }: IProps) => {
   const { page, scrollRef, targetRef } = useInfiniteScroll({ total: tree?.children?.length || 1, pageSize: PAGE_SIZE });
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const Scn = ({ isLoading, tree, scgUrl, renderRequestPanel, onAskAction, 
   }, [tree, page]);
 
   return (
-    <ScnProvider onAskAction={onAskAction} scgUrl={scgUrl}>
+    <ScnProvider onInitiateAction={onInitiateAction} scgUrl={scgUrl}>
       <StyledScTag ref={scrollRef} addr={action} className={className}>
         <Inner>
           {isLoading && <ScnSkeleton />}

@@ -39,14 +39,14 @@ const ScStruct = ({ tree }: IProps) => {
   const [action, setAction] = useState<number | null>(null);
   const [tab, setTab] = useState<TScLanguageTab>('scn');
 
-  const { onAskAction, scgUrl } = useScnContext();
+  const { onInitiateAction, scgUrl } = useScnContext();
 
   const getAction = useCallback(async () => {
     setIsLoading(true);
-    const action = await onAskAction(tree.addr);
+    const action = await onInitiateAction(tree.addr);
     setIsLoading(false);
     setAction(action);
-  }, [onAskAction, tree.addr]);
+  }, [onInitiateAction, tree.addr]);
 
   useEffect(() => {
     getAction();

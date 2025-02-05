@@ -2,9 +2,9 @@ import { tree1 } from './mock';
 import { Scn } from './Scn';
 
 export const ScnStory = () => {
-  const onAskAction = () => {
+  const onInitiateAction = () => {
     return null;
   };
 
-  return <Scn tree={tree1} action={11} scgUrl="" onAskAction={onAskAction} />;
+  return <Scn tree={tree1} action={11} scgUrl="" onInitiateAction={onInitiateAction} />;
 };
