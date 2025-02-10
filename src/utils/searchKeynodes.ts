@@ -3,7 +3,7 @@ import { ScAddr, ScClient, ScType } from 'ts-sc-client';
 
 import { snakeToCamelCase } from './snakeToCamelCase';
 
-export type TsearchKeynodes = <K extends [string, ...string[]]>(...keynodes: K) => Promise<KeynodesToObject<K>>;
+export type TSearchKeynodes = <K extends [string, ...string[]]>(...keynodes: K) => Promise<KeynodesToObject<K>>;
 
 type KeynodesToObject<T extends string[]> = string[] extends T
   ? Record<string, ScAddr>
@@ -33,7 +33,7 @@ const shiftMap = (map: Map<any, any>, to = 1) => {
   }
 };
 
-export const searchKeynodesBuilder = (client: ScClient, cacheSize = DEFAULT_CACHE_SIZE): TsearchKeynodes => {
+export const searchKeynodesBuilder = (client: ScClient, cacheSize = DEFAULT_CACHE_SIZE): TSearchKeynodes => {
   const cache = new Map<string, ScAddr>();
 
   return async (...keynodes) => {

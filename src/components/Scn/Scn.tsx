@@ -4,7 +4,7 @@ import { useInfiniteScroll } from '@components/InfiniteScroll';
 import { ScnElement } from './components/ScnElement';
 import { ScnSkeleton } from './components/ScnSkeleton';
 import { IScnNode } from './model';
-import { ScnProvider, TonInitiateAction } from './ScnContext';
+import { ScnProvider, TOnInitiateAction } from './ScnContext';
 import { Inner, StyledScTag, Target } from './styled';
 
 const PAGE_SIZE = 25;
@@ -15,7 +15,7 @@ interface IProps {
   isLoading?: boolean;
   action: number;
   renderRequestPanel?: (addr: number) => ReactNode;
-  onInitiateAction: TonInitiateAction;
+  onInitiateAction: TOnInitiateAction;
   className?: string;
 }
 

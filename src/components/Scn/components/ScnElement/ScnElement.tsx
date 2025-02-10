@@ -142,7 +142,7 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
             {!isTuple && <Arc>{arcMap[arc.type]?.[arc.direction]}</Arc>}
             {isTuple && <Marker />}
             <RightSide>
-              {!isTuple && modifiers && (
+              {modifiers && (
                 <Modifier>
                   {modifiers.map((modifier) => (
                     <Fragment key={`${arc.addr}${modifier.addr}`}>
