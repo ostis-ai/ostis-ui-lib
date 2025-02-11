@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Rename all API classes, methods and objects according to API of the OSTIS Platform 0.10.0
+- Rename all API classes, methods and objects according to API of ts-sc-client 0.5.0
 
 ## [v0.0.1-beta.1] - 04.07.2023
 
