@@ -7,9 +7,123 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.0] - 12.02.2025
+
 ### Changed
 
 - Rename all API classes, methods and objects according to API of ts-sc-client 0.5.0
+
+## [v0.3.3] - 03.02.2025
+
+### Fixed
+
+- Added new props in select - hideSelectedValues
+
+## [v0.3.2] - 24.06.2024
+
+### Fixed
+
+- Correct work of input hover
+
+## [v0.3.1] - 05.06.2024
+
+### Fixed
+
+- Show correct input cursor position when displaying password
+
+## [v0.3.0] - 30.05.2024
+
+### Added
+
+- Hook useFirstMountState
+
+### Changed
+
+- Renamed the `isScrollable` prop to `$isScrollable` in the `StyledTextarea` component
+
+### Fixed
+
+- Prevent `Input` component focus on initial page load
+- Centered icons in the `Input` component
+
+## [v0.2.1] - 01.02.2024
+
+### Fixed
+
+- Button colors
+
+## [v0.2.0] - 01.02.2024
+
+### Fixed
+
+- Console errors
+
+### Added
+
+- Theming for Chips, Popup, DropdownOption
+- Select mobile version
+- IconButton component
+- Possibility to change password icon in password input
+- Easy popup styling via className
+
+## [v0.1.1] - 13.12.2023
+
+### Fixed
+
+- Passing font weight and color to placeholder
+
+### Added
+
+- Playground for select
+- Toasts Animation
+- Custom Toast positions
+- Tooltip classname
+
+## [v0.0.1] - 29.11.2023
+
+### Added
+
+- Add Select component
+- Add Checkbox component
+
+### Changed
+
+- Remove user prop from Decomposition
+- Remove inputV2, InputSearch, InputPassword
+- Add themeing for button and input
+- Add initial Scn Story
+- Remove most circular dependences
+- Story making components
+
+### Fixed
+
+- Export InputStatus
+- Change style of skeleton of SCn
+
+## [v0.0.1-beta.6] - 18.10.2023
+
+### Changed
+
+- Add Input component.
+- Add Button component.
+
+## [v0.0.1-beta.4] - 14.09.2023
+
+### Changed
+
+- One of Scn component props has been made optional.
+
+## [v0.0.1-beta.3] - 03.08.2023
+
+### Fixed
+
+- Moved ts-sc-client to externals
+
+## [v0.0.1-beta.2] - 06.07.2023
+
+### Changed
+
+- Typing for addDecompositionItemCallBack, deleteDecompositionItemCallback functions
 
 ## [v0.0.1-beta.1] - 04.07.2023
 
@@ -50,115 +164,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add component: Toast
 - Add component: Toasts
 - Add component: Tooltip
-
-## [v0.0.1-beta.2] - 06.07.2023
-
-### Changed
-
-- Typing for addDecompositionItemCallBack, deleteDecompositionItemCallback functions
-
-## [v0.0.1-beta.3] - 03.08.2023
-
-### Fixed
-
-- Moved ts-sc-client to externals
-
-## [v0.0.1-beta.4] - 14.09.2023
-
-### Changed
-
-- One of Scn component props has been made optional.
-
-## [v0.0.1-beta.6] - 18.10.2023
-
-### Changed
-
-- Add Input component.
-- Add Button component.
-
-## [v0.0.1] - 29.11.2023
-
-### Added
-
-- Add Select component
-- Add Checkbox component
-
-### Changed
-
-- Remove user prop from Decomposition
-- Remove inputV2, InputSearch, InputPassword
-- Add themeing for button and input
-- Add initial Scn Story
-- Remove most circular dependences
-- Story making components
-
-### Fixed
-
-- Export InputStatus
-- Change style of skeleton of SCn
-
-## [v0.1.1] - 13.12.2023
-
-### Fixed
-
-- Passing font weight and color to placeholder
-
-### Added
-
-- Playground for select
-- Toasts Animation
-- Custom Toast positions
-- Tooltip classname
-
-## [v0.2.0] - 01.02.2024
-
-### Fixed
-
-- Console errors
-
-### Added
-
-- Theming for Chips, Popup, DropdownOption
-- Select mobile version
-- IconButton component
-- Possibility to change password icon in password input
-- Easy popup styling via className
-
-## [v0.2.1] - 01.02.2024
-
-### Fixed
-
-- Button colors
-
-## [v0.3.0] - 30.05.2024
-
-### Added
-
-- Hook useFirstMountState
-
-### Changed
-
-- Renamed the `isScrollable` prop to `$isScrollable` in the `StyledTextarea` component
-
-### Fixed
-
-- Prevent `Input` component focus on initial page load
-- Centered icons in the `Input` component
-
-## [v0.3.1] - 05.06.2024
-
-### Fixed
-
-- Show correct input cursor position when displaying password
-
-## [v0.3.2] - 24.06.2024
-
-### Fixed
-
-- Correct work of input hover
-
-## [v0.3.3] - 03.02.2025
-
-### Fixed
-
-- Added new props in select - hideSelectedValues
