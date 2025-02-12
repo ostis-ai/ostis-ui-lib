@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.0] - 12.02.2025
+
 ### Changed
 
 - Rename all API classes, methods and objects according to API of ts-sc-client 0.5.0
