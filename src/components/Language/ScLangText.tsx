@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useClient } from '@components/ClientProvider';
 import { useScUtils } from '@components/ScUtils';
 import { PseudoText } from '@components/Skeleton';
-import { ScAddr, ScEventParams, ScEventType } from 'ts-sc-client';
+import { ScAddr, ScEventSubscriptionParams, ScEventType } from 'ts-sc-client';
 
 import { useLanguage } from './useLanguage';
 
@@ -56,9 +56,9 @@ export const ScLangText = ({
         setText(String(newContent.data));
       };
 
-      const eventParams = new ScEventParams(linkAddr, ScEventType.ChangeContent, onActionFinished);
+      const eventParams = new ScEventSubscriptionParams(linkAddr, ScEventType.BeforeChangeLinkContent, onActionFinished);
 
-      const [{ id }] = await client.eventsCreate(eventParams);
+      const [{ id }] = await client.createElementaryEventSubscriptions(eventParams);
       setChangeContentEventId(id);
     })();
   }, [addrOrSystemId, addrOrSystemIdAddr, client, getMainIdLinkAddr, lang]);
@@ -74,23 +74,23 @@ export const ScLangText = ({
   //     const nodeAddr = await addrOrSystemIdAddr(addrOrSystemId);
 
   //     const onActionFinished = async (subscibedAddr: ScAddr, arc: ScAddr, anotherAddr: ScAddr) => {
-  //       const { nrelMainIdtf, ...rest } = await findKeynodes('nrel_main_idtf', langToKeynode[lang]);
+  //       const { nrelMainIdtf, ...rest } = await searchKeynodes('nrel_main_idtf', langToKeynode[lang]);
   //       const foundLang = rest[snakeToCamelCase(langToKeynode[lang])];
 
   //       const langAlias = '_lang';
 
   //       const template = new ScTemplate();
 
-  //       template.tripleWithRelation(
+  //       template.quintuple(
   //         subscibedAddr,
-  //         ScType.EdgeDCommonVar,
+  //         ScType.VarCommonArc,
   //         anotherAddr,
-  //         ScType.EdgeAccessVarPosPerm,
+  //         ScType.VarPermPosArc,
   //         nrelMainIdtf,
   //       );
-  //       template.triple([ScType.NodeVarClass, langAlias], ScType.EdgeAccessVarPosPerm, anotherAddr);
+  //       template.triple([ScType.VarNodeClass, langAlias], ScType.VarPermPosArc, anotherAddr);
 
-  //       const res = await client.templateSearch(template);
+  //       const res = await client.searchByTemplate(template);
   //       if (!res.length) return;
 
   //       const langAddr = res[0].get(langAlias);
@@ -103,16 +103,16 @@ export const ScLangText = ({
 
   //     const eventParams = new ScEventParams(new ScAddr(nodeAddr), ScEventType.AddOutgoingEdge, onActionFinished);
 
-  //     const [{ id }] = await client.eventsCreate(eventParams);
+  //     const [{ id }] = await client.createElementaryEventSubscriptions(eventParams);
   //     setAddNewLangEventId(id);
   //   })();
-  // }, [addrOrSystemId, addrOrSystemIdAddr, client, findKeynodes, getMainIdLinkAddr, lang]);
+  // }, [addrOrSystemId, addrOrSystemIdAddr, client, searchKeynodes, getMainIdLinkAddr, lang]);
 
   useEffect(() => {
     if (!changeContentEventId) return;
 
     return () => {
-      client.eventsDestroy(changeContentEventId);
+      client.destroyElementaryEventSubscriptions(changeContentEventId);
     };
   }, [client, changeContentEventId]);
 

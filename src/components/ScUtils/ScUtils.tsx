@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { useClient } from '@components/ClientProvider';
-import { TFindKeynodes } from '@utils/findKeynodes';
+import { TSearchKeynodes } from '@utils/searchKeynodes';
 
 import { scUtilsBuilder } from './scUtilsBuilder';
 
-type TScUtilsContext = Omit<ReturnType<typeof scUtilsBuilder>, 'findKeynodes'> & {
-  findKeynodes: TFindKeynodes;
+type TScUtilsContext = Omit<ReturnType<typeof scUtilsBuilder>, 'searchKeynodes'> & {
+  searchKeynodes: TSearchKeynodes;
 };
 
 const ScUtilsContext = createContext<TScUtilsContext>({} as TScUtilsContext);

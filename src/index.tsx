@@ -33,7 +33,7 @@ export * from '@hooks/useClickOutside';
 export * from '@hooks/useInView';
 export * from '@hooks/useInterval';
 
-export * from '@utils/findKeynodes';
+export * from '@utils/searchKeynodes';
 export * from '@utils/getRandomInt';
 export * from '@utils/langToKeynode';
 export * from '@utils/observeRect';

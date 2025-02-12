@@ -20,19 +20,19 @@ const readonlyStyle = `
 `;
 
 export interface IScgProps {
-  question?: number;
+  action?: number;
   className?: string;
   show?: boolean;
   readonly?: boolean;
   url: string;
   onOpenFragment?: (addr: number) => void;
-  onUpdateScg?: (question: number) => void;
+  onUpdateScg?: (action: number) => void;
   onEmptyFragment?: () => void;
   onFullfilledFragment?: () => void;
 }
 
 export const Scg: FC<IScgProps> = ({
-  question,
+  action,
   readonly,
   className,
   url,
@@ -54,7 +54,7 @@ export const Scg: FC<IScgProps> = ({
   const ref = useRef<HTMLIFrameElement>(null);
   const targetRef = useRef<HTMLElement | null>(null);
 
-  const { findKeynodes } = useScUtils();
+  const { searchKeynodes } = useScUtils();
 
   const lang = useLanguage();
 
@@ -111,8 +111,8 @@ export const Scg: FC<IScgProps> = ({
           setconfirmClearSceneFunc(() => (iframe.contentWindow as any)?.clearScene);
           break;
         case EWindowEvents.updateScg:
-          if (!question) break;
-          onUpdateScg?.(question);
+          if (!action) break;
+          onUpdateScg?.(action);
           break;
         case EWindowEvents.openFragment:
           if (!event.data?.payload?.fragmentAddr) break;
@@ -126,20 +126,20 @@ export const Scg: FC<IScgProps> = ({
           break;
       }
     };
-  }, [onUpdateScg, onOpenFragment, onEmptyFragment, onFullfilledFragment, question]);
+  }, [onUpdateScg, onOpenFragment, onEmptyFragment, onFullfilledFragment, action]);
 
   useEffect(() => {
     (async () => {
-      if (!isReady || !show || !question) return;
+      if (!isReady || !show || !action) return;
 
       const iframe = ref.current;
       if (!iframe) return;
 
-      const { ...rest } = await findKeynodes(langToKeynode[lang]);
+      const { ...rest } = await searchKeynodes(langToKeynode[lang]);
       const activeLangKeynode = rest[snakeToCamelCase(langToKeynode[lang])];
-      (iframe.contentWindow as any).renderScg?.(question, activeLangKeynode.value);
+      (iframe.contentWindow as any).renderScg?.(action, activeLangKeynode.value);
     })();
-  }, [isReady, question, show, lang, findKeynodes]);
+  }, [isReady, action, show, lang, searchKeynodes]);
 
   targetRef.current = targetNode?.element || null;
 

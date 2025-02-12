@@ -36,29 +36,29 @@ const ModifierArc = ({ type }: IModifierArcProps) => {
 
 const ScStruct = ({ tree }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [question, setQuestion] = useState<number | null>(null);
+  const [action, setAction] = useState<number | null>(null);
   const [tab, setTab] = useState<TScLanguageTab>('scn');
 
-  const { onAskQuestion, scgUrl } = useScnContext();
+  const { onInitiateAction, scgUrl } = useScnContext();
 
-  const getQuestion = useCallback(async () => {
+  const getAction = useCallback(async () => {
     setIsLoading(true);
-    const question = await onAskQuestion(tree.addr);
+    const action = await onInitiateAction(tree.addr);
     setIsLoading(false);
-    setQuestion(question);
-  }, [onAskQuestion, tree.addr]);
+    setAction(action);
+  }, [onInitiateAction, tree.addr]);
 
   useEffect(() => {
-    getQuestion();
-  }, [getQuestion]);
+    getAction();
+  }, [getAction]);
 
   const showScg = tab === 'scg';
-  const renderScg = showScg && !!question && !isLoading;
+  const renderScg = showScg && !!action && !isLoading;
   return (
     <Struct isScg={showScg}>
       <StyledSwitchScgScn tab={tab} onTabClick={setTab} />
       {!showScg && <ScnElement tree={tree} isRoot />}
-      <StyledScg url={scgUrl} question={question || undefined} show={renderScg} readonly />
+      <StyledScg url={scgUrl} action={action || undefined} show={renderScg} readonly />
       {showScg && isLoading && <StyledSpinner appearance={SPINER_COLOR} />}
     </Struct>
   );
@@ -74,7 +74,7 @@ const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) =
 
   const lang = useLanguage();
   const client = useClient();
-  const { findKeynodes } = useScUtils();
+  const { searchKeynodes } = useScUtils();
 
   const scType = new ScType(node.type);
 
@@ -84,7 +84,7 @@ const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) =
     if (!isLink) return setShow(true);
 
     (async () => {
-      const { languages, ...rest } = await findKeynodes('languages', langToKeynode[lang]);
+      const { languages, ...rest } = await searchKeynodes('languages', langToKeynode[lang]);
 
       const activeLangKeynode = rest[snakeToCamelCase(langToKeynode[lang])];
 
@@ -92,14 +92,14 @@ const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) =
 
       const langAlias = '_lang';
 
-      template.triple(languages, ScType.EdgeAccessVarPosPerm, [ScType.NodeVarClass, langAlias]);
-      template.triple(langAlias, ScType.EdgeAccessVarPosPerm, new ScAddr(node.addr));
-      const result = await client.templateSearch(template);
+      template.triple(languages, ScType.VarPermPosArc, [ScType.VarNodeClass, langAlias]);
+      template.triple(langAlias, ScType.VarPermPosArc, new ScAddr(node.addr));
+      const result = await client.searchByTemplate(template);
       if (!result.length) return setShow(true);
       const foundLang = result[0].get(langAlias);
       setShow(foundLang.value === activeLangKeynode.value);
     })();
-  }, [client, findKeynodes, isLink, lang, node.addr]);
+  }, [client, searchKeynodes, isLink, lang, node.addr]);
 
   if (!show) return null;
 
@@ -129,6 +129,14 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
   return (
     <Wrapper>
       <Node tree={tree}>
+        {struct && (
+          <Child>
+            <Arc>=</Arc>
+            <RightSide>
+              <ScStruct tree={struct} />
+            </RightSide>
+          </Child>
+        )}
         {children?.map(({ arcs: [arc], modifiers, linkedNodes }) => (
           <Child key={arc.addr}>
             {!isTuple && <Arc>{arcMap[arc.type]?.[arc.direction]}</Arc>}
@@ -156,14 +164,6 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
             </RightSide>
           </Child>
         ))}
-        {struct && (
-          <Child>
-            <Arc>=</Arc>
-            <RightSide>
-              <ScStruct tree={struct} />
-            </RightSide>
-          </Child>
-        )}
       </Node>
     </Wrapper>
   );
