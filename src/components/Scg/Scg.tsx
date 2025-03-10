@@ -9,7 +9,7 @@ import { snakeToCamelCase } from '@utils/snakeToCamelCase';
 import { Frame, StyledSpinner, Wrap } from './styled';
 import { EWindowEvents, ITarget, IWindowEventData } from './types';
 
-const SPINER_COLOR = '#5896C0';
+const SPINNER_COLOR = '#5896C0';
 
 const readonlyStyle = `
   <style>
@@ -42,14 +42,14 @@ export const Scg: FC<IScgProps> = ({
   onEmptyFragment,
   onFullfilledFragment,
 }) => {
-  const [isReady, setIsready] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [targetNode, setTargetNode] = useState<ITarget | null>(null);
   const [isConfirmDeletePopupShown, showConfirmDeletePopup, hideConfirmDeletePopup] = useBooleanState(false);
   const [isConfirmClearScenePopupShown, showConfirmClearScenePopup, hideConfirmClearScenePopup] =
     useBooleanState(false);
   const [confirmDeleteElementsFunc, setConfirmDeleteElementsFunc] = useState<any>();
-  const [confirmClearSceneFunc, setconfirmClearSceneFunc] = useState<any>();
+  const [confirmClearSceneFunc, setConfirmClearSceneFunc] = useState<any>();
 
   const ref = useRef<HTMLIFrameElement>(null);
   const targetRef = useRef<HTMLElement | null>(null);
@@ -79,7 +79,7 @@ export const Scg: FC<IScgProps> = ({
     const iframe = ref.current;
     if (!iframe) return setIsLoading(false);
     (iframe.contentWindow as any).onInitializationFinished = () => {
-      setIsready(true);
+      setIsReady(true);
     };
 
     (iframe.contentWindow as any).demoImplementation = true;
@@ -108,7 +108,7 @@ export const Scg: FC<IScgProps> = ({
           break;
         case EWindowEvents.clearScene:
           showConfirmClearScenePopup();
-          setconfirmClearSceneFunc(() => (iframe.contentWindow as any)?.clearScene);
+          setConfirmClearSceneFunc(() => (iframe.contentWindow as any)?.clearScene);
           break;
         case EWindowEvents.updateScg:
           if (!action) break;
@@ -145,7 +145,7 @@ export const Scg: FC<IScgProps> = ({
 
   return (
     <Wrap show={show} className={className}>
-      {isLoading && <StyledSpinner appearance={SPINER_COLOR} />}
+      {isLoading && <StyledSpinner appearance={SPINNER_COLOR} />}
       <Frame src={url} ref={ref} title="SCg codes" />
       {targetNode && <ContextMenu onClose={onClose} addr={targetNode.addr} relativeRef={ref} targetRef={targetRef} />}
     </Wrap>
