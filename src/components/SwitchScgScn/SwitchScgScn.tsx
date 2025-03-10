@@ -21,13 +21,13 @@ export const SwitchScgScn = ({ tab, className, onTabClick }: ISwitchScgScnProps)
     <SwitchWrap className={className}>
       <Tabs>
         <Tooltip title={'SCn-код'}>
-          <Tab isactive={tab === 'scn'} onClick={onClick('scn')}>
+          <Tab $isActive={tab === 'scn'} onClick={onClick('scn')}>
             <ScnSwitch />
           </Tab>
         </Tooltip>
         <Divider />
         <Tooltip title={'SCg-код'} placement="bottom-end">
-          <Tab isactive={tab === 'scg'} onClick={onClick('scg')}>
+          <Tab $isActive={tab === 'scg'} onClick={onClick('scg')}>
             <ScgSwitch />
           </Tab>
         </Tooltip>

@@ -97,7 +97,7 @@ export const ContextMenu = ({ addr, systemId, targetRef, relativeRef, onClose }:
   return (
     <StyledDropdown ref={dropdownRef} targetRef={targetRef} relativeRef={relativeRef}>
       {isLoading && (
-        <StyledDropdownOption isload>
+        <StyledDropdownOption $isLoad>
           <Spinner size={24} appearance={SPINNER_COLOR} />
           {translate({ ru: 'Идет загрузка', en: 'Loading' })}
         </StyledDropdownOption>

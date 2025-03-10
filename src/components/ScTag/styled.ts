@@ -15,13 +15,13 @@ export const StyledDropdown = styled(Dropdown)`
   overflow: auto;
 `;
 
-export const StyledDropdownOption = styled(DropdownOption)<{ isload?: boolean }>`
+export const StyledDropdownOption = styled(DropdownOption)<{ $isLoad?: boolean }>`
   &:hover {
     background-color: #f5f5f5;
   }
 
   ${(props) =>
-    props.isload &&
+    props.$isLoad &&
     css`
       display: flex;
       align-items: center;

@@ -17,8 +17,8 @@ const fadeOut = keyframes`
   }
 `;
 
-const ToastWrapper = styled.div<{ $isDisapearing?: boolean }>`
-  animation: ${({ $isDisapearing }) => ($isDisapearing ? fadeOut : fadeIn)} 0.3s ease both;
+const ToastWrapper = styled.div<{ $isDisappearing?: boolean }>`
+  animation: ${({ $isDisappearing }) => ($isDisappearing ? fadeOut : fadeIn)} 0.3s ease both;
 `;
 
 interface IProps {
@@ -45,14 +45,14 @@ export const Toast = ({ id }: IProps) => {
     ? cloneElement(toast.component, { onClose: toast.params.closeable ? onClose : undefined })
     : null;
 
-  const isDisapearing = deletingToasts.includes(id);
+  const isDisappearing = deletingToasts.includes(id);
 
   const onAnimationEnd = () => {
-    if (isDisapearing) removeToast(id);
+    if (isDisappearing) removeToast(id);
   };
 
   return (
-    <ToastWrapper $isDisapearing={isDisapearing} onAnimationEnd={onAnimationEnd}>
+    <ToastWrapper $isDisappearing={isDisappearing} onAnimationEnd={onAnimationEnd}>
       {newComponent}
     </ToastWrapper>
   );
