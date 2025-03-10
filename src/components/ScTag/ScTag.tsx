@@ -6,7 +6,7 @@ import { useBooleanState } from '@hooks/useBooleanState';
 import { useClickOutside } from '@hooks/useClickOutside';
 import styled, { css } from 'styled-components';
 
-import { SPINER_COLOR } from './constants';
+import { SPINNER_COLOR } from './constants';
 import { IContextItem } from './model';
 import { StyledDropdown, StyledDropdownOption } from './styled';
 import { useContextMenu } from './useContextMenu';
@@ -97,8 +97,8 @@ export const ContextMenu = ({ addr, systemId, targetRef, relativeRef, onClose }:
   return (
     <StyledDropdown ref={dropdownRef} targetRef={targetRef} relativeRef={relativeRef}>
       {isLoading && (
-        <StyledDropdownOption isLoad>
-          <Spinner size={24} appearance={SPINER_COLOR} />
+        <StyledDropdownOption $isLoad>
+          <Spinner size={24} appearance={SPINNER_COLOR} />
           {translate({ ru: 'Идет загрузка', en: 'Loading' })}
         </StyledDropdownOption>
       )}

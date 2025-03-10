@@ -13,7 +13,7 @@ export const Tabs = styled.div`
   width: 100%;
 `;
 
-export const Tab = styled.div<{ isActive: boolean }>`
+export const Tab = styled.div<{ $isActive: boolean }>`
   font-size: 26px;
   font-weight: 400;
   color: #c0c0c0;
@@ -36,7 +36,7 @@ export const Tab = styled.div<{ isActive: boolean }>`
   }
 
   ${(props) =>
-    props.isActive &&
+    props.$isActive &&
     css`
       background: #f8f8f8;
 

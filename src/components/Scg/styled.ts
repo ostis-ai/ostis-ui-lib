@@ -29,8 +29,8 @@ export const Frame = styled.iframe`
   border: 0;
 `;
 
-export const Popup = styled.div<{ isClear?: boolean }>`
-  width: ${(props) => (props.isClear ? '383px' : '344px')};
+export const Popup = styled.div<{ $isClear?: boolean }>`
+  width: ${(props) => (props.$isClear ? '383px' : '344px')};
 
   font-family: 'Roboto';
   font-style: normal;
