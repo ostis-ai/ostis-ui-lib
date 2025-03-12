@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+- ScLangText now attempts to get system identifier if main identifier does not exist
+- Rename ScnEdge to ScnConnector, struct to structure
+- Typos in component names
+
 ## [v0.4.1] - 10.03.2025
 
 ### Fixed
