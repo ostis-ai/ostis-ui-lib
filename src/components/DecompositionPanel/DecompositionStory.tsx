@@ -52,7 +52,7 @@ const Decomposition = () => {
       editDecompositionItemCallback={editDecompositionItemCallback}
       deleteDecompositionItemCallback={deleteDecompositionItemCallback}
     >
-      <DecompositionPanel editable deleteable />
+      <DecompositionPanel editable deletable />
     </DecompositionProvider>
   );
 };

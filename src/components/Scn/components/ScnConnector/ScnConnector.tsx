@@ -11,7 +11,7 @@ interface IProps {
   node: IScnNode;
 }
 
-export const ScnEdge = ({ node: { addr, type, sourceNode, targetNode } }: IProps) => {
+export const ScnConnector = ({ node: { addr, type, sourceNode, targetNode } }: IProps) => {
   if (!sourceNode || !targetNode) return null;
 
   return (

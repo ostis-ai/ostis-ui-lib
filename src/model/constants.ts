@@ -1,1 +1,1 @@
-export const SPINER_COLOR = '#5896C0';
+export const SPINNER_COLOR = '#5896C0';

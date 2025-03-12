@@ -16,7 +16,7 @@ export interface IScnNode {
   sourceNode?: INodeShort | null;
   targetNode?: INodeShort | null;
   children?: IScnChild[] | null;
-  struct?: IScnNode;
+  structure?: IScnNode;
 }
 
 export interface IScnChild {

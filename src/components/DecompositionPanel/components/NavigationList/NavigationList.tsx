@@ -22,20 +22,20 @@ import {
 interface INavigationListProps {
   data: ITransformedDecomposition[];
   children?: ReactNode;
-  deleteable: boolean;
+  deletable: boolean;
   editable: boolean;
 }
 
 export const NavigationListInner = ({
   data,
   children,
-  deleteable,
+  deletable,
   editable,
 }: PropsWithChildren<INavigationListProps>) => {
   return (
     <ul>
       {data.map((item) => {
-        return <NavigationItem key={item.id} menuItem={item} deleteable={deleteable} editable={editable} />;
+        return <NavigationItem key={item.id} menuItem={item} deletable={deletable} editable={editable} />;
       })}
       {children}
     </ul>
@@ -45,10 +45,10 @@ export const NavigationListInner = ({
 interface INavigationItemProps {
   menuItem: ITransformedDecomposition;
   editable: boolean;
-  deleteable: boolean;
+  deletable: boolean;
 }
 
-const NavigationItem = ({ menuItem, editable, deleteable }: INavigationItemProps) => {
+const NavigationItem = ({ menuItem, editable, deletable }: INavigationItemProps) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isAddInputShow, setIsAddInputShow] = useState(false);
   const [isEditInputShow, setIsEditInputShow] = useState(false);
@@ -157,7 +157,7 @@ const NavigationItem = ({ menuItem, editable, deleteable }: INavigationItemProps
                       onDelete(menuItem.id);
                       closeOptions();
                     }}
-                    deleteable={deleteable}
+                    deletable={deletable}
                   />
                 )}
               </OptionsBtnWrapper>
@@ -165,7 +165,7 @@ const NavigationItem = ({ menuItem, editable, deleteable }: INavigationItemProps
           </ItemContentWrapper>
           {menuItem.expanded && !!menuItem.children.length && (
             <ChildrenWrapper>
-              <NavigationList data={menuItem.children} deleteable={deleteable} editable={editable}>
+              <NavigationList data={menuItem.children} deletable={deletable} editable={editable}>
                 {isAddInputShow && (
                   <TextAreaItem
                     value={addInputValue}

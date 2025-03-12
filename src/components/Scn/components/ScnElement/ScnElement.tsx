@@ -5,15 +5,15 @@ import { IScnNode } from '@components/Scn/model';
 import { useScnContext } from '@components/Scn/ScnContext';
 import { useScUtils } from '@components/ScUtils';
 import { TScLanguageTab } from '@components/SwitchScgScn';
-import { SPINER_COLOR } from '@model/constants';
+import { SPINNER_COLOR } from '@model/constants';
 import { langToKeynode } from '@utils/langToKeynode';
 import { snakeToCamelCase } from '@utils/snakeToCamelCase';
 import { ScAddr, ScTemplate, ScType } from 'ts-sc-client';
 
 import { arcMap } from '../../constants';
-import { EdgeNode, KeywordNode, LinkNode, SimpleNode, TupleNode } from '../Nodes';
+import { ConnectorNode, KeywordNode, LinkNode, SimpleNode, TupleNode } from '../Nodes';
 import { ScnLink } from '../ScnLink';
-import { Struct, StyledScg, StyledSpinner, StyledSwitchScgScn } from '../ScStruct/styled';
+import { Structure, StyledScg, StyledSpinner, StyledSwitchScgScn } from '../ScStructure/styled';
 
 import { Arc, Child, LinkedNodes, Marker, Modifier, RightSide, StyledLinkedNode, Wrapper } from './styled';
 import { getRandomInt } from '@utils/getRandomInt';
@@ -34,7 +34,7 @@ const ModifierArc = ({ type }: IModifierArcProps) => {
   return <>::</>;
 };
 
-const ScStruct = ({ tree }: IProps) => {
+const ScStructure = ({ tree }: IProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [action, setAction] = useState<number | null>(null);
   const [tab, setTab] = useState<TScLanguageTab>('scn');
@@ -55,12 +55,12 @@ const ScStruct = ({ tree }: IProps) => {
   const showScg = tab === 'scg';
   const renderScg = showScg && !!action && !isLoading;
   return (
-    <Struct isScg={showScg}>
+    <Structure isScg={showScg}>
       <StyledSwitchScgScn tab={tab} onTabClick={setTab} />
       {!showScg && <ScnElement tree={tree} isRoot />}
       <StyledScg url={scgUrl} action={action || undefined} show={renderScg} readonly />
-      {showScg && isLoading && <StyledSpinner appearance={SPINER_COLOR} />}
-    </Struct>
+      {showScg && isLoading && <StyledSpinner appearance={SPINNER_COLOR} />}
+    </Structure>
   );
 };
 
@@ -112,13 +112,13 @@ const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) =
 };
 
 const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
-  const { children, type, struct } = tree;
+  const { children, type, structure } = tree;
   const scType = new ScType(type);
 
   const getNode = () => {
     if (isRoot) return KeywordNode;
     if (scType.isLink()) return LinkNode;
-    if (scType.isEdge()) return EdgeNode;
+    if (scType.isConnector()) return ConnectorNode;
     if (scType.isTuple()) return TupleNode;
     return SimpleNode;
   };
@@ -129,11 +129,11 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
   return (
     <Wrapper>
       <Node tree={tree}>
-        {struct && (
+        {structure && (
           <Child>
             <Arc>=</Arc>
             <RightSide>
-              <ScStruct tree={struct} />
+              <ScStructure tree={structure} />
             </RightSide>
           </Child>
         )}
