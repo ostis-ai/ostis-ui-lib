@@ -112,7 +112,7 @@ const LinkedNode = ({ node, showMarker }: PropsWithChildren<ILinkedNodeProps>) =
 };
 
 const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
-  const { children, type, structure } = tree;
+  const { children, type, struct } = tree;
   const scType = new ScType(type);
 
   const getNode = () => {
@@ -129,11 +129,11 @@ const ScnElementWrapper = ({ tree, isRoot = false }: IProps) => {
   return (
     <Wrapper>
       <Node tree={tree}>
-        {structure && (
+        {struct && (
           <Child>
             <Arc>=</Arc>
             <RightSide>
-              <ScStructure tree={structure} />
+              <ScStructure tree={struct} />
             </RightSide>
           </Child>
         )}
