@@ -3,7 +3,7 @@ import { IScnNode } from '@components/Scn/model';
 import { ScType } from 'ts-sc-client';
 
 import { ScLink } from '../ScLink';
-import { ScnEdge } from '../ScnEdge';
+import { ScnConnector } from '../ScnConnector';
 import { ScnLink } from '../ScnLink';
 
 import { KeywordLinkWrapper, LeftSide, StyledScnLink } from './styled';
@@ -31,7 +31,7 @@ export const KeywordNode = ({ children, tree }: PropsWithChildren<INodeProps>) =
   const scType = new ScType(type);
 
   const getComp = () => {
-    if (scType.isEdge()) return <ScnEdge node={tree} />;
+    if (scType.isConnector()) return <ScnConnector node={tree} />;
     if (scType.isLink()) return <KeywordLinkNode tree={tree} />;
     return <StyledScnLink addr={addr} />;
   };
@@ -51,9 +51,9 @@ export const LinkNode = ({ children, tree: { addr, content, contentType } }: Pro
   </>
 );
 
-export const EdgeNode = ({ children, tree }: PropsWithChildren<INodeProps>) => (
+export const ConnectorNode = ({ children, tree }: PropsWithChildren<INodeProps>) => (
   <>
-    <ScnEdge node={tree} />
+    <ScnConnector node={tree} />
     {children}
   </>
 );

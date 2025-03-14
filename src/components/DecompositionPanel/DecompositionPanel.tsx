@@ -13,10 +13,10 @@ const emptyArray: ITransformedDecomposition[] = [];
 interface IProps {
   className?: string;
   editable?: boolean;
-  deleteable?: boolean;
+  deletable?: boolean;
 }
 
-export const DecompositionPanel: FC<IProps> = ({ className, editable = false, deleteable = false }) => {
+export const DecompositionPanel: FC<IProps> = ({ className, editable = false, deletable = false }) => {
   const {
     isMenuListLoading,
     menuList,
@@ -61,7 +61,7 @@ export const DecompositionPanel: FC<IProps> = ({ className, editable = false, de
     <div className={className}>
       <Nav>
         {!isMenuListLoading && (
-          <NavigationList data={menuList?.children || emptyArray} editable={editable} deleteable={deleteable}>
+          <NavigationList data={menuList?.children || emptyArray} editable={editable} deletable={deletable}>
             <>
               {isAddInputShow && (
                 <TextAreaItem

@@ -3,7 +3,7 @@ import { Spinner } from '@components/Spinner';
 import { SwitchScgScn } from '@components/SwitchScgScn';
 import styled, { css } from 'styled-components';
 
-export const Struct = styled.div<{ isScg?: boolean }>`
+export const Structure = styled.div<{ isScg?: boolean }>`
   border: solid 1px #96a399;
 
   background-color: #fdfdfd;

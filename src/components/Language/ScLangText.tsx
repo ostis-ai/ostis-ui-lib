@@ -33,13 +33,19 @@ export const ScLangText = ({
 
   const client = useClient();
 
-  const { getMainId, getMainIdLinkAddr, addrOrSystemIdAddr } = useScUtils();
+  const { getMainId, getSystemId, getMainIdLinkAddr, addrOrSystemIdAddr } = useScUtils();
 
   useEffect(() => {
     setIsLoading(true);
     (async () => {
-      const text = await getMainId(new ScAddr(await addrOrSystemIdAddr(addrOrSystemId)), lang);
-      setText(text ? String(text) : defaultText);
+      const elementAddr = new ScAddr(await addrOrSystemIdAddr(addrOrSystemId));
+      let text = await getMainId(elementAddr, lang);
+      if (!text) {
+        text = await getSystemId(elementAddr);
+        if (!text)
+          text = defaultText;
+      }
+      setText(String(text));
       setIsLoading(false);
     })();
   }, [addrOrSystemId, addrOrSystemIdAddr, getMainId, lang, defaultText]);
@@ -51,8 +57,8 @@ export const ScLangText = ({
 
       if (!linkAddr) return;
 
-      const onActionFinished = async (subscibedAddr: ScAddr) => {
-        const [newContent] = await client.getLinkContents([subscibedAddr]);
+      const onActionFinished = async (subscribedAddr: ScAddr) => {
+        const [newContent] = await client.getLinkContents([subscribedAddr]);
         setText(String(newContent.data));
       };
 
