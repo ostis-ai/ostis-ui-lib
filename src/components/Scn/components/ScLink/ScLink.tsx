@@ -62,6 +62,8 @@ const ScLinkHtml = ({ addr }: IProps) => {
   const parseHtml = useCallback(async () => {
     const [{ data }] = await client.getLinkContents([new ScAddr(addr)]);
 
+    console.log(data);
+
     if (!data) return;
     const parser = new DOMParser();
     const dom = parser.parseFromString(String(data).trim(), 'text/html');
@@ -76,7 +78,7 @@ const ScLinkHtml = ({ addr }: IProps) => {
   }, [parseHtml, isInView]);
 
   return (
-    <StyledScTag isHTML addr={addr}>
+    <StyledScTag $isHTML={true} addr={addr}>
       {contentHtml &&
         Array.from(contentHtml.childNodes).map((childNode, ind) => <HtmlNodeToReact key={ind} node={childNode} />)}
       {!contentHtml && <span ref={targetRef} />}

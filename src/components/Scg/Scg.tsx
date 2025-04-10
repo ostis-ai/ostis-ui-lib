@@ -144,7 +144,7 @@ export const Scg: FC<IScgProps> = ({
   targetRef.current = targetNode?.element || null;
 
   return (
-    <Wrap show={show} className={className}>
+    <Wrap $show={show} className={className}>
       {isLoading && <StyledSpinner appearance={SPINNER_COLOR} />}
       <Frame src={url} ref={ref} title="SCg codes" />
       {targetNode && <ContextMenu onClose={onClose} addr={targetNode.addr} relativeRef={ref} targetRef={targetRef} />}

@@ -13,7 +13,7 @@ export const rotate = keyframes`
   }
 `;
 
-export const ItemContentWrapper = styled.div<{ isOptionsOpen: boolean; isLoading: boolean }>`
+export const ItemContentWrapper = styled.div<{ $isOptionsOpen: boolean; $isLoading: boolean }>`
   display: grid;
   grid-template-columns: 26px 1fr 26px;
   align-items: center;
@@ -38,13 +38,13 @@ export const ItemContentWrapper = styled.div<{ isOptionsOpen: boolean; isLoading
   }
 
   ${(props) =>
-    props.isOptionsOpen &&
+    props.$isOptionsOpen &&
     css`
       background: #f1f1f1;
       opacity: 1;
     `}
 
-  &isLoading {
+  &$isLoading {
     animation-name: ${rotate};
   }
 `;

@@ -19,6 +19,8 @@ export interface IDecompositionItem {
   sectionName: string;
 }
 
+export type TToggleDecompositionItemCallback = (id: number) => Promise<number | null>;
+
 export type TAddDecompositionItemCallBack = (parentID: string, data: IDecompositionItem) => Promise<number | null>;
 
 export type TGetDecompositionCallback = () => Promise<Decomposition | null>;

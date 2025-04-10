@@ -1,7 +1,7 @@
 import { Spinner } from '@components/Spinner';
 import styled from 'styled-components';
 
-export const Wrap = styled.div<{ show?: boolean }>`
+export const Wrap = styled.div<{ $show?: boolean }>`
   position: absolute;
   height: calc(100vh - 80px - 36px);
 
@@ -9,7 +9,7 @@ export const Wrap = styled.div<{ show?: boolean }>`
   justify-content: center;
   align-items: center;
 
-  display: ${(props) => (props.show ? 'block' : 'none')};
+  display: ${(props) => (props.$show ? 'block' : 'none')};
 `;
 
 export const StyledSpinner = styled(Spinner)`
