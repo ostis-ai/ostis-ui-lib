@@ -62,8 +62,6 @@ const ScLinkHtml = ({ addr }: IProps) => {
   const parseHtml = useCallback(async () => {
     const [{ data }] = await client.getLinkContents([new ScAddr(addr)]);
 
-    console.log(data);
-
     if (!data) return;
     const parser = new DOMParser();
     const dom = parser.parseFromString(String(data).trim(), 'text/html');
