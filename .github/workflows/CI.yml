@@ -10,7 +10,7 @@ on:
 jobs:
   check_pr_commits:
     name: Check commit messages
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: GS Commit Message Checker
