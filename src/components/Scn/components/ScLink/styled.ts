@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { ScTag, ScTagLink } from '../../../ScTag';
 import { ScnLink } from '../ScnLink';
 
-export const StyledScTag = styled(ScTag)<{ isHTML?: boolean }>`
+export const StyledScTag = styled(ScTag)<{ $isHTML?: boolean }>`
   display: flex;
   gap: 2px;
 
@@ -14,7 +14,7 @@ export const StyledScTag = styled(ScTag)<{ isHTML?: boolean }>`
   color: #000000;
 
   ${(props) =>
-    props.isHTML &&
+    props.$isHTML &&
     css`
       display: block;
 

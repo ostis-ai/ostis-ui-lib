@@ -117,14 +117,14 @@ export const ContextMenu = ({ addr, systemId, targetRef, relativeRef, onClose }:
   );
 };
 
-const StyledScTag = styled(ScTag)<{ appearance: TAppearance }>`
+const StyledScTag = styled(ScTag)<{ $appearance: TAppearance }>`
   font-size: 18px;
   line-height: 22px;
 
   cursor: pointer;
 
-  ${({ appearance }) => {
-    switch (appearance) {
+  ${({ $appearance }) => {
+    switch ($appearance) {
       case 'blue':
         return css`
           color: #2a6496;

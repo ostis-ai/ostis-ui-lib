@@ -54,6 +54,7 @@ export interface SelectProps extends Omit<React.InputHTMLAttributes<HTMLSelectEl
   renderedEmptyValue?: React.ReactNode;
   value?: string | string[];
   isLoading?: boolean;
+  showOptions?: boolean;
   mobile?: boolean;
   mode?: 'select' | 'search';
   // dimention?: SelectDimention;
@@ -85,6 +86,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       value,
       mobile = false,
       isLoading,
+      showOptions = true,
       className,
       style,
       iconsRight,
@@ -533,7 +535,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               />
             )}
           </ValueWrapper>
-          {isSearchPanelOpen && !mobile && (
+          {showOptions && isSearchPanelOpen && !mobile && (
             <StyledDropdown
               id="selectDropdownContainer"
               targetRef={portalTargetRef || containerRef}
@@ -551,7 +553,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             <StyledOpenStatusButton $opened={isSearchPanelOpen} onClick={toggleSearchPanel} aria-hidden />
           </IconPanel>
         </SelectWrapper>
-        {isSearchPanelOpen && mobile && (
+        {showOptions && isSearchPanelOpen && mobile && (
           <StyledPopup onClose={onCloseSelect}>
             <PopupHeader>
               <IconButton onClick={onCloseSelect}>
