@@ -21,9 +21,75 @@ interface IProps {
 export const scUtilsBuilder = ({ client }: IProps) => {
   const searchKeynodes = searchKeynodesBuilder(client);
 
+  const searchLanguages = async () => {
+    const { languages } = await searchKeynodes("languages");
+
+    const template = new ScTemplate();
+    const languageAlias = '_language';
+
+    template.triple(languages, ScType.VarPermPosArc, [ScType.NodeVar, languageAlias]);
+    const searchResult = await client.searchByTemplate(template);
+    return searchResult.map((result) => result.get(languageAlias));
+  }
+  interface MainIdCache {
+    [key: string]: ScAddr | null;
+  }
+
+  const mainIdCache: MainIdCache = {};
+
+  let initializationPromise: Promise<void> | null = null;
+  const initializeMainIdCache = async () => {
+    if (initializationPromise) {
+      return initializationPromise;
+    }
+
+    initializationPromise = (async () => {
+      try {
+        const languages = await searchLanguages();
+        // these keynodes have too many outgoing connectors so too frequent search for main identifier for them slows
+        // down the queue of other client requests
+        const keynodes = await searchKeynodes("lang_ru", "lang_en");
+        await Promise.all(
+          Object.entries(keynodes).map(async ([key, value]) => {
+            console.log(key, value);
+            for (const lang of languages) {
+              const mainIdLink = await getMainIdLinkAddrWithoutCache(value, lang);
+              if (!mainIdLink) continue;
+              mainIdCache[`${value.value}_${lang.value}`] = mainIdLink;
+            }
+          })
+        );
+      } catch (error) {
+        initializationPromise = null;
+        throw error;
+      }
+    })();
+
+    return initializationPromise;
+  };
+
   const getMainIdLinkAddr = async (addr: ScAddr, lang: TLanguage) => {
-    const { nrelMainIdtf, ...rest } = await searchKeynodes('nrel_main_idtf', langToKeynode[lang]);
-    const foundLang = rest[snakeToCamelCase(langToKeynode[lang])];
+    if (!initializationPromise) {
+      await initializeMainIdCache();
+    } else {
+      await initializationPromise;
+    }
+
+    const { ...language } = await searchKeynodes(langToKeynode[lang]);
+    const foundLang = language[snakeToCamelCase(langToKeynode[lang])];
+
+    const cacheKey = `${addr.value}_${foundLang.value}`;
+
+    if (Object.prototype.hasOwnProperty.call(mainIdCache, cacheKey)) {
+      return mainIdCache[cacheKey];
+    }
+
+    return getMainIdLinkAddrWithoutCache(addr, foundLang);
+  };
+
+  const getMainIdLinkAddrWithoutCache = async (addr: ScAddr, lang: ScAddr) => {
+
+    const { nrelMainIdtf } = await searchKeynodes('nrel_main_idtf');
 
     const template = new ScTemplate();
     const linkAlias = '_link';
@@ -35,7 +101,7 @@ export const scUtilsBuilder = ({ client }: IProps) => {
       ScType.VarPermPosArc,
       nrelMainIdtf,
     );
-    template.triple(foundLang, ScType.VarPermPosArc, linkAlias);
+    template.triple(lang, ScType.VarPermPosArc, linkAlias);
     const result = await client.searchByTemplate(template);
 
     if (result.length) {
@@ -43,6 +109,7 @@ export const scUtilsBuilder = ({ client }: IProps) => {
     }
     return null;
   };
+
 
   const getMainId = async (addr: ScAddr, lang: TLanguage) => {
     const linkAddr = await getMainIdLinkAddr(addr, lang);
