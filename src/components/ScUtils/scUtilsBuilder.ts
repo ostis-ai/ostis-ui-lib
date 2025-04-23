@@ -74,7 +74,7 @@ export const scUtilsBuilder = ({ client }: IProps) => {
       await initializationPromise;
     }
 
-    const { ...language } = await searchKeynodes(langToKeynode[lang]);
+    const language = await searchKeynodes(langToKeynode[lang]);
     const foundLang = language[snakeToCamelCase(langToKeynode[lang])];
 
     const cacheKey = `${addr.value}_${foundLang.value}`;
