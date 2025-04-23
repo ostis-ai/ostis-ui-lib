@@ -51,7 +51,6 @@ export const scUtilsBuilder = ({ client }: IProps) => {
         const keynodes = await searchKeynodes("lang_ru", "lang_en");
         await Promise.all(
           Object.entries(keynodes).map(async ([key, value]) => {
-            console.log(key, value);
             for (const lang of languages) {
               const mainIdLink = await getMainIdLinkAddrWithoutCache(value, lang);
               if (!mainIdLink) continue;
