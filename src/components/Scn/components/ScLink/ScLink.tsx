@@ -76,7 +76,7 @@ const ScLinkHtml = ({ addr }: IProps) => {
   }, [parseHtml, isInView]);
 
   return (
-    <StyledScTag isHTML addr={addr}>
+    <StyledScTag $isHTML={true} addr={addr}>
       {contentHtml &&
         Array.from(contentHtml.childNodes).map((childNode, ind) => <HtmlNodeToReact key={ind} node={childNode} />)}
       {!contentHtml && <span ref={targetRef} />}

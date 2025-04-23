@@ -134,7 +134,7 @@ const NavigationItem = ({ menuItem, editable, deletable }: INavigationItemProps)
     <>
       {menuItem.title && (
         <li>
-          <ItemContentWrapper isOptionsOpen={isOptionsOpen} isLoading={menuItem.isLoading}>
+          <ItemContentWrapper $isOptionsOpen={isOptionsOpen} $isLoading={menuItem.isLoading}>
             <StyledButtonWithIcon
               marker={true}
               onClick={() => onToggle(menuItem.id)}
